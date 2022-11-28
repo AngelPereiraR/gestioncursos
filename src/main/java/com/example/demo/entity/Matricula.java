@@ -15,11 +15,11 @@ public class Matricula {
 	private int idmatricula;
 
 	@ManyToOne
-	@JoinColumn(name = "idalumno")
-	private Alumnos alumno;
+	@JoinColumn(name = "idalumnos")
+	private Alumnos idalumnos;
 
 	@ManyToOne
-	@JoinColumn(name = "idcurso")
+	@JoinColumn(name = "idcursos")
 	private Cursos curso;
 
 	private int valoracion;
@@ -32,7 +32,7 @@ public class Matricula {
 	public Matricula(int idmatricula, Alumnos alumno, Cursos curso, int valoracion) {
 		super();
 		this.idmatricula = idmatricula;
-		this.alumno = alumno;
+		this.idalumnos = alumno;
 		this.curso = curso;
 		this.valoracion = valoracion;
 	}
@@ -46,11 +46,11 @@ public class Matricula {
 	}
 
 	public Alumnos getAlumno() {
-		return alumno;
+		return idalumnos;
 	}
 
 	public void setAlumno(Alumnos alumno) {
-		this.alumno = alumno;
+		this.idalumnos = alumno;
 	}
 
 	public Cursos getCurso() {
@@ -71,7 +71,7 @@ public class Matricula {
 
 	@Override
 	public String toString() {
-		return "Matricula [idmatricula=" + idmatricula + ", alumno=" + alumno + ", curso=" + curso + ", valoracion="
+		return "Matricula [idmatricula=" + idmatricula + ", alumno=" + idalumnos + ", curso=" + curso + ", valoracion="
 				+ valoracion + "]";
 	}
 

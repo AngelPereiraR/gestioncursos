@@ -9,53 +9,38 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Comentarios {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idcomentarios;
-	private int idAlumno;
-	private int idCurso;
 	private String comentario;
-	
+
 	@ManyToOne
-	@JoinColumn(name="idAlumno")
-	private Alumnos alumno;
+	@JoinColumn(name = "idalumnos")
+	private Alumnos idalumnos;
+
+	@ManyToOne
+	@JoinColumn(name = "idcurso")
+	private Cursos idcurso;
 
 	public Comentarios() {
 		super();
 	}
 
-	public Comentarios(int idComentarios, int idAlumno, int idCurso, String comentario, Alumnos alumno) {
+	public Comentarios(int idcomentarios, String comentario, Alumnos idalumnos, Cursos idcurso) {
 		super();
-		this.idcomentarios = idComentarios;
-		this.idAlumno = idAlumno;
-		this.idCurso = idCurso;
+		this.idcomentarios = idcomentarios;
 		this.comentario = comentario;
-		this.alumno = alumno;
+		this.idalumnos = idalumnos;
+		this.idcurso = idcurso;
 	}
 
-	public int getIdComentarios() {
+	public int getIdcomentarios() {
 		return idcomentarios;
 	}
 
-	public void setIdComentarios(int idComentarios) {
-		this.idcomentarios = idComentarios;
-	}
-
-	public int getIdAlumno() {
-		return idAlumno;
-	}
-
-	public void setIdAlumno(int idAlumno) {
-		this.idAlumno = idAlumno;
-	}
-
-	public int getIdCurso() {
-		return idCurso;
-	}
-
-	public void setIdCurso(int idCurso) {
-		this.idCurso = idCurso;
+	public void setIdcomentarios(int idcomentarios) {
+		this.idcomentarios = idcomentarios;
 	}
 
 	public String getComentario() {
@@ -66,18 +51,26 @@ public class Comentarios {
 		this.comentario = comentario;
 	}
 
-	public Alumnos getAlumno() {
-		return alumno;
+	public Alumnos getIdalumnos() {
+		return idalumnos;
 	}
 
-	public void setAlumno(Alumnos alumno) {
-		this.alumno = alumno;
+	public void setIdalumnos(Alumnos idalumnos) {
+		this.idalumnos = idalumnos;
+	}
+
+	public Cursos getIdcurso() {
+		return idcurso;
+	}
+
+	public void setIdcurso(Cursos idcurso) {
+		this.idcurso = idcurso;
 	}
 
 	@Override
 	public String toString() {
-		return "Comentarios [idComentarios=" + idcomentarios + ", idAlumno=" + idAlumno + ", idCurso=" + idCurso
-				+ ", comentario=" + comentario + ", alumno=" + alumno + "]";
+		return "Comentarios [idcomentarios=" + idcomentarios + ", comentario=" + comentario + ", idalumnos=" + idalumnos
+				+ ", idcurso=" + idcurso + "]";
 	}
 
 }

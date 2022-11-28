@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-import java.util.Arrays;
+import java.util.List;
 
 import com.example.demo.entity.Comentarios;
 import com.example.demo.entity.Matricula;
@@ -21,9 +21,9 @@ public class AlumnosModel {
 
 	private String foto;
 
-	private Comentarios[] comentarios;
+	private List<Comentarios> comentarios;
 
-	private Matricula[] matriculas;
+	private List<Matricula> matriculas;
 
 	public AlumnosModel() {
 		super();
@@ -31,7 +31,7 @@ public class AlumnosModel {
 	}
 
 	public AlumnosModel(int idalumnos, String nombre, String apellidos, String email, String usuario, String password,
-			String foto, Comentarios[] comentarios, Matricula[] matriculas) {
+			String foto, List<Comentarios> comentarios, List<Matricula> matriculas) {
 		super();
 		this.idalumnos = idalumnos;
 		this.nombre = nombre;
@@ -100,19 +100,19 @@ public class AlumnosModel {
 		this.foto = foto;
 	}
 
-	public Comentarios[] getComentarios() {
+	public List<Comentarios> getComentarios() {
 		return comentarios;
 	}
 
-	public void setComentarios(Comentarios[] comentarios) {
+	public void setComentarios(List<Comentarios> comentarios) {
 		this.comentarios = comentarios;
 	}
 
-	public Matricula[] getMatriculas() {
+	public List<Matricula> getMatriculas() {
 		return matriculas;
 	}
 
-	public void setMatriculas(Matricula[] matriculas) {
+	public void setMatriculas(List<Matricula> matriculas) {
 		this.matriculas = matriculas;
 	}
 
@@ -120,7 +120,7 @@ public class AlumnosModel {
 	public String toString() {
 		return "AlumnosModel [idalumnos=" + idalumnos + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email="
 				+ email + ", usuario=" + usuario + ", password=" + password + ", foto=" + foto + ", comentarios="
-				+ Arrays.toString(comentarios) + ", matriculas=" + Arrays.toString(matriculas) + "]";
+				+ comentarios + ", matriculas=" + matriculas + "]";
 	}
 
 }

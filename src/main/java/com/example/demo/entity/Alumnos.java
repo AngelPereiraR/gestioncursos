@@ -1,15 +1,19 @@
 package com.example.demo.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Alumnos {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idalumnos;
 	private String nombre;
 	private String apellidos;
@@ -17,21 +21,29 @@ public class Alumnos {
 	private String usuario;
 	private String password;
 	private String foto;
-	
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumnos")
+	private List<Comentarios> idcomentarios;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumnos")
+	private List<Matricula> idmatriculas;
+
 	public Alumnos() {
 		super();
 	}
 
-	public Alumnos(int idAlumnos, String nombre, String apellidos, String email, String usuario, String password,
-			String foto) {
+	public Alumnos(int idalumnos, String nombre, String apellidos, String email, String usuario, String password,
+			String foto, List<Comentarios> comentarios, List<Matricula> matriculas) {
 		super();
-		this.idalumnos = idAlumnos;
+		this.idalumnos = idalumnos;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
 		this.usuario = usuario;
 		this.password = password;
 		this.foto = foto;
+		this.idcomentarios = comentarios;
+		this.idmatriculas = matriculas;
 	}
 
 	public int getIdAlumnos() {
@@ -95,7 +107,5 @@ public class Alumnos {
 		return "Alumnos [idAlumnos=" + idalumnos + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email="
 				+ email + ", usuario=" + usuario + ", password=" + password + ", foto=" + foto + "]";
 	}
-	
-	
 
 }
