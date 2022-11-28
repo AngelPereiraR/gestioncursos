@@ -4,9 +4,9 @@ import java.util.Date;
 
 import com.example.demo.entity.Profesor;
 
-public class CursosModel {
+public class CursoModel {
 
-	private int idcursos;
+	private int idcurso;
 
 	private String nombre;
 
@@ -14,35 +14,35 @@ public class CursosModel {
 
 	private int nivel;
 
-	private Profesor profesor;
+	private Profesor idprofesor;
 
 	private Date fechaInicio;
 
 	private Date fechaFin;
 
-	public CursosModel() {
+	public CursoModel() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public CursosModel(int idcursos, String nombre, String descripcion, int nivel, Profesor profesor,
-			Date fechaInicio, Date fechaFin) {
+	public CursoModel(int idcurso, String nombre, String descripcion, int nivel, Profesor idprofesor, Date fechaInicio,
+			Date fechaFin) {
 		super();
-		this.idcursos = idcursos;
+		this.idcurso = idcurso;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.nivel = nivel;
-		this.profesor = profesor;
+		this.idprofesor = idprofesor;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 	}
 
-	public int getIdcursos() {
-		return idcursos;
+	public int getIdcurso() {
+		return idcurso;
 	}
 
-	public void setIdcursos(int idcursos) {
-		this.idcursos = idcursos;
+	public void setIdcurso(int idcurso) {
+		this.idcurso = idcurso;
 	}
 
 	public String getNombre() {
@@ -69,12 +69,12 @@ public class CursosModel {
 		this.nivel = nivel;
 	}
 
-	public Profesor getProfesor() {
-		return profesor;
+	public Profesor getIdprofesor() {
+		return idprofesor;
 	}
 
-	public void setProfesor(Profesor profesor) {
-		this.profesor = profesor;
+	public void setIdprofesor(Profesor profesor) {
+		this.idprofesor = profesor;
 	}
 
 	public Date getFechaInicio() {
@@ -95,8 +95,9 @@ public class CursosModel {
 
 	@Override
 	public String toString() {
-		return "CursosModel [idcursos=" + idcursos + ", nombre=" + nombre + ", descripcion=" + descripcion + ", nivel="
-				+ nivel + ", profesor=" + profesor + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + "]";
+		return "CursosModel [idcurso=" + idcurso + ", nombre=" + nombre + ", descripcion=" + descripcion + ", nivel="
+				+ nivel + ", idprofesor=" + idprofesor + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin
+				+ "]";
 	}
 
 }

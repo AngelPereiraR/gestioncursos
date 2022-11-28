@@ -5,9 +5,9 @@ import java.util.List;
 import com.example.demo.entity.Comentario;
 import com.example.demo.entity.Matricula;
 
-public class AlumnosModel {
+public class AlumnoModel {
 
-	private int idalumnos;
+	private int idalumno;
 
 	private String nombre;
 
@@ -21,35 +21,35 @@ public class AlumnosModel {
 
 	private String foto;
 
-	private List<Comentario> comentarios;
+	private List<Comentario> comentario;
 
-	private List<Matricula> matriculas;
+	private List<Matricula> matricula;
 
-	public AlumnosModel() {
+	public AlumnoModel() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public AlumnosModel(int idalumnos, String nombre, String apellidos, String email, String usuario, String password,
-			String foto, List<Comentario> comentarios, List<Matricula> matriculas) {
+	public AlumnoModel(int idalumno, String nombre, String apellidos, String email, String usuario, String password,
+			String foto, List<Comentario> comentario, List<Matricula> matricula) {
 		super();
-		this.idalumnos = idalumnos;
+		this.idalumno = idalumno;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
 		this.usuario = usuario;
 		this.password = password;
 		this.foto = foto;
-		this.comentarios = comentarios;
-		this.matriculas = matriculas;
+		this.comentario = comentario;
+		this.matricula = matricula;
 	}
 
-	public int getIdalumnos() {
-		return idalumnos;
+	public int getIdalumno() {
+		return idalumno;
 	}
 
-	public void setIdalumnos(int idalumnos) {
-		this.idalumnos = idalumnos;
+	public void setIdalumno(int idalumno) {
+		this.idalumno = idalumno;
 	}
 
 	public String getNombre() {
@@ -100,27 +100,27 @@ public class AlumnosModel {
 		this.foto = foto;
 	}
 
-	public List<Comentario> getComentarios() {
-		return comentarios;
+	public List<Comentario> getComentario() {
+		return comentario;
 	}
 
-	public void setComentarios(List<Comentario> comentarios) {
-		this.comentarios = comentarios;
+	public void setComentario(List<Comentario> comentario) {
+		this.comentario = comentario;
 	}
 
-	public List<Matricula> getMatriculas() {
-		return matriculas;
+	public List<Matricula> getMatricula() {
+		return matricula;
 	}
 
-	public void setMatriculas(List<Matricula> matriculas) {
-		this.matriculas = matriculas;
+	public void setMatricula(List<Matricula> matricula) {
+		this.matricula = matricula;
 	}
 
 	@Override
 	public String toString() {
-		return "AlumnosModel [idalumnos=" + idalumnos + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email="
-				+ email + ", usuario=" + usuario + ", password=" + password + ", foto=" + foto + ", comentarios="
-				+ comentarios + ", matriculas=" + matriculas + "]";
+		return "AlumnoModel [idalumno=" + idalumno + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email="
+				+ email + ", usuario=" + usuario + ", password=" + password + ", foto=" + foto + ", comentario="
+				+ comentario + ", matricula=" + matricula + "]";
 	}
 
 }

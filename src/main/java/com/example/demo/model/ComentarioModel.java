@@ -3,9 +3,9 @@ package com.example.demo.model;
 import com.example.demo.entity.Alumno;
 import com.example.demo.entity.Curso;
 
-public class ComentariosModel {
+public class ComentarioModel {
 
-	private int idcomentarios;
+	private int idcomentario;
 
 	private Alumno alumno;
 
@@ -13,25 +13,25 @@ public class ComentariosModel {
 
 	private String comentario;
 
-	public ComentariosModel() {
+	public ComentarioModel() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ComentariosModel(int idcomentarios, Alumno alumno, Curso curso, String comentario) {
+	public ComentarioModel(int idcomentario, Alumno alumno, Curso curso, String comentario) {
 		super();
-		this.idcomentarios = idcomentarios;
+		this.idcomentario = idcomentario;
 		this.alumno = alumno;
 		this.curso = curso;
 		this.comentario = comentario;
 	}
 
-	public int getIdcomentarios() {
-		return idcomentarios;
+	public int getIdcomentario() {
+		return idcomentario;
 	}
 
-	public void setIdcomentarios(int idcomentarios) {
-		this.idcomentarios = idcomentarios;
+	public void setIdcomentario(int idcomentario) {
+		this.idcomentario = idcomentario;
 	}
 
 	public Alumno getAlumno() {
@@ -60,7 +60,7 @@ public class ComentariosModel {
 
 	@Override
 	public String toString() {
-		return "ComentariosModel [idcomentarios=" + idcomentarios + ", alumno=" + alumno + ", curso=" + curso
+		return "ComentariosModel [idcomentario=" + idcomentario + ", alumno=" + alumno + ", curso=" + curso
 				+ ", comentario=" + comentario + "]";
 	}
 

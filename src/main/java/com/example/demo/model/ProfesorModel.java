@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.example.demo.entity.Curso;
 
-public class ProfesoresModel {
+public class ProfesorModel {
 
-	private int idprofesores;
+	private int idprofesor;
 
 	private String nombre;
 
@@ -18,31 +18,31 @@ public class ProfesoresModel {
 
 	private String password;
 
-	private List<Curso> cursos;
+	private List<Curso> idcurso;
 
-	public ProfesoresModel() {
+	public ProfesorModel() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ProfesoresModel(int idprofesores, String nombre, String apellidos, String email, String usuario,
-			String password, List<Curso> cursos) {
+	public ProfesorModel(int idprofesore, String nombre, String apellidos, String email, String usuario,
+			String password, List<Curso> idcurso) {
 		super();
-		this.idprofesores = idprofesores;
+		this.idprofesor = idprofesore;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
 		this.usuario = usuario;
 		this.password = password;
-		this.cursos = cursos;
+		this.idcurso = idcurso;
 	}
 
-	public int getIdprofesores() {
-		return idprofesores;
+	public int getIdprofesor() {
+		return idprofesor;
 	}
 
-	public void setIdprofesores(int idprofesores) {
-		this.idprofesores = idprofesores;
+	public void setIdprofesor(int idprofesor) {
+		this.idprofesor = idprofesor;
 	}
 
 	public String getNombre() {
@@ -85,18 +85,18 @@ public class ProfesoresModel {
 		this.password = password;
 	}
 
-	public List<Curso> getCursos() {
-		return cursos;
+	public List<Curso> getCurso() {
+		return idcurso;
 	}
 
-	public void setCursos(List<Curso> cursos) {
-		this.cursos = cursos;
+	public void setCurso(List<Curso> curso) {
+		this.idcurso = curso;
 	}
 
 	@Override
 	public String toString() {
-		return "ProfesoresModel [idprofesores=" + idprofesores + ", nombre=" + nombre + ", apellidos=" + apellidos
-				+ ", email=" + email + ", usuario=" + usuario + ", password=" + password + ", cursos=" + cursos + "]";
+		return "ProfesoresModel [idprofesor=" + idprofesor + ", nombre=" + nombre + ", apellidos=" + apellidos
+				+ ", email=" + email + ", usuario=" + usuario + ", password=" + password + ", curso=" + idcurso + "]";
 	}
 
 }
