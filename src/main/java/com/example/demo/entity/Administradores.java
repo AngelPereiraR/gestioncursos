@@ -20,7 +20,7 @@ public class Administradores {
 	
 	private String password;
 	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="administradores")
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="idadministradores")
 	private List<Noticias> noticias;
 	
 	public Administradores(int idadministradores, String usuario, String password, List<Noticias> noticias) {

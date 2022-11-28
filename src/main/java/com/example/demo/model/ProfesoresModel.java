@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-import java.util.Arrays;
+import java.util.List;
 
 import com.example.demo.entity.Cursos;
 
@@ -18,7 +18,7 @@ public class ProfesoresModel {
 
 	private String password;
 
-	private Cursos[] cursos;
+	private List<Cursos> cursos;
 
 	public ProfesoresModel() {
 		super();
@@ -26,7 +26,7 @@ public class ProfesoresModel {
 	}
 
 	public ProfesoresModel(int idprofesores, String nombre, String apellidos, String email, String usuario,
-			String password, Cursos[] cursos) {
+			String password, List<Cursos> cursos) {
 		super();
 		this.idprofesores = idprofesores;
 		this.nombre = nombre;
@@ -85,19 +85,18 @@ public class ProfesoresModel {
 		this.password = password;
 	}
 
-	public Cursos[] getCursos() {
+	public List<Cursos> getCursos() {
 		return cursos;
 	}
 
-	public void setCursos(Cursos[] cursos) {
+	public void setCursos(List<Cursos> cursos) {
 		this.cursos = cursos;
 	}
 
 	@Override
 	public String toString() {
 		return "ProfesoresModel [idprofesores=" + idprofesores + ", nombre=" + nombre + ", apellidos=" + apellidos
-				+ ", email=" + email + ", usuario=" + usuario + ", password=" + password + ", cursos="
-				+ Arrays.toString(cursos) + "]";
+				+ ", email=" + email + ", usuario=" + usuario + ", password=" + password + ", cursos=" + cursos + "]";
 	}
 
 }

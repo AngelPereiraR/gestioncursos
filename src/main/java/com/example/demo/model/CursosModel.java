@@ -2,7 +2,7 @@ package com.example.demo.model;
 
 import java.util.Date;
 
-import com.example.demo.entity.Profesores;
+import com.example.demo.entity.Profesor;
 
 public class CursosModel {
 
@@ -14,7 +14,7 @@ public class CursosModel {
 
 	private int nivel;
 
-	private Profesores profesor;
+	private Profesor profesor;
 
 	private Date fechaInicio;
 
@@ -25,7 +25,7 @@ public class CursosModel {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CursosModel(int idcursos, String nombre, String descripcion, int nivel, Profesores profesor,
+	public CursosModel(int idcursos, String nombre, String descripcion, int nivel, Profesor profesor,
 			Date fechaInicio, Date fechaFin) {
 		super();
 		this.idcursos = idcursos;
@@ -69,11 +69,11 @@ public class CursosModel {
 		this.nivel = nivel;
 	}
 
-	public Profesores getProfesor() {
+	public Profesor getProfesor() {
 		return profesor;
 	}
 
-	public void setProfesor(Profesores profesor) {
+	public void setProfesor(Profesor profesor) {
 		this.profesor = profesor;
 	}
 
