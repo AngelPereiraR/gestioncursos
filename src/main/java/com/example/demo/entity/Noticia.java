@@ -8,42 +8,41 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Noticias {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int idnoticias;
-	
-	private String titulo;
-	
-	private String descripcion;
-	
-	private String imagen;
-	
-	@ManyToOne
-	@JoinColumn(name="idadministrador")
-	private Administradores idadministradores;
+public class Noticia {
 
-	public Noticias() {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int idnoticia;
+
+	private String titulo;
+
+	private String descripcion;
+
+	private String imagen;
+
+	@ManyToOne
+	@JoinColumn(name = "idadministrador")
+	private Administrador idadministrador;
+
+	public Noticia() {
 		super();
 	}
 
-	public Noticias(int idnoticias, String titulo, String descripcion, String imagen,
-			Administradores administradores) {
+	public Noticia(int idnoticia, String titulo, String descripcion, String imagen, Administrador idadministrador) {
 		super();
-		this.idnoticias = idnoticias;
+		this.idnoticia = idnoticia;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.imagen = imagen;
-		this.idadministradores = administradores;
+		this.idadministrador = idadministrador;
 	}
 
-	public int getIdnoticias() {
-		return idnoticias;
+	public int getIdnoticia() {
+		return idnoticia;
 	}
 
-	public void setIdnoticias(int idnoticias) {
-		this.idnoticias = idnoticias;
+	public void setIdnoticia(int idnoticia) {
+		this.idnoticia = idnoticia;
 	}
 
 	public String getTitulo() {
@@ -70,17 +69,18 @@ public class Noticias {
 		this.imagen = imagen;
 	}
 
-	public Administradores getAdministradores() {
-		return idadministradores;
+	public Administrador getIdadministrador() {
+		return idadministrador;
 	}
 
-	public void setAdministradores(Administradores administradores) {
-		this.idadministradores = administradores;
+	public void setIdadministrador(Administrador idadministrador) {
+		this.idadministrador = idadministrador;
 	}
 
 	@Override
 	public String toString() {
-		return "Noticias [idnoticias=" + idnoticias + ", titulo=" + titulo + ", descripcion=" + descripcion
-				+ ", imagen=" + imagen + ", administradores=" + idadministradores + "]";
+		return "Noticia [idnoticia=" + idnoticia + ", titulo=" + titulo + ", descripcion=" + descripcion + ", imagen="
+				+ imagen + ", idadministrador=" + idadministrador + "]";
 	}
+
 }

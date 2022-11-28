@@ -2,7 +2,7 @@ package com.example.demo.model;
 
 import java.util.List;
 
-import com.example.demo.entity.Cursos;
+import com.example.demo.entity.Curso;
 
 public class ProfesoresModel {
 
@@ -18,7 +18,7 @@ public class ProfesoresModel {
 
 	private String password;
 
-	private List<Cursos> cursos;
+	private List<Curso> cursos;
 
 	public ProfesoresModel() {
 		super();
@@ -26,7 +26,7 @@ public class ProfesoresModel {
 	}
 
 	public ProfesoresModel(int idprofesores, String nombre, String apellidos, String email, String usuario,
-			String password, List<Cursos> cursos) {
+			String password, List<Curso> cursos) {
 		super();
 		this.idprofesores = idprofesores;
 		this.nombre = nombre;
@@ -85,11 +85,11 @@ public class ProfesoresModel {
 		this.password = password;
 	}
 
-	public List<Cursos> getCursos() {
+	public List<Curso> getCursos() {
 		return cursos;
 	}
 
-	public void setCursos(List<Cursos> cursos) {
+	public void setCursos(List<Curso> cursos) {
 		this.cursos = cursos;
 	}
 

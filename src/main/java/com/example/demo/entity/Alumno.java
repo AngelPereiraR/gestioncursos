@@ -10,11 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Alumnos {
+public class Alumno {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int idalumnos;
+	private int idalumno;
 	private String nombre;
 	private String apellidos;
 	private String email;
@@ -22,36 +22,36 @@ public class Alumnos {
 	private String password;
 	private String foto;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumnos")
-	private List<Comentarios> idcomentarios;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumno")
+	private List<Comentario> idcomentario;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumnos")
-	private List<Matricula> idmatriculas;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumno")
+	private List<Matricula> idmatricula;
 
-	public Alumnos() {
+	public Alumno() {
 		super();
 	}
 
-	public Alumnos(int idalumnos, String nombre, String apellidos, String email, String usuario, String password,
-			String foto, List<Comentarios> comentarios, List<Matricula> matriculas) {
+	public Alumno(int idalumno, String nombre, String apellidos, String email, String usuario, String password,
+			String foto, List<Comentario> idcomentario, List<Matricula> idmatricula) {
 		super();
-		this.idalumnos = idalumnos;
+		this.idalumno = idalumno;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
 		this.usuario = usuario;
 		this.password = password;
 		this.foto = foto;
-		this.idcomentarios = comentarios;
-		this.idmatriculas = matriculas;
+		this.idcomentario = idcomentario;
+		this.idmatricula = idmatricula;
 	}
 
-	public int getIdAlumnos() {
-		return idalumnos;
+	public int getIdalumno() {
+		return idalumno;
 	}
 
-	public void setIdAlumnos(int idAlumnos) {
-		this.idalumnos = idAlumnos;
+	public void setIdalumno(int idalumno) {
+		this.idalumno = idalumno;
 	}
 
 	public String getNombre() {
@@ -102,10 +102,26 @@ public class Alumnos {
 		this.foto = foto;
 	}
 
-	@Override
-	public String toString() {
-		return "Alumnos [idAlumnos=" + idalumnos + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email="
-				+ email + ", usuario=" + usuario + ", password=" + password + ", foto=" + foto + "]";
+	public List<Comentario> getIdcomentario() {
+		return idcomentario;
 	}
 
+	public void setIdcomentario(List<Comentario> idcomentario) {
+		this.idcomentario = idcomentario;
+	}
+
+	public List<Matricula> getIdmatricula() {
+		return idmatricula;
+	}
+
+	public void setIdmatricula(List<Matricula> idmatricula) {
+		this.idmatricula = idmatricula;
+	}
+
+	@Override
+	public String toString() {
+		return "Alumno [idalumno=" + idalumno + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email
+				+ ", usuario=" + usuario + ", password=" + password + ", foto=" + foto + ", idcomentario="
+				+ idcomentario + ", idmatricula=" + idmatricula + "]";
+	}
 }

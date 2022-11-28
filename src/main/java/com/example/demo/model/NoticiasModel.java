@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-import com.example.demo.entity.Administradores;
+import com.example.demo.entity.Administrador;
 
 public class NoticiasModel {
 	
@@ -12,14 +12,14 @@ public class NoticiasModel {
 	
 	private String imagen;
 	
-	private Administradores administradores;
+	private Administrador administradores;
 
 	public NoticiasModel() {
 		super();
 	}
 
 	public NoticiasModel(int idnoticias, String titulo, String descripcion, String imagen,
-			Administradores administradores) {
+			Administrador administradores) {
 		super();
 		this.idnoticias = idnoticias;
 		this.titulo = titulo;
@@ -60,11 +60,11 @@ public class NoticiasModel {
 		this.imagen = imagen;
 	}
 
-	public Administradores getAdministradores() {
+	public Administrador getAdministradores() {
 		return administradores;
 	}
 
-	public void setAdministradores(Administradores administradores) {
+	public void setAdministradores(Administrador administradores) {
 		this.administradores = administradores;
 	}
 

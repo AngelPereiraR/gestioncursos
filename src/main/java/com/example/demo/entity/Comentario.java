@@ -8,11 +8,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Matricula {
+public class Comentario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int idmatricula;
+	private int idcomentario;
+	private String comentario;
 
 	@ManyToOne
 	@JoinColumn(name = "idalumno")
@@ -22,27 +23,32 @@ public class Matricula {
 	@JoinColumn(name = "idcurso")
 	private Curso idcurso;
 
-	private int valoracion;
-
-	public Matricula() {
+	public Comentario() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Matricula(int idmatricula, Alumno idalumno, Curso idcurso, int valoracion) {
+	public Comentario(int idcomentario, String comentario, Alumno idalumno, Curso idcurso) {
 		super();
-		this.idmatricula = idmatricula;
+		this.idcomentario = idcomentario;
+		this.comentario = comentario;
 		this.idalumno = idalumno;
 		this.idcurso = idcurso;
-		this.valoracion = valoracion;
 	}
 
-	public int getIdmatricula() {
-		return idmatricula;
+	public int getIdcomentario() {
+		return idcomentario;
 	}
 
-	public void setIdmatricula(int idmatricula) {
-		this.idmatricula = idmatricula;
+	public void setIdcomentario(int idcomentario) {
+		this.idcomentario = idcomentario;
+	}
+
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
 	}
 
 	public Alumno getIdalumno() {
@@ -61,17 +67,10 @@ public class Matricula {
 		this.idcurso = idcurso;
 	}
 
-	public int getValoracion() {
-		return valoracion;
-	}
-
-	public void setValoracion(int valoracion) {
-		this.valoracion = valoracion;
-	}
-
 	@Override
 	public String toString() {
-		return "Matricula [idmatricula=" + idmatricula + ", idalumno=" + idalumno + ", idcurso=" + idcurso
-				+ ", valoracion=" + valoracion + "]";
+		return "Comentario [idcomentario=" + idcomentario + ", comentario=" + comentario + ", idalumno=" + idalumno
+				+ ", idcurso=" + idcurso + "]";
 	}
+
 }

@@ -13,52 +13,52 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Cursos {
+public class Curso {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int idcursos;
+	private int idcurso;
 	private String nombre;
 	private String descripcion;
 	private int nivel;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idcurso")
-	private List<Comentarios> idcomentarios;
+	private List<Comentario> idcomentario;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idcurso")
-	private List<Comentarios> idmatriculas;
+	private List<Comentario> idmatricula;
 
 	@ManyToOne
 	@JoinColumn(name = "idprofesores")
-	private Profesor idprofesores;
+	private Profesor idprofesor;
 	private Date fechaInicio;
 	private Date fechaFin;
 
-	public Cursos() {
+	public Curso() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Cursos(int idcursos, String nombre, String descripcion, int nivel, List<Comentarios> idcomentarios,
-			List<Comentarios> idmatriculas, Profesor profesor_id, Date fechaInicio, Date fechaFin) {
+	public Curso(int idcurso, String nombre, String descripcion, int nivel, List<Comentario> idcomentario,
+			List<Comentario> idmatricula, Profesor idprofesor, Date fechaInicio, Date fechaFin) {
 		super();
-		this.idcursos = idcursos;
+		this.idcurso = idcurso;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.nivel = nivel;
-		this.idcomentarios = idcomentarios;
-		this.idmatriculas = idmatriculas;
-		this.idprofesores = profesor_id;
+		this.idcomentario = idcomentario;
+		this.idmatricula = idmatricula;
+		this.idprofesor = idprofesor;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 	}
 
-	public int getIdcursos() {
-		return idcursos;
+	public int getIdcurso() {
+		return idcurso;
 	}
 
-	public void setIdcursos(int idcursos) {
-		this.idcursos = idcursos;
+	public void setIdcurso(int idcurso) {
+		this.idcurso = idcurso;
 	}
 
 	public String getNombre() {
@@ -85,28 +85,28 @@ public class Cursos {
 		this.nivel = nivel;
 	}
 
-	public List<Comentarios> getIdcomentarios() {
-		return idcomentarios;
+	public List<Comentario> getIdcomentario() {
+		return idcomentario;
 	}
 
-	public void setIdcomentarios(List<Comentarios> idcomentarios) {
-		this.idcomentarios = idcomentarios;
+	public void setIdcomentario(List<Comentario> idcomentario) {
+		this.idcomentario = idcomentario;
 	}
 
-	public List<Comentarios> getIdmatriculas() {
-		return idmatriculas;
+	public List<Comentario> getIdmatricula() {
+		return idmatricula;
 	}
 
-	public void setIdmatriculas(List<Comentarios> idmatriculas) {
-		this.idmatriculas = idmatriculas;
+	public void setIdmatricula(List<Comentario> idmatricula) {
+		this.idmatricula = idmatricula;
 	}
 
-	public Profesor getProfesor_id() {
-		return idprofesores;
+	public Profesor getIdprofesor() {
+		return idprofesor;
 	}
 
-	public void setProfesor_id(Profesor profesor_id) {
-		this.idprofesores = profesor_id;
+	public void setIdprofesor(Profesor idprofesor) {
+		this.idprofesor = idprofesor;
 	}
 
 	public Date getFechaInicio() {
@@ -127,9 +127,8 @@ public class Cursos {
 
 	@Override
 	public String toString() {
-		return "Cursos [idcursos=" + idcursos + ", nombre=" + nombre + ", descripcion=" + descripcion + ", nivel="
-				+ nivel + ", idcomentarios=" + idcomentarios + ", idmatriculas=" + idmatriculas + ", profesor_id="
-				+ idprofesores + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + "]";
+		return "Curso [idcurso=" + idcurso + ", nombre=" + nombre + ", descripcion=" + descripcion + ", nivel=" + nivel
+				+ ", idcomentario=" + idcomentario + ", idmatricula=" + idmatricula + ", idprofesor=" + idprofesor
+				+ ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + "]";
 	}
-
 }

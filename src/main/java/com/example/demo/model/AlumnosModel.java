@@ -2,7 +2,7 @@ package com.example.demo.model;
 
 import java.util.List;
 
-import com.example.demo.entity.Comentarios;
+import com.example.demo.entity.Comentario;
 import com.example.demo.entity.Matricula;
 
 public class AlumnosModel {
@@ -21,7 +21,7 @@ public class AlumnosModel {
 
 	private String foto;
 
-	private List<Comentarios> comentarios;
+	private List<Comentario> comentarios;
 
 	private List<Matricula> matriculas;
 
@@ -31,7 +31,7 @@ public class AlumnosModel {
 	}
 
 	public AlumnosModel(int idalumnos, String nombre, String apellidos, String email, String usuario, String password,
-			String foto, List<Comentarios> comentarios, List<Matricula> matriculas) {
+			String foto, List<Comentario> comentarios, List<Matricula> matriculas) {
 		super();
 		this.idalumnos = idalumnos;
 		this.nombre = nombre;
@@ -100,11 +100,11 @@ public class AlumnosModel {
 		this.foto = foto;
 	}
 
-	public List<Comentarios> getComentarios() {
+	public List<Comentario> getComentarios() {
 		return comentarios;
 	}
 
-	public void setComentarios(List<Comentarios> comentarios) {
+	public void setComentarios(List<Comentario> comentarios) {
 		this.comentarios = comentarios;
 	}
 

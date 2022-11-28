@@ -14,38 +14,38 @@ public class Profesor {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int idprofesores;
+	private int idprofesor;
 	private String nombre;
 	private String apellidos;
 	private String email;
 	private String usuario;
 	private String password;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idprofesores")
-	private List<Cursos> idcurso;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idprofesor")
+	private List<Curso> idcurso;
 
 	public Profesor() {
 		super();
 	}
 
-	public Profesor(int idprofesores, String nombre, String apellidos, String email, String usuario, String password,
-			List<Cursos> cursos) {
+	public Profesor(int idprofesor, String nombre, String apellidos, String email, String usuario, String password,
+			List<Curso> idcurso) {
 		super();
-		this.idprofesores = idprofesores;
+		this.idprofesor = idprofesor;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
 		this.usuario = usuario;
 		this.password = password;
-		this.idcurso = cursos;
+		this.idcurso = idcurso;
 	}
 
-	public int getIdprofesores() {
-		return idprofesores;
+	public int getIdprofesor() {
+		return idprofesor;
 	}
 
-	public void setIdprofesores(int idprofesores) {
-		this.idprofesores = idprofesores;
+	public void setIdprofesor(int idprofesor) {
+		this.idprofesor = idprofesor;
 	}
 
 	public String getNombre() {
@@ -88,18 +88,18 @@ public class Profesor {
 		this.password = password;
 	}
 
-	public List<Cursos> getCursos() {
+	public List<Curso> getIdcurso() {
 		return idcurso;
 	}
 
-	public void setCursos(List<Cursos> cursos) {
-		this.idcurso = cursos;
+	public void setIdcurso(List<Curso> idcurso) {
+		this.idcurso = idcurso;
 	}
 
 	@Override
 	public String toString() {
-		return "Profesores [idprofesores=" + idprofesores + ", nombre=" + nombre + ", apellidos=" + apellidos
-				+ ", email=" + email + ", usuario=" + usuario + ", password=" + password + ", cursos=" + idcurso + "]";
+		return "Profesor [idprofesor=" + idprofesor + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email="
+				+ email + ", usuario=" + usuario + ", password=" + password + ", idcurso=" + idcurso + "]";
 	}
 
 }

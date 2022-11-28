@@ -2,7 +2,7 @@ package com.example.demo.model;
 
 import java.util.Arrays;
 
-import com.example.demo.entity.Noticias;
+import com.example.demo.entity.Noticia;
 
 public class AdministradoresModel {
 	
@@ -12,9 +12,9 @@ public class AdministradoresModel {
 	
 	private String password;
 	
-	private Noticias[] noticias;
+	private Noticia[] noticias;
 	
-	public AdministradoresModel(int idadministradores, String usuario, String password, Noticias[] noticias) {
+	public AdministradoresModel(int idadministradores, String usuario, String password, Noticia[] noticias) {
 		super();
 		this.idadministradores = idadministradores;
 		this.usuario = usuario;
@@ -50,11 +50,11 @@ public class AdministradoresModel {
 		this.password = password;
 	}
 	
-	public Noticias[] getNoticias() {
+	public Noticia[] getNoticias() {
 		return noticias;
 	}
 
-	public void setNoticias(Noticias[] noticias) {
+	public void setNoticias(Noticia[] noticias) {
 		this.noticias = noticias;
 	}
 
