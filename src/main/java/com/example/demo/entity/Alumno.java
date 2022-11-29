@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Alumno {
@@ -15,12 +16,26 @@ public class Alumno {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idalumno;
+
+	@Size(max = 45)
 	private String nombre;
+
+	@Size(max = 45)
 	private String apellidos;
+
+	@Size(max = 45)
 	private String role;
+
+	@Size(max = 45)
 	private String email;
+
+	@Size(max = 45)
 	private String usuario;
+
+	@Size(max = 45)
 	private String password;
+
+	@Size(max = 45)
 	private String foto;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idalumno")
@@ -33,8 +48,10 @@ public class Alumno {
 		super();
 	}
 
-	public Alumno(int idalumno, String nombre,String role ,String apellidos, String email, String usuario, String password,
-			String foto, List<Comentario> idcomentario, List<Matricula> idmatricula) {
+	public Alumno(int idalumno, @Size(max = 45) String nombre, @Size(max = 45) String role,
+			@Size(max = 45) String apellidos, @Size(max = 45) String email, @Size(max = 45) String usuario,
+			@Size(max = 45) String password, @Size(max = 45) String foto, List<Comentario> idcomentario,
+			List<Matricula> idmatricula) {
 		super();
 		this.idalumno = idalumno;
 		this.nombre = nombre;

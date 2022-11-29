@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Curso {
@@ -18,8 +19,13 @@ public class Curso {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idcurso;
+
+	@Size(max = 45)
 	private String nombre;
+
+	@Size(max = 45)
 	private String descripcion;
+
 	private int nivel;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idcurso")
@@ -31,7 +37,9 @@ public class Curso {
 	@ManyToOne
 	@JoinColumn(name = "idprofesores")
 	private Profesor idprofesor;
+
 	private Date fechaInicio;
+
 	private Date fechaFin;
 
 	public Curso() {
@@ -39,8 +47,9 @@ public class Curso {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Curso(int idcurso, String nombre, String descripcion, int nivel, List<Comentario> idcomentario,
-			List<Comentario> idmatricula, Profesor idprofesor, Date fechaInicio, Date fechaFin) {
+	public Curso(int idcurso, @Size(max = 45) String nombre, @Size(max = 45) String descripcion, int nivel,
+			List<Comentario> idcomentario, List<Comentario> idmatricula, Profesor idprofesor, Date fechaInicio,
+			Date fechaFin) {
 		super();
 		this.idcurso = idcurso;
 		this.nombre = nombre;
