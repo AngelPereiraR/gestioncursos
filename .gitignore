@@ -24,3 +24,10 @@ target/classes/com/example/demo/services/NoticiaService.class
 target/classes/com/example/demo/services/ProfesorService.class
 target/classes/META-INF/MANIFEST.MF
 target/classes/META-INF/MANIFEST.MF
+target/classes/com/example/demo/entity/Administrador.class
+target/classes/com/example/demo/entity/Alumno.class
+target/classes/com/example/demo/entity/Comentario.class
+target/classes/com/example/demo/entity/Curso.class
+target/classes/com/example/demo/entity/Noticia.class
+target/classes/com/example/demo/entity/Profesor.class
+target/classes/com/example/demo/entity/Usuario.class
