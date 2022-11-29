@@ -15,20 +15,32 @@
                     <i class="fas fa-bars"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">Login</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">Register</a></li>
+                    <ul sec:authorize="hasRole('ROLE_ALUMNO')" class="navbar-nav ms-auto">
+                        <li class="nav-item mx-0 mx-lg-1"> 
+                        <form class="nav-link py-3 px-0 px-lg-3 rounded" th:action="@{/logout}" method="post">
+                        <button class="btn btn-link" type="submit">Cerrar Sesion</button></form>
+                        </li>
+                       
                     
                     </ul>
-                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">Login</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">Register</a></li>
+                     <ul sec:authorize="hasRole('ROLE_PROFESOR')" class="navbar-nav ms-auto">
+                        <li class="nav-item mx-0 mx-lg-1"> <form class="nav-link py-3 px-0 px-lg-3 rounded" th:action="@{/logout}" method="post">
+                        <button class="btn btn-link" type="submit">Cerrar Sesion</button></form></li>
+                        
                     
                     </ul>
                     
-                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">Login</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">Register</a></li>
+                     <ul sec:authorize="hasRole('ROLE_ADMIN')" class="navbar-nav ms-auto">
+                         <li class="nav-item mx-0 mx-lg-1">
+                        <form class="nav-link py-3 px-0 px-lg-3 rounded" th:action="@{/logout}" method="post">
+                        <button class="btn btn-link" type="submit">Cerrar Sesion</button></form>
+                        </li>
+                    
+                    </ul>
+                    
+                    <ul sec:authorize="!isAuthenticated()" class="navbar-nav ms-auto">
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/auth/login}">Login</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/auth/registerform}" >Register</a></li>
                     
                     </ul>
                     
