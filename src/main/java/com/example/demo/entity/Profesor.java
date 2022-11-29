@@ -17,6 +17,7 @@ public class Profesor {
 	private int idprofesor;
 	private String nombre;
 	private String apellidos;
+	private String role;
 	private String email;
 	private String usuario;
 	private String password;
@@ -28,7 +29,7 @@ public class Profesor {
 		super();
 	}
 
-	public Profesor(int idprofesor, String nombre, String apellidos, String email, String usuario, String password,
+	public Profesor(int idprofesor, String nombre, String role,String apellidos, String email, String usuario, String password,
 			List<Curso> idcurso) {
 		super();
 		this.idprofesor = idprofesor;
@@ -38,6 +39,7 @@ public class Profesor {
 		this.usuario = usuario;
 		this.password = password;
 		this.idcurso = idcurso;
+		this.setRole(role);
 	}
 
 	public int getIdprofesor() {
@@ -100,6 +102,14 @@ public class Profesor {
 	public String toString() {
 		return "Profesor [idprofesor=" + idprofesor + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email="
 				+ email + ", usuario=" + usuario + ", password=" + password + ", idcurso=" + idcurso + "]";
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 }

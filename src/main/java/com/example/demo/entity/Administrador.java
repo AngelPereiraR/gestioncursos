@@ -17,6 +17,8 @@ public class Administrador {
 	private int idadministrador;
 
 	private String usuario;
+	
+	private String role;
 
 	private String password;
 
@@ -27,12 +29,13 @@ public class Administrador {
 		super();
 	}
 
-	public Administrador(int idadministrador, String usuario, String password, List<Noticia> idnoticia) {
+	public Administrador(int idadministrador, String usuario,String role, String password, List<Noticia> idnoticia) {
 		super();
 		this.idadministrador = idadministrador;
 		this.usuario = usuario;
 		this.password = password;
 		this.idnoticia = idnoticia;
+		this.setRole(role);
 	}
 
 	public int getIdadministrador() {
@@ -71,6 +74,14 @@ public class Administrador {
 	public String toString() {
 		return "Administrador [idadministrador=" + idadministrador + ", usuario=" + usuario + ", password=" + password
 				+ ", idnoticia=" + idnoticia + "]";
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 }

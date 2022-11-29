@@ -17,6 +17,7 @@ public class Alumno {
 	private int idalumno;
 	private String nombre;
 	private String apellidos;
+	private String role;
 	private String email;
 	private String usuario;
 	private String password;
@@ -32,7 +33,7 @@ public class Alumno {
 		super();
 	}
 
-	public Alumno(int idalumno, String nombre, String apellidos, String email, String usuario, String password,
+	public Alumno(int idalumno, String nombre,String role ,String apellidos, String email, String usuario, String password,
 			String foto, List<Comentario> idcomentario, List<Matricula> idmatricula) {
 		super();
 		this.idalumno = idalumno;
@@ -44,6 +45,7 @@ public class Alumno {
 		this.foto = foto;
 		this.idcomentario = idcomentario;
 		this.idmatricula = idmatricula;
+		this.setRole(role);
 	}
 
 	public int getIdalumno() {
@@ -123,5 +125,13 @@ public class Alumno {
 		return "Alumno [idalumno=" + idalumno + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email
 				+ ", usuario=" + usuario + ", password=" + password + ", foto=" + foto + ", idcomentario="
 				+ idcomentario + ", idmatricula=" + idmatricula + "]";
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 }

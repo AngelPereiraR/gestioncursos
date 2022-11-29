@@ -20,13 +20,13 @@ public class SecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests((requests) -> requests
-				.antMatchers("/admin/**").hasRole("administradores").antMatchers("/alumno/**").hasRole("alumnos").antMatchers("/profesor/**").hasRole("profesores").antMatchers(" \"/webjars/**\",\"*/css/**\",\"/auth/**\"").permitAll()
+				.antMatchers("/admin/**").hasRole("administradores").antMatchers("/alumno/**").hasRole("alumnos").antMatchers("/profesor/**").hasRole("profesores").antMatchers( "/","/webjars/**","/css/**","/auth/**").permitAll()
 				.anyRequest().authenticated()
 			)
 			.formLogin((form) -> form
 				.loginPage("/login")
-				.defaultSuccessUrl("/students")
-				.permitAll()
+				.defaultSuccessUrl("/inicio")
+				.permitAll().loginPage("/login")
 			)
 			.logout((logout) -> logout.permitAll().
 					logoutUrl("/logout").logoutSuccessUrl("/login?logout"));
