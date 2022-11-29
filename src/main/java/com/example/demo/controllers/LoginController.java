@@ -20,7 +20,7 @@ public class LoginController {
 
 	@GetMapping("/auth/registerForm")
 	public String registerForm(Model model) {
-		model.addAttribute("user", new Usuario());
+		model.addAttribute("usuario", new Usuario());
 	
 		return "registro";
 	}
