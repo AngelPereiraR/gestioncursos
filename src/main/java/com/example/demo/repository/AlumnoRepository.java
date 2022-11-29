@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.Alumno;
 
-@Repository("alumnosRepository")
+@Repository("alumnoRepository")
 public interface AlumnoRepository extends JpaRepository<Alumno, Serializable>{
 
 }

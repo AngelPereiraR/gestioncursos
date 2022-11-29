@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.Comentario;
 
-@Repository("comentariosRepository")
+@Repository("comentarioRepository")
 public interface ComentarioRepository extends JpaRepository<Comentario, Serializable>{
 
 }

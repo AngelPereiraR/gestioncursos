@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.Administrador;
 
-@Repository("administradoresRepository")
+@Repository("administradorRepository")
 public interface AdministradorRepository extends JpaRepository<Administrador, Serializable>{
 
 }
