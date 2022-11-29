@@ -13,14 +13,16 @@ public class Usuario {
 	private long id;
 	
 	@Column(name="email", unique=true, nullable=false)
+	@Size(max = 45)
 	private String email;
 	
 	@Column(name="password", nullable=false)
-	@Size(max=100)
+	@Size(max = 45)
 	private String password;
 	
 	private boolean enabled;
 	
+	@Size(max = 45)
 	private String role;
 	
 	
@@ -29,7 +31,7 @@ public class Usuario {
 		super();
 	}
 
-	public Usuario(long id, String email, @Size(max = 100) String password, boolean enabled, String role) {
+	public Usuario(long id, String email, @Size(max = 45) String password, boolean enabled, String role) {
 		super();
 		this.id = id;
 		this.email = email;

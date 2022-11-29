@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Comentario {
@@ -13,6 +14,8 @@ public class Comentario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idcomentario;
+
+	@Size(max = 45)
 	private String comentario;
 
 	@ManyToOne
@@ -27,7 +30,7 @@ public class Comentario {
 		super();
 	}
 
-	public Comentario(int idcomentario, String comentario, Alumno idalumno, Curso idcurso) {
+	public Comentario(int idcomentario, @Size(max = 45) String comentario, Alumno idalumno, Curso idcurso) {
 		super();
 		this.idcomentario = idcomentario;
 		this.comentario = comentario;

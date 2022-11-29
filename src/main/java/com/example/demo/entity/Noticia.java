@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Noticia {
@@ -14,10 +15,13 @@ public class Noticia {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idnoticia;
 
+	@Size(max = 45)
 	private String titulo;
 
+	@Size(max = 45)
 	private String descripcion;
 
+	@Size(max = 45)
 	private String imagen;
 
 	@ManyToOne
@@ -28,7 +32,8 @@ public class Noticia {
 		super();
 	}
 
-	public Noticia(int idnoticia, String titulo, String descripcion, String imagen, Administrador idadministrador) {
+	public Noticia(int idnoticia, @Size(max = 45) String titulo, @Size(max = 45) String descripcion,
+			@Size(max = 45) String imagen, Administrador idadministrador) {
 		super();
 		this.idnoticia = idnoticia;
 		this.titulo = titulo;
