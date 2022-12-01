@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="@{webjars/bootstrap/4.5.3/css/bootstrap.min.css}"
-      rel="stylesheet" type="text/css">
+       <link th:href="@{/css/styles.css}"
+      rel="stylesheet">
 
+     
 <meta charset="UTF-8">
 <title>Registro de usuarios</title>
 </head>
 <body>
-	<div class = "container">
+<nav th:replace="index::header"></nav>
+
+	<div >
 		<form th:action="@{/auth/register}" th:object="${usuario}" method="post">
 			<div class="form-label-group">
 				<label>Email: </label>

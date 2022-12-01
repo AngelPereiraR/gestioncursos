@@ -39,40 +39,5 @@ public class SecurityConfig {
 		return authenticationConfiguration.getAuthenticationManager();
 	}
 	
-	/*
-	@Bean
-	public UserDetailsService userDetailsService() {
-		UserDetails user =
-			 User.withDefaultPasswordEncoder()
-				.username("user")
-				.password("password")
-				.roles("USER")
-				.build();
-
-		return new InMemoryUserDetailsManager(user);
-	}*/
 	
-	/*
-	@Autowired
-	@Qualifier("userRepository")
-	private UserRepository userRepository;
-	
-	@Bean
-	public UserDetails userDetailsService(String username)throws UsernameNotFoundException {
-		com.example.demo.entity.User user = userRepository.finByUsername(username);
-		
-		UserBuilder builder=null;
-		
-		if(user!=null) {
-			
-			builder=User.withUsername(username);
-			builder.disabled(false);
-			builder.password(user.getPassword());
-			builder.authorities(new SimpleGrantedAuthority(user.getRole()));
-		}else 
-			throw new UsernameNotFoundException("User not found");
-		return builder.build();
-		
-	}
-	*/
 }
