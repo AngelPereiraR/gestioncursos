@@ -11,17 +11,21 @@
 <body>
 <nav th:replace="index::header"></nav>
 
-	<div >
+	<div class="container  mt-sm-5 ">
 		<form th:action="@{/auth/register}" th:object="${usuario}" method="post">
 			<div class="form-label-group">
-				<label>Email: </label>
-				<input type="text" th:field="*{email}" class="form-control" placeholder="" name="email"/>
+				<label class="sr-only">Email: </label>
+				<input type="text" th:field="*{email}" class="form-control" placeholder="Email" name="email"/>
 			</div>
+			<br>
 			<div class="form-label-group">
-				<label>Contraseña: </label>
-				<input type="password" th:field="*{password}" class="form-control" placeholder="" name="password"/>
+				<label class="sr-only">Contraseña: </label>
+				<input type="password" th:field="*{password}" class="form-control" placeholder="Contraseña" name="password"/>
 			</div>
-			<input class="btn btn-lg btn-primary btn-block text-uppercase" id="boton" type="submit" value="Resgistrarse"/>
+			<br>
+			<button class="btn tbn-lg btn-primary btn-block text-uppercase" type="submit">
+				Registrarse
+			</button>
 		</form>
 	</div>
 </body>
