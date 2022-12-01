@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/gestion")
+@RequestMapping("/")
 public class CourseController {
-	private static final String LAYOUT_VIEW = "index";
+	private static final String LAYOUT_VIEW = "inicio";
 
-	@GetMapping("/hola")
+	@GetMapping("/inicio")
 	public String firtsView() {
 		return LAYOUT_VIEW;
 	}

@@ -11,17 +11,35 @@
 <body>
 <nav th:replace="index::header"></nav>
 
-	<div >
+	<div class="container" >
 		<form th:action="@{/auth/register}" th:object="${usuario}" method="post">
+			<div class="form-label-group mt-4 ">
+				<label>Nombre: </label>
+				<input type="text" th:field="*{nombre}" class="form-control" placeholder="Nombre" name="nombre"/>
+			</div>
+			<br>
+			<div class="form-label-group">
+				<label>Apellidos: </label>
+				<input type="text" th:field="*{apellidos}" class="form-control" placeholder="Apellidos" name="apellidos"/>
+			</div>
+			<br>
 			<div class="form-label-group">
 				<label>Email: </label>
-				<input type="text" th:field="*{email}" class="form-control" placeholder="" name="email"/>
+				<input type="text" th:field="*{email}" class="form-control" placeholder="Email" name="email"/>
 			</div>
+			<br>
 			<div class="form-label-group">
-				<label>Contraseña: </label>
-				<input type="password" th:field="*{password}" class="form-control" placeholder="" name="password"/>
+				<label>Foto URL: </label>
+				<input type="text" th:field="*{foto}" class="form-control" placeholder="Url" name="foto"/>
 			</div>
-			<input class="btn btn-lg btn-primary btn-block text-uppercase" id="boton" type="submit" value="Resgistrarse"/>
+			<br><div class="form-label-group">
+				<label>Contraseña: </label>
+				<input type="password" th:field="*{password}" class="form-control" placeholder="Contraseña" name="password"/>
+			</div>
+			<br>
+			<button class="btn tbn-lg btn-primary btn-block text-uppercase" type="submit">
+				Registrarse
+			</button>
 		</form>
 	</div>
 </body>
