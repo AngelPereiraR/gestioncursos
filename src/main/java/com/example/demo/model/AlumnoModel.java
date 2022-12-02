@@ -32,7 +32,7 @@ public class AlumnoModel {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AlumnoModel(int idalumno, String nombre, String apellidos, String email, String usuario, String password,
+	public AlumnoModel(int idalumno, String nombre, String apellidos, String email,  String password,
 			String foto, List<Comentario> comentario, List<Matricula> matricula) {
 		super();
 		this.idalumno = idalumno;

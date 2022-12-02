@@ -29,8 +29,6 @@ public class Alumno {
 	@Size(max = 45)
 	private String email;
 
-	@Size(max = 45)
-	private String usuario;
 
 	@Size(max = 45)
 	private String password;
@@ -50,7 +48,7 @@ public class Alumno {
 	}
 
 	public Alumno(int idalumno, @Size(max = 45) String nombre, @Size(max = 45) String role,
-			@Size(max = 45) String apellidos, @Size(max = 45) String email, @Size(max = 45) String usuario,
+			@Size(max = 45) String apellidos, @Size(max = 45) String email, 
 			@Size(max = 45) String password, @Size(max = 45) String foto, List<Comentario> idcomentario,
 			List<Matricula> idmatricula) {
 		super();
@@ -58,12 +56,12 @@ public class Alumno {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
-		this.usuario = usuario;
+
 		this.password = password;
 		this.foto = foto;
 		this.idcomentario = idcomentario;
 		this.idmatricula = idmatricula;
-		this.setRole(role);
+	
 	}
 
 	public int getIdalumno() {
@@ -98,13 +96,7 @@ public class Alumno {
 		this.email = email;
 	}
 
-	public String getUsuario() {
-		return usuario;
-	}
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
 
 	public String getPassword() {
 		return password;
@@ -141,7 +133,7 @@ public class Alumno {
 	@Override
 	public String toString() {
 		return "Alumno [idalumno=" + idalumno + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email
-				+ ", usuario=" + usuario + ", password=" + password + ", foto=" + foto + ", idcomentario="
+				+ ", password=" + password + ", foto=" + foto + ", idcomentario="
 				+ idcomentario + ", idmatricula=" + idmatricula + "]";
 	}
 

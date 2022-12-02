@@ -11,7 +11,7 @@
 <body>
 <nav th:replace="index::header" class="header"></nav>
 	<div class="container mt-sm-5  ">
-		<form  class="form-singin align-items-center " th:action="@{inicio}" th:objects="${usuario}" method="POST">
+		<form  class="form-singin align-items-center " th:action="@{/inicio/}" th:objects="${usuario}" method="GET">
 			<input type="hidden" name="${ csrf.parameterName}" value="${crsf.token}"/>
 			<label form="inputEmail" class="sr-only">Email</label>
 			<input type="text" class="form-control" placeholder="Username" name="username" id="username"/>

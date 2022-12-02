@@ -20,7 +20,7 @@ public class SecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests((requests) -> requests
-				.antMatchers("/admin/**").hasRole("administrador").antMatchers("/alumno/**").hasRole("alumno").antMatchers("/profesor/**").hasRole("profesor").antMatchers( "/","/webjars/**","/imgs/**","/css/**","/auth/** ").permitAll()
+				.antMatchers("/admin/**").hasRole("administrador").antMatchers("/alumno/**").hasRole("alumno").antMatchers("/profesor/**").hasRole("profesor").antMatchers( "/","/webjars/**","/imgs/**","/css/**","/auth/**","/inicio/**").permitAll()
 				.anyRequest().authenticated()
 			)
 			.formLogin((form) -> form

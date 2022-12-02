@@ -33,12 +33,12 @@ public class LoginController {
 		model.addAttribute("usuario", new Usuario());
 		model.addAttribute("error", error);
 		model.addAttribute("logout", logout);
-		return "login"	;
+		return "login";
 	}
 	
-	@GetMapping("/auth/registerform")
+	@GetMapping("/auth/registerForm")
 	public String registerForm(Model model) {
-		model.addAttribute("usuario", new Alumno());
+		model.addAttribute("alumno", new Alumno());
 	
 		return "registro";
 	}
@@ -48,7 +48,7 @@ public class LoginController {
 		Usuario usuario= new Usuario();
 		usuario.setEmail(alumno.getEmail());
 		usuario.setPassword(alumno.getPassword());
-		usuario.setRole("alumno");
+		usuario.setRole(alumno.getRole());
 		alumnoService.addAlumno(alumnoService.transform(alumno));
 		userService.registrar(usuario);
 		flash.addFlashAttribute("succes", "User registered succesfully!");

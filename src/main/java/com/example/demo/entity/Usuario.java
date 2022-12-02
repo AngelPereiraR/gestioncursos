@@ -29,6 +29,7 @@ public class Usuario {
 
 	public Usuario() {
 		super();
+		
 	}
 
 	public Usuario(long id, String email, @Size(max = 45) String password, boolean enabled, String role) {
