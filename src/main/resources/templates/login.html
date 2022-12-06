@@ -14,7 +14,7 @@
 		<form  class="form-singin align-items-center " th:action="@{/inicio/}" th:objects="${usuario}" method="GET">
 			<input type="hidden" name="${ csrf.parameterName}" value="${crsf.token}"/>
 			<label form="inputEmail" class="sr-only">Email</label>
-			<input type="text" class="form-control" placeholder="Email" name="email" id="email"/>
+			<input type="text" class="form-control" placeholder="Email" name="username" id="username"/>
 			<br>
 			<label form="inputPassword" class="sr-only">Contraseña</label>
 			<input type="password" class="form-control" placeholder="Password" name="password" id="password"/>

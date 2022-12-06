@@ -18,8 +18,8 @@ public class SecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.csrf().disable()
-			.authorizeRequests((requests) -> requests
+		http.
+			authorizeRequests((requests) -> requests
 				.antMatchers("/admin/**").hasRole("administrador").antMatchers("/alumno/**").hasRole("alumno").antMatchers("/profesor/**").hasRole("profesor").antMatchers( "/","/webjars/**","/imgs/**","/css/**","/auth/**","/inicio/**").permitAll()
 				.anyRequest().authenticated()
 			)
