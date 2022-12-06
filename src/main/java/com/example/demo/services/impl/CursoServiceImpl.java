@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Curso;
+
 import com.example.demo.model.CursoModel;
 import com.example.demo.repository.CursoRepository;
 import com.example.demo.services.CursoService;
@@ -57,4 +58,10 @@ public class CursoServiceImpl implements CursoService {
 	}
 
 	
+	@Override
+	public CursoModel findCurso(int id) {
+		// TODO Auto-generated method stub
+		
+		return transform(cursoRepository.findById(id).orElse(null));
+	}
 }

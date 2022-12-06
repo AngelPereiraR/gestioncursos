@@ -29,7 +29,7 @@ public class SecurityConfig {
 				.permitAll()
 			)
 			.logout((logout) -> logout.permitAll().
-					logoutUrl("/logout").logoutSuccessUrl("/auth/login?logout"));
+					logoutUrl("/logout").logoutSuccessUrl("/login?logout"));
 
 		return http.build();
 	}

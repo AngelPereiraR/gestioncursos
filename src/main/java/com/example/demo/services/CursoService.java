@@ -12,4 +12,5 @@ public interface CursoService {
 	public abstract Curso updateCurso(CursoModel cursoModel);
 	public abstract Curso transform(CursoModel cursoModel);
 	public abstract CursoModel transform(Curso curso);
+	public abstract CursoModel findCurso(int id);
 }

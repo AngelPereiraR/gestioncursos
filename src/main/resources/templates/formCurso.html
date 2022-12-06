@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="@{webjars/bootstrap/4.5.3/css/bootstrap.min.css}"
+      rel="stylesheet" type="text/css">
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container mt-sm-5">
+	<form action="#" th:action="@{/admin/addCurso/}" th:object="${curso}" method="post" class="form form-singin align-items-center">
+		
+		<input type="hidden"  th:field="*{idcurso}"> 
+		<p>NOMBRE: <input type="text" th:field="*{nombre}"/>
+		<p th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Name has errors</p>
+			
+		<p>DESCRIPCION: <input type="text" th:field="*{descripcion}"/></p>
+		<p th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}">Description has errors</p>		
+		
+		<p>FECHA INICIO:  <input type="date" th:field="*{fechaInicio}"/></p>
+		<p th:if="${#fields.hasErrors('fechaInicio')}" th:errors="*{fechaInicio}">Price has errors</p>		
+		
+		<p>FECHA FIN: <input type="date" th:field="*{fechaFin}"/></p>
+		<p th:if="${#fields.hasErrors('fechaFin')}" th:errors="*{fechaFin}">Hours has errors</p>		
+		
+		<p> <input type="submit" value="Submit"/></p>	
+	</form>
+	</div>
+</body>
+</html>
