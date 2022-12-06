@@ -10,15 +10,17 @@
 </head>
 <body>
 <nav th:replace="index::header" class="header"></nav>
-	<div class="container mt-sm-5  ">
-		<form  class="form-singin align-items-center " th:action="@{/inicio/}" th:objects="${usuario}" method="GET">
-			<input type="hidden" name="${ csrf.parameterName}" value="${crsf.token}"/>
+	<div class="container mt-sm-5">
+		<form  class="form-singin align-items-center " th:action="@{/auth/login}" th:object="${usuario}" method="post">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_crsf.token}"/>
 			<label form="inputEmail" class="sr-only">Email</label>
 			<input type="text" class="form-control" placeholder="Email" name="username" id="username"/>
 			<br>
 			<label form="inputPassword" class="sr-only">Contraseña</label>
 			<input type="password" class="form-control" placeholder="Password" name="password" id="password"/>
 			<br>
+			<div th:if="${error!=null}" class="alert alert-danger" role="alert">Invalid username</div>
+			<div th:if="${logout!=null}" class="alert alert-info" role="alert">Logout successful</div>
 			<button class="btn tbn-lg btn-primary btn-block text-uppercase" type="submit">
 				Iniciar Sesión
 			</button>

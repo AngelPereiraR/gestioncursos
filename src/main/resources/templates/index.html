@@ -12,38 +12,21 @@
                 <a class="navbar-brand" th:href="@{/}">GestionCursos</a>
               
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">
-                        <li sec:authorize="hasRole('alumno')"  class="nav-item mx-0 mx-lg-1">
-                        	<a class="nav-link" th:text="'Hola ' + ${#authentication.name}"></a>
-                        </li>
-                        <li  sec:authorize="hasRole('alumno')" class="nav-item mx-0 mx-lg-1">
-                        	<form class="nav-link py-3 px-0 px-lg-3 rounded" th:action="@{/logout}" method="post">
-                        		<button class="btn btn-link" type="submit">Cerrar Sesion</button>
-                        	</form>
-                        </li>
-                        
-                         <li  sec:authorize="!isAuthenticated()" class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/auth/login}">Login</a></li>
-                        <li sec:authorize="!isAuthenticated()"  class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/auth/registerForm}">Register</a></li>
-                        
-                         <li sec:authorize="hasRole('profesor')" class="nav-item mx-0 mx-lg-1">
-                        	<a class="nav-link" th:text="'Hola ' + ${#authentication.name}"></a>
-                        </li>
-                        <li sec:authorize="hasRole('profesor')"  class="nav-item mx-0 mx-lg-1">
-                        	<form class="nav-link py-3 px-0 px-lg-3 rounded" th:action="@{/logout}" method="post">
-                        		<button class="btn btn-link" type="submit">Cerrar Sesion</button>
-                        	</form>
-                        </li>
-                        
-                         <li sec:authorize="hasRole('administrador')"  class="nav-item mx-0 mx-lg-1">
-                        	<a class="nav-link" th:text="'Hola ' + ${#authentication.name}"></a>
-                        </li>
-                        <li  sec:authorize="hasRole('administrador')" class="nav-item mx-0 mx-lg-1">
-                        	<form class="nav-link py-3 px-0 px-lg-3 rounded" th:action="@{/logout}" method="post">
-	                        	<button class="btn btn-link" type="submit">Cerrar Sesion</button>
-	                        </form>
-                        </li>
-                       
+
+                	<ul sec:authorize="!isAuthenticated()" class="navbar-nav ms-auto">
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/auth/login}">Login</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/auth/registerForm}">Register</a></li>
                     </ul>
+                    <ul sec:authorize="isAuthenticated()" class="navbar-nav ms-auto">
+                        <li class="nav-item mx-0 mx-lg-1">
+                        	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:text="'Hola ' + ${#authentication.name}"></a>
+                        </li>
+                        <li class="nav-item mx-0 mx-lg-1">
+                        	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/logout}">Cerrar Sesión</a>
+                        </li>
+                    </ul>
+                    
+
                     
                 </div>
             </div>

@@ -25,11 +25,11 @@ public class SecurityConfig {
 			)
 			.formLogin((form) -> form
 				.loginPage("/auth/login").usernameParameter("email")
-				.defaultSuccessUrl("/inicio")
+				.defaultSuccessUrl("/inicio/")
 				.permitAll()
 			)
 			.logout((logout) -> logout.permitAll().
-					logoutUrl("/logout").logoutSuccessUrl("/login?logout"));
+					logoutUrl("/logout").logoutSuccessUrl("/auth/login?logout"));
 
 		return http.build();
 	}
