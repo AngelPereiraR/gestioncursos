@@ -1,13 +1,13 @@
 package com.example.demo.model;
 
-import com.example.demo.entity.Alumno;
 import com.example.demo.entity.Curso;
+import com.example.demo.entity.Usuario;
 
 public class ComentarioModel {
 
 	private int idcomentario;
 
-	private Alumno alumno;
+	private Usuario user;
 
 	private Curso curso;
 
@@ -18,10 +18,10 @@ public class ComentarioModel {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ComentarioModel(int idcomentario, Alumno alumno, Curso curso, String comentario) {
+	public ComentarioModel(int idcomentario, Usuario user, Curso curso, String comentario) {
 		super();
 		this.idcomentario = idcomentario;
-		this.alumno = alumno;
+		this.user = user;
 		this.curso = curso;
 		this.comentario = comentario;
 	}
@@ -34,12 +34,12 @@ public class ComentarioModel {
 		this.idcomentario = idcomentario;
 	}
 
-	public Alumno getAlumno() {
-		return alumno;
+	public Usuario getAlumno() {
+		return user;
 	}
 
-	public void setAlumno(Alumno alumno) {
-		this.alumno = alumno;
+	public void setAlumno(Usuario alumno) {
+		this.user = alumno;
 	}
 
 	public Curso getCurso() {
@@ -60,7 +60,7 @@ public class ComentarioModel {
 
 	@Override
 	public String toString() {
-		return "ComentariosModel [idcomentario=" + idcomentario + ", alumno=" + alumno + ", curso=" + curso
+		return "ComentariosModel [idcomentario=" + idcomentario + ", usuario=" + user + ", curso=" + curso
 				+ ", comentario=" + comentario + "]";
 	}
 

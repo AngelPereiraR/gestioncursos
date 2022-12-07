@@ -26,20 +26,20 @@ public class Noticia {
 
 	@ManyToOne
 	@JoinColumn(name = "idadministrador")
-	private Administrador idadministrador;
+	private Usuario id;
 
 	public Noticia() {
 		super();
 	}
 
 	public Noticia(int idnoticia, @Size(max = 45) String titulo, @Size(max = 45) String descripcion,
-			@Size(max = 45) String imagen, Administrador idadministrador) {
+			@Size(max = 45) String imagen, Usuario id) {
 		super();
 		this.idnoticia = idnoticia;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.imagen = imagen;
-		this.idadministrador = idadministrador;
+		this.id = id;
 	}
 
 	public int getIdnoticia() {
@@ -74,18 +74,18 @@ public class Noticia {
 		this.imagen = imagen;
 	}
 
-	public Administrador getIdadministrador() {
-		return idadministrador;
+	public Usuario getIdadministrador() {
+		return id;
 	}
 
-	public void setIdadministrador(Administrador idadministrador) {
-		this.idadministrador = idadministrador;
+	public void setIdadministrador(Usuario id) {
+		this.id = id;
 	}
 
 	@Override
 	public String toString() {
 		return "Noticia [idnoticia=" + idnoticia + ", titulo=" + titulo + ", descripcion=" + descripcion + ", imagen="
-				+ imagen + ", idadministrador=" + idadministrador + "]";
+				+ imagen + ", id=" + id + "]";
 	}
 
 }
