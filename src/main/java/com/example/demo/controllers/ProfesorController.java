@@ -65,7 +65,7 @@ public class ProfesorController {
 		if (id == null) {
 			model.addAttribute("usuario", new Usuario());
 		} else {
-			model.addAttribute("usuario", userService.findProfesor(id));
+			model.addAttribute("usuario", userService.findUsuario(id));
 		}
 		return FORM_VIEW;
 	}

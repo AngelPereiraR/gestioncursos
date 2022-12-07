@@ -148,7 +148,7 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 	}
 
 	@Override
-	public UsuarioModel findProfesor(int id) {
+	public UsuarioModel findUsuario(int id) {
 
 		return transform(userRepository.findById(id).orElse(null));
 	}
