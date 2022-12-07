@@ -25,6 +25,8 @@ public interface UsuarioService {
 
 	public abstract List<UsuarioModel> listAllProfesores();
 
+	public abstract UsuarioModel findProfesor(int id);
+
 	public abstract Usuario addProfesor(UsuarioModel usuarioModel);
 
 	public abstract int removeProfesor(int id);

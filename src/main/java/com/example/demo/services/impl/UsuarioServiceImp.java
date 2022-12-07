@@ -147,4 +147,10 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 		return userRepository.save(transform(usuarioModel));
 	}
 
+	@Override
+	public UsuarioModel findProfesor(int id) {
+
+		return transform(userRepository.findById(id).orElse(null));
+	}
+
 }

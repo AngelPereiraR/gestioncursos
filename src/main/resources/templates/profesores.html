@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="ISO-8859-1">
+<title>Academy</title>
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Apellidos</th>
+				<th>Email</th>
+			</tr>
+		</thead>
+
+		<tbody th:each="usuario: ${usuarios}">
+			<tr>
+				<td th:text=${usuario.nombre}></td>
+				<td th:text=${usuario.apellidos}></td>
+				<td th:text=${usuario.email}></td>
+				<td><a th:href="@{/admin/formProfesor/} + ${usuario.id}">
+						<button type="button">Editar Profesor</button>
+				</a> <a th:href="@{/admin/removeProfesor/} + ${usuario.id}">
+						<button type="button">Eliminar Profesor</button>
+				</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<a th:href="@{/admin/formProfesor}">
+		<button type="button">Añadir Profesor</button>
+	</a>
+</body>
+</html>
