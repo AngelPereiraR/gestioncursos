@@ -15,11 +15,10 @@ public class AlumnoModel {
 
 	private String email;
 
-
 	private String password;
 
 	private String foto;
-	
+
 	private String role;
 
 	private List<Comentario> comentario;
@@ -28,18 +27,18 @@ public class AlumnoModel {
 
 	public AlumnoModel() {
 		super();
-		this.role="alumno";
+		this.setRole("alumno");
 		// TODO Auto-generated constructor stub
 	}
 
-	public AlumnoModel(int idalumno, String nombre, String apellidos, String email,  String password,
-			String foto, List<Comentario> comentario, List<Matricula> matricula) {
+	public AlumnoModel(int idalumno, String nombre, String apellidos, String email, String password, String foto,
+			List<Comentario> comentario, List<Matricula> matricula) {
 		super();
 		this.idalumno = idalumno;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
-		
+
 		this.password = password;
 		this.foto = foto;
 		this.comentario = comentario;
@@ -78,8 +77,6 @@ public class AlumnoModel {
 		this.email = email;
 	}
 
-	
-
 	public String getPassword() {
 		return password;
 	}
@@ -94,6 +91,14 @@ public class AlumnoModel {
 
 	public void setFoto(String foto) {
 		this.foto = foto;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public List<Comentario> getComentario() {
@@ -115,8 +120,8 @@ public class AlumnoModel {
 	@Override
 	public String toString() {
 		return "AlumnoModel [idalumno=" + idalumno + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email="
-				+ email + ",  , password=" + password + ", foto=" + foto + ", comentario="
-				+ comentario + ", matricula=" + matricula + "]";
+				+ email + ",  , password=" + password + ", foto=" + foto + ", comentario=" + comentario + ", matricula="
+				+ matricula + "]";
 	}
 
 }
