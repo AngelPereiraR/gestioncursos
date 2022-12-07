@@ -18,7 +18,7 @@
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/auth/registerForm}">Register</a></li>
                     </ul>
                     <ul sec:authorize="isAuthenticated()" class="navbar-nav ms-auto">
-                      <li  sec:authorize="hasRole('alumno')" class="nav-item mx-0 mx-lg-1">
+                      <li  sec:authorize="hasRole('ROLE_ALUMNO')" class="nav-item mx-0 mx-lg-1">
                         	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:text="Hola"></a>
                         </li>
                         <li class="nav-item mx-0 mx-lg-1">
