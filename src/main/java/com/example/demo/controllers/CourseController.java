@@ -32,14 +32,14 @@ public class CourseController {
 	private CursoService cursoService;
 	
 	
-	@PreAuthorize("hasAnyRole('alumno','profesor','administrador')")
+	
 	@GetMapping("/inicio/")
 	private String home() {
 		
 		return LAYOUT_VIEW;
 	}
 	
-	@PreAuthorize("hasRole('administrador')")
+	
 	@GetMapping("/admin/listCursos")
 	public ModelAndView listCursos() {
 		ModelAndView mav = new ModelAndView(COURSES_VIEW);
@@ -48,7 +48,7 @@ public class CourseController {
 	}
 	
 	
-	@PreAuthorize("hasRole('administrador')")
+
 	@PostMapping("/admin/addCurso")
 	public String addCurso(@ModelAttribute("curso") CursoModel cursoModel, RedirectAttributes flash) {
 		if(cursoModel.getIdcurso()==0) {
@@ -68,7 +68,7 @@ public class CourseController {
 	}
 	
 	
-	@PreAuthorize("hasRole('administrador')")
+	
 	@PostMapping("/admin/removeCurso/{id}")
 	public String deleteCourse(@PathVariable("id") int id, RedirectAttributes flash) {
 		cursoService.removeCurso(id);
@@ -77,7 +77,7 @@ public class CourseController {
 		return "redirect:/admin/listCursos";
 		
 	}
-	@PreAuthorize("hasRole('administrador')")
+
 	@GetMapping( value={"/admin/formCurso/{id}" ,"/admin/formCurso"})
 	public String formCurso(@PathVariable(name="id", required=false) Integer id,Model model) {
 		

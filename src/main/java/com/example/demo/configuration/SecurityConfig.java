@@ -1,6 +1,7 @@
 package com.example.demo.configuration;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,10 +22,11 @@ public class SecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
 		
 		http.
 			authorizeRequests((requests) -> requests
-				.antMatchers("/admin/**","/inicio/**").hasRole("administrador").antMatchers("/alumno/**","/inicio/**").hasRole("alumno").antMatchers("/profesor/**","/inicio/**").hasRole("profesor").antMatchers( "/","/webjars/**","/imgs/**","/css/**","/auth/**","/inicio/**").permitAll()
+				.antMatchers("/admin/**","/inicio/**").hasRole("ADMIN").antMatchers("/alumno/**","/inicio/**").hasRole("ALUMNO").antMatchers("/profesor/**","/inicio/**").hasRole("PROF").antMatchers( "/","/webjars/**","/imgs/**","/css/**","/auth/**","/inicio/**").permitAll()
 				.anyRequest().authenticated()
 			)
 			.formLogin((form) -> form
@@ -37,6 +39,8 @@ public class SecurityConfig {
 
 		return http.build();
 	}
+	
+	
 	
 	@Bean 
 	AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)throws Exception{

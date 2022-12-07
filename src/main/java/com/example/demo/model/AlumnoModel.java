@@ -28,7 +28,7 @@ public class AlumnoModel {
 
 	public AlumnoModel() {
 		super();
-		this.role="alumno";
+		this.role="ROLE_ADMIN";
 		// TODO Auto-generated constructor stub
 	}
 

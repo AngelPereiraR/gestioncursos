@@ -44,7 +44,7 @@ public class Alumno {
 
 	public Alumno() {
 		super();
-		this.role="alumno";
+		this.role="ROLE_ADMIN";
 	}
 
 	public Alumno(int idalumno, @Size(max = 45) String nombre, @Size(max = 45) String role,
