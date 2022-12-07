@@ -8,6 +8,10 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.entity.Usuario;
 
 @Repository("userRepository")
-public interface UserRepository extends JpaRepository<Usuario, Serializable>{
+public interface UserRepository extends JpaRepository<Usuario, Serializable> {
 	public abstract Usuario findByEmail(String email);
+
+	public abstract Usuario findByRole(String role);
+
+	public abstract Usuario findAllByRole(String role);
 }

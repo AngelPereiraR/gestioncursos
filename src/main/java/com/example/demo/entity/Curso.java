@@ -35,8 +35,8 @@ public class Curso {
 	private List<Comentario> idmatricula;
 
 	@ManyToOne
-	@JoinColumn(name = "idprofesores")
-	private Profesor idprofesor;
+	@JoinColumn(name = "id")
+	private Usuario id;
 
 	private Date fechaInicio;
 
@@ -48,8 +48,7 @@ public class Curso {
 	}
 
 	public Curso(int idcurso, @Size(max = 45) String nombre, @Size(max = 45) String descripcion, int nivel,
-			List<Comentario> idcomentario, List<Comentario> idmatricula, Profesor idprofesor, Date fechaInicio,
-			Date fechaFin) {
+			List<Comentario> idcomentario, List<Comentario> idmatricula, Usuario id, Date fechaInicio, Date fechaFin) {
 		super();
 		this.idcurso = idcurso;
 		this.nombre = nombre;
@@ -57,7 +56,7 @@ public class Curso {
 		this.nivel = nivel;
 		this.idcomentario = idcomentario;
 		this.idmatricula = idmatricula;
-		this.idprofesor = idprofesor;
+		this.id = id;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 	}
@@ -110,12 +109,12 @@ public class Curso {
 		this.idmatricula = idmatricula;
 	}
 
-	public Profesor getIdprofesor() {
-		return idprofesor;
+	public Usuario getIdprofesor() {
+		return id;
 	}
 
-	public void setIdprofesor(Profesor idprofesor) {
-		this.idprofesor = idprofesor;
+	public void setIdprofesor(Usuario id) {
+		this.id = id;
 	}
 
 	public Date getFechaInicio() {
@@ -137,7 +136,7 @@ public class Curso {
 	@Override
 	public String toString() {
 		return "Curso [idcurso=" + idcurso + ", nombre=" + nombre + ", descripcion=" + descripcion + ", nivel=" + nivel
-				+ ", idcomentario=" + idcomentario + ", idmatricula=" + idmatricula + ", idprofesor=" + idprofesor
-				+ ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + "]";
+				+ ", idcomentario=" + idcomentario + ", idmatricula=" + idmatricula + ", id=" + id + ", fechaInicio="
+				+ fechaInicio + ", fechaFin=" + fechaFin + "]";
 	}
 }

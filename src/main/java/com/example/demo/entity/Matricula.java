@@ -15,8 +15,8 @@ public class Matricula {
 	private int idmatricula;
 
 	@ManyToOne
-	@JoinColumn(name = "idalumno")
-	private Alumno idalumno;
+	@JoinColumn(name = "id")
+	private Usuario id;
 
 	@ManyToOne
 	@JoinColumn(name = "idcurso")
@@ -29,10 +29,10 @@ public class Matricula {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Matricula(int idmatricula, Alumno idalumno, Curso idcurso, int valoracion) {
+	public Matricula(int idmatricula, Usuario id, Curso idcurso, int valoracion) {
 		super();
 		this.idmatricula = idmatricula;
-		this.idalumno = idalumno;
+		this.id = id;
 		this.idcurso = idcurso;
 		this.valoracion = valoracion;
 	}
@@ -45,12 +45,12 @@ public class Matricula {
 		this.idmatricula = idmatricula;
 	}
 
-	public Alumno getIdalumno() {
-		return idalumno;
+	public Usuario getIdalumno() {
+		return id;
 	}
 
-	public void setIdalumno(Alumno idalumno) {
-		this.idalumno = idalumno;
+	public void setIdalumno(Usuario id) {
+		this.id = id;
 	}
 
 	public Curso getIdcurso() {
@@ -71,7 +71,7 @@ public class Matricula {
 
 	@Override
 	public String toString() {
-		return "Matricula [idmatricula=" + idmatricula + ", idalumno=" + idalumno + ", idcurso=" + idcurso
-				+ ", valoracion=" + valoracion + "]";
+		return "Matricula [idmatricula=" + idmatricula + ", id=" + id + ", idcurso=" + idcurso + ", valoracion="
+				+ valoracion + "]";
 	}
 }

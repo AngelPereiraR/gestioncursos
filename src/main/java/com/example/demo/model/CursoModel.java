@@ -2,7 +2,7 @@ package com.example.demo.model;
 
 import java.util.Date;
 
-import com.example.demo.entity.Profesor;
+import com.example.demo.entity.Usuario;
 
 public class CursoModel {
 
@@ -14,7 +14,7 @@ public class CursoModel {
 
 	private int nivel;
 
-	private Profesor idprofesor;
+	private Usuario id;
 
 	private Date fechaInicio;
 
@@ -25,14 +25,14 @@ public class CursoModel {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CursoModel(int idcurso, String nombre, String descripcion, int nivel, Profesor idprofesor, Date fechaInicio,
+	public CursoModel(int idcurso, String nombre, String descripcion, int nivel, Usuario id, Date fechaInicio,
 			Date fechaFin) {
 		super();
 		this.idcurso = idcurso;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.nivel = nivel;
-		this.idprofesor = idprofesor;
+		this.id = id;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 	}
@@ -69,12 +69,12 @@ public class CursoModel {
 		this.nivel = nivel;
 	}
 
-	public Profesor getIdprofesor() {
-		return idprofesor;
+	public Usuario getIdprofesor() {
+		return id;
 	}
 
-	public void setIdprofesor(Profesor profesor) {
-		this.idprofesor = profesor;
+	public void setIdprofesor(Usuario id) {
+		this.id = id;
 	}
 
 	public Date getFechaInicio() {
@@ -96,8 +96,7 @@ public class CursoModel {
 	@Override
 	public String toString() {
 		return "CursosModel [idcurso=" + idcurso + ", nombre=" + nombre + ", descripcion=" + descripcion + ", nivel="
-				+ nivel + ", idprofesor=" + idprofesor + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin
-				+ "]";
+				+ nivel + ", usuario=" + id + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + "]";
 	}
 
 }

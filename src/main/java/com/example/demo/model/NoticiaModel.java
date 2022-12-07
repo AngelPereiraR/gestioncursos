@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-import com.example.demo.entity.Administrador;
+import com.example.demo.entity.Usuario;
 
 public class NoticiaModel {
 
@@ -12,19 +12,19 @@ public class NoticiaModel {
 
 	private String imagen;
 
-	private Administrador administrador;
+	private Usuario user;
 
 	public NoticiaModel() {
 		super();
 	}
 
-	public NoticiaModel(int idnoticia, String titulo, String descripcion, String imagen, Administrador administrador) {
+	public NoticiaModel(int idnoticia, String titulo, String descripcion, String imagen, Usuario user) {
 		super();
 		this.idnoticia = idnoticia;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.imagen = imagen;
-		this.administrador = administrador;
+		this.user = user;
 	}
 
 	public int getIdnoticia() {
@@ -59,17 +59,17 @@ public class NoticiaModel {
 		this.imagen = imagen;
 	}
 
-	public Administrador getAdministrador() {
-		return administrador;
+	public Usuario getAdministrador() {
+		return user;
 	}
 
-	public void setAdministrador(Administrador administrador) {
-		this.administrador = administrador;
+	public void setAdministrador(Usuario user) {
+		this.user = user;
 	}
 
 	@Override
 	public String toString() {
 		return "NoticiasModel [idnoticia=" + idnoticia + ", titulo=" + titulo + ", descripcion=" + descripcion
-				+ ", imagen=" + imagen + ", administrador=" + administrador + "]";
+				+ ", imagen=" + imagen + ", usuario=" + user + "]";
 	}
 }

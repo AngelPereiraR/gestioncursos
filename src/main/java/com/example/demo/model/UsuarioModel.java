@@ -3,11 +3,13 @@ package com.example.demo.model;
 import java.util.List;
 
 import com.example.demo.entity.Comentario;
+import com.example.demo.entity.Curso;
 import com.example.demo.entity.Matricula;
+import com.example.demo.entity.Noticia;
 
-public class AlumnoModel {
+public class UsuarioModel {
 
-	private int idalumno;
+	private int id;
 
 	private String nombre;
 
@@ -21,36 +23,42 @@ public class AlumnoModel {
 
 	private String role;
 
+	private List<Noticia> idnoticia;
+
 	private List<Comentario> comentario;
 
 	private List<Matricula> matricula;
 
-	public AlumnoModel() {
+	private List<Curso> idcurso;
+	
+	public UsuarioModel() {
 		super();
-		this.setRole("alumno");
 		// TODO Auto-generated constructor stub
 	}
 
-	public AlumnoModel(int idalumno, String nombre, String apellidos, String email, String password, String foto,
-			List<Comentario> comentario, List<Matricula> matricula) {
+	public UsuarioModel(int id, String nombre, String apellidos, String email, String password, String foto,
+			String role, List<Noticia> idnoticia, List<Comentario> comentario, List<Matricula> matricula,
+			List<Curso> idcurso) {
 		super();
-		this.idalumno = idalumno;
+		this.id = id;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
-
 		this.password = password;
 		this.foto = foto;
+		this.role = role;
+		this.idnoticia = idnoticia;
 		this.comentario = comentario;
 		this.matricula = matricula;
+		this.idcurso = idcurso;
 	}
 
-	public int getIdalumno() {
-		return idalumno;
+	public int getId() {
+		return id;
 	}
 
-	public void setIdalumno(int idalumno) {
-		this.idalumno = idalumno;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNombre() {
@@ -101,6 +109,14 @@ public class AlumnoModel {
 		this.role = role;
 	}
 
+	public List<Noticia> getIdnoticia() {
+		return idnoticia;
+	}
+
+	public void setIdnoticia(List<Noticia> idnoticia) {
+		this.idnoticia = idnoticia;
+	}
+
 	public List<Comentario> getComentario() {
 		return comentario;
 	}
@@ -117,11 +133,12 @@ public class AlumnoModel {
 		this.matricula = matricula;
 	}
 
-	@Override
-	public String toString() {
-		return "AlumnoModel [idalumno=" + idalumno + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email="
-				+ email + ",  , password=" + password + ", foto=" + foto + ", comentario=" + comentario + ", matricula="
-				+ matricula + "]";
+	public List<Curso> getIdcurso() {
+		return idcurso;
+	}
+
+	public void setIdcurso(List<Curso> idcurso) {
+		this.idcurso = idcurso;
 	}
 
 }
