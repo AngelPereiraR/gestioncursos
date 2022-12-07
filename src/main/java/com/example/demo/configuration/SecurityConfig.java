@@ -9,6 +9,9 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.server.authentication.logout.DelegatingServerLogoutHandler;
+import org.springframework.security.web.server.authentication.logout.SecurityContextServerLogoutHandler;
+import org.springframework.security.web.server.authentication.logout.WebSessionServerLogoutHandler;
 
 
 @Configuration
@@ -18,9 +21,10 @@ public class SecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		
 		http.
 			authorizeRequests((requests) -> requests
-				.antMatchers("/admin/**").hasRole("administrador").antMatchers("/alumno/**").hasRole("alumno").antMatchers("/profesor/**").hasRole("profesor").antMatchers( "/","/webjars/**","/imgs/**","/css/**","/auth/**","/inicio/**").permitAll()
+				.antMatchers("/admin/**","/inicio/**").hasRole("administrador").antMatchers("/alumno/**","/inicio/**").hasRole("alumno").antMatchers("/profesor/**","/inicio/**").hasRole("profesor").antMatchers( "/","/webjars/**","/imgs/**","/css/**","/auth/**","/inicio/**").permitAll()
 				.anyRequest().authenticated()
 			)
 			.formLogin((form) -> form
@@ -29,7 +33,7 @@ public class SecurityConfig {
 				.permitAll()
 			)
 			.logout((logout) -> logout.permitAll().
-					logoutUrl("/logout").logoutSuccessUrl("/login?logout"));
+					logoutUrl("/logout").logoutSuccessUrl("/auth/login?logout"));
 
 		return http.build();
 	}
