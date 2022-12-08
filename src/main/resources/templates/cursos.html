@@ -28,10 +28,10 @@
 				<td th:text=${curso.fechaFin}></td>
 				<td>
 					<a th:href="@{/admin/formCurso/} + ${curso.idcurso}">
-						<button class="btn" type="button">Editar Curso</button>
+						<button class="btn tbn-lg btn-primary btn-block text-uppercase" type="button">Editar Curso</button>
 					</a>
-					<a th:href="@{/admin/removeCurso/} + ${curso.idcurso}" class="btn">
-							<button type="button">Eliminar Curso</button>
+					<a th:href="@{/admin/removeCurso/} + ${curso.idcurso}" method="post">
+							<button class="btn tbn-lg btn-danger btn-block text-uppercase" type="button">Eliminar Curso</button>
 					</a> 
 					
 				</td>

@@ -38,9 +38,9 @@ public class Curso {
 	@JoinColumn(name = "id")
 	private Usuario id;
 
-	private Date fechaInicio;
+	private String fechaInicio;
 
-	private Date fechaFin;
+	private String fechaFin;
 
 	public Curso() {
 		super();
@@ -48,7 +48,7 @@ public class Curso {
 	}
 
 	public Curso(int idcurso, @Size(max = 45) String nombre, @Size(max = 45) String descripcion, int nivel,
-			List<Comentario> idcomentario, List<Comentario> idmatricula, Usuario id, Date fechaInicio, Date fechaFin) {
+			List<Comentario> idcomentario, List<Comentario> idmatricula, Usuario id, String fechaInicio, String fechaFin) {
 		super();
 		this.idcurso = idcurso;
 		this.nombre = nombre;
@@ -117,19 +117,19 @@ public class Curso {
 		this.id = id;
 	}
 
-	public Date getFechaInicio() {
+	public String getFechaInicio() {
 		return fechaInicio;
 	}
 
-	public void setFechaInicio(Date fechaInicio) {
+	public void setFechaInicio(String fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
 
-	public Date getFechaFin() {
+	public String getFechaFin() {
 		return fechaFin;
 	}
 
-	public void setFechaFin(Date fechaFin) {
+	public void setFechaFin(String fechaFin) {
 		this.fechaFin = fechaFin;
 	}
 

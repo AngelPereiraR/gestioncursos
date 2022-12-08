@@ -16,17 +16,17 @@ public class CursoModel {
 
 	private Usuario id;
 
-	private Date fechaInicio;
+	private String fechaInicio;
 
-	private Date fechaFin;
+	private String fechaFin;
 
 	public CursoModel() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public CursoModel(int idcurso, String nombre, String descripcion, int nivel, Usuario id, Date fechaInicio,
-			Date fechaFin) {
+	public CursoModel(int idcurso, String nombre, String descripcion, int nivel, Usuario id, String fechaInicio,
+			String fechaFin) {
 		super();
 		this.idcurso = idcurso;
 		this.nombre = nombre;
@@ -77,19 +77,19 @@ public class CursoModel {
 		this.id = id;
 	}
 
-	public Date getFechaInicio() {
+	public String getFechaInicio() {
 		return fechaInicio;
 	}
 
-	public void setFechaInicio(Date fechaInicio) {
+	public void setFechaInicio(String fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
 
-	public Date getFechaFin() {
+	public String getFechaFin() {
 		return fechaFin;
 	}
 
-	public void setFechaFin(Date fechaFin) {
+	public void setFechaFin(String fechaFin) {
 		this.fechaFin = fechaFin;
 	}
 

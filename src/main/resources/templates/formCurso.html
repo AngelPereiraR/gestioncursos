@@ -4,28 +4,35 @@
 <link th:href="@{/css/styles.css}"
       rel="stylesheet">
 
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 <nav th:replace="index::header" class="header"></nav>
 	<div class="container mt-sm-5">
-	<form action="#" th:action="@{/admin/addCurso/}" th:object="${curso}" method="post"  class="form-singin align-items-center ">
+	<form action="#" th:action="@{/admin/addCurso/}" th:object="${curso}" method="post"  class="form align-items-center ">
 		
 		<input type="hidden"  th:field="*{idcurso}"> 
-		<label class="sr-only">NOMBRE:</label> <input type="text" th:field="*{nombre}"/>
-		<p th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Name has errors</p>
-			
-		<label class="sr-only">DESCRIPCION:</label> <input type="text" th:field="*{descripcion}"/>
-		<p th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}">Description has errors</p>		
+		<label class="sr-only">Nombre:</label>
+		<input type="text" th:field="*{nombre}" class="form-control"/>
 		
-		<label class="sr-only"> INICIO:</label>  <input type="date" th:field="*{fechaInicio}"/>
-		<p th:if="${#fields.hasErrors('fechaInicio')}" th:errors="*{fechaInicio}">Price has errors</p>		
+		<br>
+		<label class="sr-only">Descripcion:</label>
+		 <input type="text" th:field="*{descripcion}" class="form-control"/>
+		<br>
 		
-		<label class="sr-only">FECHA FIN:</label> <input type="date" th:field="*{fechaFin}"/>
-		<p th:if="${#fields.hasErrors('fechaFin')}" th:errors="*{fechaFin}">Hours has errors</p>		
+		<label class="sr-only">Nivel:</label>
+		 <input type="number" th:field="*{nivel}" class="form-control"/>
+		<br>
+		<label class="sr-only"> Fecha de inicio:</label> 
+		 <input type="date" th:field="*{fechaInicio}" class="form-control"/>
+	
+		<br>
+		<label class="sr-only">Fecha de fin :</label> 
+		<input type="date" th:field="*{fechaFin}" class="form-control"/>
 		
-		<p> <input type="submit" value="Submit"/></p>	
+		<br>
+		 <button type="submit" class="btn tbn-lg btn-primary btn-block text-uppercase">Añadir Curso</button>	
 	</form>
 	</div>
 </body>
