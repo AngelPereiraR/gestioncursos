@@ -52,6 +52,7 @@ public class CourseController {
 	@PostMapping("/admin/addCurso")
 	public String addCurso(@ModelAttribute("curso") CursoModel cursoModel, RedirectAttributes flash) {
 		if(cursoModel.getIdcurso()==0) {
+			
 		cursoService.addCurso(cursoModel);
 		
 		flash.addFlashAttribute("succes", "course added suff");

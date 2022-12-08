@@ -2,11 +2,14 @@
 <html>
 <head>
 
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
+<link th:href="@{/css/styles.css}"
+      rel="stylesheet">
 <title>Academy</title>
 </head>
 <body>
-	<table>
+<nav th:replace="index::header" class="header"></nav>
+	<table class="table">
 		<thead>
 			<tr>
 				<th>Nombre</th>
@@ -25,9 +28,9 @@
 				<td th:text=${curso.fechaFin}></td>
 				<td>
 					<a th:href="@{/admin/formCurso/} + ${curso.idcurso}">
-						<button type="button">Editar Curso</button>
+						<button class="btn" type="button">Editar Curso</button>
 					</a>
-					<a th:href="@{/admin/removeCurso/} + ${curso.idcurso}">
+					<a th:href="@{/admin/removeCurso/} + ${curso.idcurso}" class="btn">
 							<button type="button">Eliminar Curso</button>
 					</a> 
 					
@@ -35,8 +38,8 @@
 			</tr>
 		</tbody>
 	</table>
-	<a th:href="@{/admin/formCourse}">
-					<button type="button">Añadir Curso</button>
+	<a th:href="@{/admin/formCurso}" >
+					<button class="btn tbn-lg btn-primary btn-block text-uppercase"type="button">AÃ±adir Curso</button>
 	</a>
 	</body>
 </html>
