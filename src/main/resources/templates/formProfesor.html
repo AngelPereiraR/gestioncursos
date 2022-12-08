@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="@{webjars/bootstrap/4.5.3/css/bootstrap.min.css}"
+	rel="stylesheet" type="text/css">
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container mt-sm-5">
+		<form action="#" th:action="@{/admin/addProfesor/}"
+			th:object="${profesor}" method="post"
+			class="form form-singin align-items-center">
+
+			<input type="hidden" th:field="*{id}">
+			<p>
+				NOMBRE: <input type="text" placeholder="Nombre" th:field="*{nombre}" />
+			<p th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Name
+				has errors</p>
+			<p>
+				APELLIDOS: <input type="text" placeholder="Apellidos"
+					th:field="*{apellidos}" />
+			<p th:if="${#fields.hasErrors('apellidos')}" th:errors="*{apellidos}">Surname
+				has errors</p>
+			<p>
+				EMAIL: <input type="text" placeholder="Email" th:field="*{email}" />
+			<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email
+				has errors</p>
+			<p>
+				CONTRASEÑA: <input type="password" placeholder="Contraseña"
+					th:field="*{password}" />
+			</p>
+			<p th:if="${#fields.hasErrors('*{password}')}"
+				th:errors="*{*{password}}">Password has errors</p>
+
+			<br>
+			<button class="btn tbn-lg btn-primary btn-block text-uppercase"
+				type="submit">Registrar Profesor</button>
+		</form>
+	</div>
+</body>
+</html>

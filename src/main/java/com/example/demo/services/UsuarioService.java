@@ -11,6 +11,8 @@ public interface UsuarioService {
 
 	public abstract UsuarioModel transform(Usuario user);
 
+	public abstract UsuarioModel findUsuario(int id);
+
 	// Alumno
 
 	public abstract List<UsuarioModel> listAllAlumnos();
