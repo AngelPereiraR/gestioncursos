@@ -1,6 +1,5 @@
 package com.example.demo.entity;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -48,7 +47,8 @@ public class Curso {
 	}
 
 	public Curso(int idcurso, @Size(max = 45) String nombre, @Size(max = 45) String descripcion, int nivel,
-			List<Comentario> idcomentario, List<Comentario> idmatricula, Usuario id, String fechaInicio, String fechaFin) {
+			List<Comentario> idcomentario, List<Comentario> idmatricula, Usuario id, String fechaInicio,
+			String fechaFin) {
 		super();
 		this.idcurso = idcurso;
 		this.nombre = nombre;

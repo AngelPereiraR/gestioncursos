@@ -4,34 +4,30 @@
  <link th:href="@{/css/styles.css}"
       rel="stylesheet">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Formulario Profesor</title>
 </head>
 <body>
+<nav th:replace="index::header" class="header"></nav>
 	<div class="container mt-sm-5">
-		<form action="#" th:action="@{/admin/addProfesor/}"
-			th:object="${profesor}" method="post"
-			class="form form-singin align-items-center">
+		<form action="#" th:action="@{/admin/addProfesor/}" th:object="${usuario}" method="post" class="form form-singin align-items-center">
 
-			<input type="hidden" th:field="*{id}">
+			<input type="hidden" th:field="*{id}">	
+			<label class="sr-only">Nombre:</label>
+			 <input type="text" th:field="*{nombre}" class="form-control"/>
+		
+			<br>
+			<label class="sr-only">Apellidos:</label>
+			 <input type="text" th:field="*{apellidos}" class="form-control"/>
+			<br>
 			
-		<label class="sr-only">Nombre:</label>
-		<input type="text" th:field="*{nombre}" class="form-control"/>
-		
-		<br>
-		<label class="sr-only">Apellidos:</label>
-		 <input type="text" th:field="*{apellidos}" class="form-control"/>
-		<br>
-		
-		<label class="sr-only">Email:</label>
-		 <input type="text" th:field="*{email}" class="form-control"/>
-		<br>
-		<label class="sr-only"> Contraseña:</label> 
-		 <input type="password" th:field="*{password}" class="form-control"/>
+			<label class="sr-only">Email:</label>
+			 <input type="text" th:field="*{email}" class="form-control"/>
+			<br>
+			<label class="sr-only"> Contraseña:</label> 
+			 <input type="password" th:field="*{password}" class="form-control"/>
 
-		
-		<br>
-		 <button type="submit" class="btn tbn-lg btn-primary btn-block text-uppercase">Añadir Profesor</button>	
-
+			<br>
+		 	<button class="btn tbn-lg btn-primary btn-block text-uppercase"  type="submit">Añadir Profesor</button>	
 		</form>
 	</div>
 </body>

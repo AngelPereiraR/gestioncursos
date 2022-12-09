@@ -2,34 +2,38 @@
 <html>
 <head>
 
-<meta charset="ISO-8859-1">
-<title>Academy</title>
+<meta charset="UTF-8">
+<link th:href="@{/css/styles.css}"
+      rel="stylesheet">
+<title>Profesores</title>
 </head>
 <body>
-	<table>
+<nav th:replace="index::header" class="header"></nav>
+	<table class="table">
 		<thead>
 			<tr>
 				<th>Nombre</th>
 				<th>Apellidos</th>
 				<th>Email</th>
+				<th>Acciones</th>
 			</tr>
 		</thead>
 
-		<tbody th:each="usuario: ${usuarios}">
+		<tbody th:each="profesor: ${profesores}">
 			<tr>
-				<td th:text=${usuario.nombre}></td>
-				<td th:text=${usuario.apellidos}></td>
-				<td th:text=${usuario.email}></td>
-				<td><a th:href="@{/admin/formProfesor/} + ${usuario.id}">
-						<button type="button">Editar Profesor</button>
-				</a> <a th:href="@{/admin/removeProfesor/} + ${usuario.id}">
-						<button type="button">Eliminar Profesor</button>
+				<td th:text=${profesor.nombre}></td>
+				<td th:text=${profesor.apellidos}></td>
+				<td th:text=${profesor.email}></td>
+				<td><a th:href="@{/admin/formProfesor/} + ${profesor.id}">
+						<button class="btn tbn-lg btn-primary btn-block text-uppercase" type="button">Editar Profesor</button>
+				</a> <a th:href="@{/admin/removeProfesor/} + ${profesor.id}">
+						<button class="btn tbn-lg btn-danger btn-block text-uppercase" type="button">Eliminar Profesor</button>
 				</a></td>
 			</tr>
 		</tbody>
 	</table>
 	<a th:href="@{/admin/formProfesor}">
-		<button type="button">Añadir Profesor</button>
+		<button class="btn tbn-lg btn-primary btn-block text-uppercase" type="button">AÃ±adir Profesor</button>
 	</a>
 </body>
 </html>

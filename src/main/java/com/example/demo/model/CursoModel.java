@@ -1,7 +1,5 @@
 package com.example.demo.model;
 
-import java.util.Date;
-
 import com.example.demo.entity.Usuario;
 
 public class CursoModel {
