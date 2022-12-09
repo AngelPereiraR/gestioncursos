@@ -19,7 +19,7 @@ public class SecurityConfig {
 
 		http.authorizeRequests((requests) -> requests.antMatchers("/admin/**", "/inicio/**").hasRole("ADMIN")
 				.antMatchers("/alumno/**", "/inicio/**").hasRole("ALUMNO").antMatchers("/profesor/**", "/inicio/**")
-				.hasRole("PROF").antMatchers("/", "/webjars/**", "/imgs/**", "/css/**", "/auth/**", "/inicio/**")
+				.hasRole("PROFESOR").antMatchers("/", "/webjars/**", "/imgs/**", "/css/**", "/auth/**", "/inicio/**")
 				.permitAll().anyRequest().authenticated())
 				.formLogin((form) -> form.loginPage("/auth/login").usernameParameter("email")
 						.defaultSuccessUrl("/inicio/").permitAll())

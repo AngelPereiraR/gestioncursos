@@ -14,6 +14,7 @@
 		<input type="hidden" th:field="*{email}">
 		<input type="hidden" th:field="*{enabled}">
 		<input type="hidden" th:field="*{role}">
+		<input type="hidden" th:field="*{password}">
 		
 		<label class="sr-only">Nombre:</label>
 		<input type="text" th:field="*{nombre}" class="form-control"/>
@@ -22,11 +23,7 @@
 		<label class="sr-only">Apellidos:</label>
 		 <input type="text" th:field="*{apellidos}" class="form-control"/>
 		<br>
-		
-		<label class="sr-only">Password:</label>
-		 <input type="password" th:field="*{password}" class="form-control"/>
-		<br>
-		
+	
 		<label class="sr-only">Foto:</label> 
 		 <input type="url" th:field="*{foto}" class="form-control"/>
 		<br>

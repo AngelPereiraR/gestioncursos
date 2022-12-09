@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.Usuario;
 import com.example.demo.model.UsuarioModel;
+import com.example.demo.repository.UserRepository;
 import com.example.demo.services.UsuarioService;
 
 @Controller
@@ -20,10 +21,16 @@ import com.example.demo.services.UsuarioService;
 public class ProfesorController {
 	private static final String PROFESSORS_VIEW = "profesores";
 	private static final String FORM_VIEW = "formProfesor";
+	private static final String FORM_VIEW2 = "formProfesorUpdate";
 
 	@Autowired
 	@Qualifier("userService")
 	public UsuarioService userService;
+	
+	@Autowired
+	@Qualifier("userRepository")
+	public UserRepository userRepository;
+
 
 	@GetMapping("/admin/listaProfesores")
 	public ModelAndView listaProfesores() {
@@ -34,19 +41,22 @@ public class ProfesorController {
 
 	@PostMapping("/admin/addProfesor")
 	public String addCurso(@ModelAttribute("Profesor") UsuarioModel usuarioModel, RedirectAttributes flash) {
-		if (usuarioModel.getId() == 0) {
+	
 			usuarioModel.setRole("ROLE_PROFESOR");
 			userService.addProfesor((usuarioModel));
 
 			flash.addFlashAttribute("succes", "professor added suff");
 			return "redirect:/admin/listaProfesores";
-		} else {
-			userService.updateProfesor(usuarioModel);
+		
+		
+	}
+	
+	@PostMapping("/profesor/updateProfesor")
+	public String updateProfesor(@ModelAttribute("Profesor") UsuarioModel profesorModel, RedirectAttributes flash) {
+		userService.updateProfesor(profesorModel);
 
-			flash.addFlashAttribute("succes", "professor updated suff");
-			return "redirect:/admin/listaProfesores";
-
-		}
+		flash.addFlashAttribute("succes", "professor updated suff");
+		return "redirect:/inicio/";
 
 	}
 
@@ -59,14 +69,19 @@ public class ProfesorController {
 
 	}
 
-	@GetMapping(value = { "/admin/formProfesor/{id}", "/admin/formProfesor" })
+	@GetMapping("/admin/formProfesor")
 	public String formCurso(@PathVariable(name = "id", required = false) Integer id, Model model) {
 
 		if (id == null) {
 			model.addAttribute("usuario", new Usuario());
-		} else {
-			model.addAttribute("usuario", userService.findUsuario(id));
-		}
+		} 
+		
 		return FORM_VIEW;
+	}
+	
+	@GetMapping("/profesor/formProfesorUpdate/{email}")
+	public String formAlumno(@PathVariable(name="email", required=false) String email,Model model) {
+		model.addAttribute("profesor", userRepository.findByEmail(email));
+		return FORM_VIEW2;
 	}
 }
