@@ -112,7 +112,9 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 
 	@Override
 	public Usuario updateAlumno(UsuarioModel usuarioModel) {
-		return userRepository.save(transform(usuarioModel));
+		Usuario user = transform(usuarioModel);
+		user.setPassword(passwordEncoder().encode(user.getPassword()));
+		return userRepository.save(user);
 	}
 
 	@Override

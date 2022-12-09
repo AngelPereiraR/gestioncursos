@@ -11,17 +11,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.demo.entity.Usuario;
 import com.example.demo.model.UsuarioModel;
+import com.example.demo.repository.UserRepository;
 import com.example.demo.services.UsuarioService;
 
 @Controller
 public class AlumnoController {
 	private static final String ALUMNOS_VIEW = "alumnos";
+	private static final String FORM_VIEW = "formAlumno";
 
 	@Autowired
 	@Qualifier("userService")
 	public UsuarioService userService;
+	
+	@Autowired
+	@Qualifier("userRepository")
+	public UserRepository userRepository;
 
 	@GetMapping("/admin/listaAlumnos")
 	public ModelAndView listaAlumnos() {
@@ -30,12 +35,12 @@ public class AlumnoController {
 		return mav;
 	}
 	
-	@PostMapping("/admin/updateAlumno")
+	@PostMapping("/alumno/updateAlumno")
 	public String updateAlumno(@ModelAttribute("alumno") UsuarioModel alumnoModel, RedirectAttributes flash) {
 		userService.updateAlumno(alumnoModel);
 			
 		flash.addFlashAttribute("success", "alumno actualizado correctamente");
-		return "redirect:/admin/listaAlumnos";
+		return "redirect:/inicio/";
 		
 	}
 	
@@ -64,5 +69,11 @@ public class AlumnoController {
 		flash.addFlashAttribute("success", "alumno desactivado correctamente");
 		return "redirect:/admin/listaAlumnos";
 		
+	}
+	
+	@GetMapping("/alumno/formAlumno/{email}")
+	public String formAlumno(@PathVariable(name="email", required=false) String email,Model model) {
+		model.addAttribute("alumno", userRepository.findByEmail(email));
+		return FORM_VIEW;
 	}
 }
