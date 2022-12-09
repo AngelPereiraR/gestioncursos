@@ -52,7 +52,7 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 
 	public com.example.demo.entity.Usuario registrar(com.example.demo.entity.Usuario user) {
 		user.setPassword(passwordEncoder().encode(user.getPassword()));
-		user.setEnabled(true);
+		user.setEnabled(false);
 		return userRepository.save(user);
 	}
 
@@ -87,6 +87,26 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 	@Override
 	public int removeAlumno(int id) {
 		userRepository.deleteById(id);
+		return 0;
+	}
+	
+	@Override
+	public int activateAlumno(int id) {
+		UsuarioModel user = findUsuario(id);
+		if(user.getRole().equals("ROLE_ALUMNO")) {
+			user.setEnabled(true);
+			userRepository.save(transform(user));
+		}
+		return 0;
+	}
+	
+	@Override
+	public int deactivateAlumno(int id) {
+		UsuarioModel user = findUsuario(id);
+		if(user.getRole().equals("ROLE_ALUMNO")) {
+			user.setEnabled(false);
+			userRepository.save(transform(user));
+		}
 		return 0;
 	}
 

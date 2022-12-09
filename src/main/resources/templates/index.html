@@ -20,10 +20,13 @@
                     </ul>
                     
                     <ul sec:authorize="hasRole('ROLE_ADMIN')"class="navbar-nav ms-auto">
-                      <li  class="nav-item mx-0 mx-lg-1">
+                    	<li class="nav-item mx-0 mx-lg-1">
+                        	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/admin/listaAlumnos}">Alumnos</a>
+                        </li>
+                      	<li class="nav-item mx-0 mx-lg-1">
                         	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/admin/listCursos}">Cursos</a>
                         </li>
-                         <li  class="nav-item mx-0 mx-lg-1">
+                        <li class="nav-item mx-0 mx-lg-1">
                         	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/admin/listaProfesores}">Profesores</a>
                         </li>
                         <li class="nav-item mx-0 mx-lg-1">
@@ -39,7 +42,7 @@
                     
                     <ul sec:authorize="hasRole('ROLE_ALUMNO')"class="navbar-nav ms-auto">
                       <li  class="nav-item mx-0 mx-lg-1">
-                        	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:text="admin"></a>
+                        	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:text="alumno"></a>
                         </li>
                         <li class="nav-item mx-0 mx-lg-1">
                         	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:text="'Hola ' + ${#authentication.name}"></a>
@@ -54,7 +57,7 @@
                     
                     <ul sec:authorize="hasRole('ROLE_PROFESOR')"class="navbar-nav ms-auto">
                       <li  class="nav-item mx-0 mx-lg-1">
-                        	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:text="admin"></a>
+                        	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:text="profesor"></a>
                         </li>
                         <li class="nav-item mx-0 mx-lg-1">
                         	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:text="'Hola ' + ${#authentication.name}"></a>

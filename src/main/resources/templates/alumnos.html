@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Alumnos</title>
+	<link th:href="@{/css/styles.css}" rel="stylesheet">
+</head>
+<body>
+	<nav th:replace="index::header"></nav>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Apellidos</th>
+				<th>Email</th>
+				<th>Foto</th>
+				<th>Acciones</th>
+			</tr>
+		</thead>
+		
+		<tbody th:each="alumno: ${alumnos}">
+			<tr>
+				<td th:text=${alumno.nombre}></td>
+				<td th:text=${alumno.apellidos}></td>
+				<td th:text=${alumno.email}></td>
+				<td th:text=${alumno.foto}></td>
+				<td>
+					<a th:if="${alumno.enabled == false}" th:href="@{/admin/activateAlumno/} + ${alumno.id}" method="post">
+						<button class="btn tbn-lg btn-primary btn-block text-uppercase" type="button">Activar Alumno</button>
+					</a>
+					<a th:unless="${alumno.enabled == false}" th:href="@{/admin/deactivateAlumno/} + ${alumno.id}" method="post">
+						<button class="btn tbn-lg btn-danger btn-block text-uppercase" type="button">Desactivar Alumno</button>
+					</a>
+					<a th:href="@{/admin/removeAlumno/} + ${alumno.id}" method="post">
+						<button class="btn tbn-lg btn-danger btn-block text-uppercase" type="button">Eliminar Alumno</button>
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	</body>
+</html>

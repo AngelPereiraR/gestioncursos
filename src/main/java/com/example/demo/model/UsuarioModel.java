@@ -18,6 +18,8 @@ public class UsuarioModel {
 	private String email;
 
 	private String password;
+	
+	private boolean enabled;
 
 	private String foto;
 
@@ -36,7 +38,7 @@ public class UsuarioModel {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UsuarioModel(int id, String nombre, String apellidos, String email, String password, String foto,
+	public UsuarioModel(int id, String nombre, String apellidos, String email, String password, boolean enabled, String foto,
 			String role, List<Noticia> idnoticia, List<Comentario> comentario, List<Matricula> matricula,
 			List<Curso> idcurso) {
 		super();
@@ -45,6 +47,7 @@ public class UsuarioModel {
 		this.apellidos = apellidos;
 		this.email = email;
 		this.password = password;
+		this.enabled = enabled;
 		this.foto = foto;
 		this.role = role;
 		this.idnoticia = idnoticia;
@@ -91,6 +94,14 @@ public class UsuarioModel {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	public String getFoto() {

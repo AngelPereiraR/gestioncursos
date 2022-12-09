@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 public class Usuario {
 	@Id
 	@GeneratedValue
-	private long id;
+	private int id;
 
 	@Size(max = 45)
 	private String nombre;
@@ -50,11 +50,11 @@ public class Usuario {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
 	private List<Curso> idcurso;
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -151,7 +151,7 @@ public class Usuario {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Usuario(long id, @Size(max = 45) String nombre, @Size(max = 45) String apellidos,
+	public Usuario(int id, @Size(max = 45) String nombre, @Size(max = 45) String apellidos,
 			@Size(max = 45) String email, @Size(max = 45) String password, boolean enabled, @Size(max = 45) String role,
 			@Size(max = 45) String foto, List<Comentario> idcomentario, List<Matricula> idmatricula,
 			List<Noticia> idnoticia, List<Curso> idcurso) {

@@ -22,6 +22,10 @@ public interface UsuarioService {
 	public abstract int removeAlumno(int id);
 
 	public abstract Usuario updateAlumno(UsuarioModel usuarioModel);
+	
+	public abstract int activateAlumno(int id);
+
+	public abstract int deactivateAlumno(int id);
 
 	// Profesor
 
