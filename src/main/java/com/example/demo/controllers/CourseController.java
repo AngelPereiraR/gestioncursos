@@ -65,7 +65,7 @@ public class CourseController {
 	
 	
 	
-	@PostMapping("/admin/removeCurso/{id}")
+	@GetMapping("/admin/removeCurso/{id}")
 	public String deleteCourse(@PathVariable("id") int id, RedirectAttributes flash) {
 		cursoService.removeCurso(id);
 		
