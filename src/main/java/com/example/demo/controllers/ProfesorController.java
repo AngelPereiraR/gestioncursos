@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.entity.Usuario;
 import com.example.demo.model.UsuarioModel;
 import com.example.demo.repository.UserRepository;
-import com.example.demo.services.UsuarioService;
+import com.example.demo.services.impl.UsuarioServiceImp;
 
 @Controller
 
@@ -25,7 +25,7 @@ public class ProfesorController {
 
 	@Autowired
 	@Qualifier("userService")
-	public UsuarioService userService;
+	public UsuarioServiceImp userService;
 
 	@Autowired
 	@Qualifier("userRepository")
@@ -42,7 +42,7 @@ public class ProfesorController {
 	public String addCurso(@ModelAttribute("Profesor") UsuarioModel usuarioModel, RedirectAttributes flash) {
 
 		usuarioModel.setRole("ROLE_PROFESOR");
-		userService.addProfesor((usuarioModel));
+		userService.registrar(userService.transform(usuarioModel));
 
 		flash.addFlashAttribute("succes", "professor added suff");
 		return "redirect:/admin/listaProfesores";

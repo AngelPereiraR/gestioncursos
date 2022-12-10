@@ -16,15 +16,15 @@ import com.example.demo.services.CursoService;
 
 @Service("cursoService")
 public class CursoServiceImpl implements CursoService {
-	
+
 	@Autowired
 	@Qualifier("cursoRepository")
 	private CursoRepository cursoRepository;
-	
+
 	@Override
 	public List<CursoModel> listAllCursos() {
 		List<CursoModel> cursos = new ArrayList<CursoModel>();
-		for(Curso curso: cursoRepository.findAll())
+		for (Curso curso : cursoRepository.findAll())
 			cursos.add(transform(curso));
 		return cursos;
 	}
@@ -57,11 +57,10 @@ public class CursoServiceImpl implements CursoService {
 		return modelMapper.map(curso, CursoModel.class);
 	}
 
-	
 	@Override
 	public CursoModel findCurso(int id) {
 		// TODO Auto-generated method stub
-		
+
 		return transform(cursoRepository.findById(id).orElse(null));
 	}
 }

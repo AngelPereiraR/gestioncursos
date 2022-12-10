@@ -51,8 +51,14 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 	}
 
 	public com.example.demo.entity.Usuario registrar(com.example.demo.entity.Usuario user) {
-		user.setPassword(passwordEncoder().encode(user.getPassword()));
-		user.setEnabled(false);
+		if (user.getRole().equals("ROLE_ALUMNO")) {
+			user.setPassword(passwordEncoder().encode(user.getPassword()));
+			user.setEnabled(false);
+		} else {
+			user.setPassword(passwordEncoder().encode(user.getPassword()));
+			user.setEnabled(true);
+		}
+
 		return userRepository.save(user);
 	}
 
@@ -80,7 +86,7 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 
 	@Override
 	public Usuario addAlumno(UsuarioModel usuarioModel) {
-		
+
 		return userRepository.save(transform(usuarioModel));
 	}
 
@@ -89,21 +95,21 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 		userRepository.deleteById(id);
 		return 0;
 	}
-	
+
 	@Override
 	public int activateAlumno(int id) {
 		UsuarioModel user = findUsuario(id);
-		if(user.getRole().equals("ROLE_ALUMNO")) {
+		if (user.getRole().equals("ROLE_ALUMNO")) {
 			user.setEnabled(true);
 			userRepository.save(transform(user));
 		}
 		return 0;
 	}
-	
+
 	@Override
 	public int deactivateAlumno(int id) {
 		UsuarioModel user = findUsuario(id);
-		if(user.getRole().equals("ROLE_ALUMNO")) {
+		if (user.getRole().equals("ROLE_ALUMNO")) {
 			user.setEnabled(false);
 			userRepository.save(transform(user));
 		}
@@ -112,9 +118,7 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 
 	@Override
 	public Usuario updateAlumno(UsuarioModel usuarioModel) {
-		Usuario user = transform(usuarioModel);
-		user.setPassword(passwordEncoder().encode(user.getPassword()));
-		return userRepository.save(user);
+		return userRepository.save(transform(usuarioModel));
 	}
 
 	@Override
@@ -129,7 +133,7 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 
 	@Override
 	public Usuario addProfesor(UsuarioModel usuarioModel) {
-		
+
 		return userRepository.save(transform(usuarioModel));
 	}
 

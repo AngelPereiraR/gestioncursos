@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="UTF-8">
-<link th:href="@{/css/styles.css}"
-      rel="stylesheet">
-<title>Academy</title>
+<link th:href="@{/css/styles.css}" rel="stylesheet">
+<title>Cursos</title>
 </head>
 <body>
-<nav th:replace="index::header" class="header"></nav>
+	<nav th:replace="index::header" class="header"></nav>
 	<table class="table">
 		<thead>
 			<tr>
@@ -16,7 +14,7 @@
 				<th>Descripcion</th>
 				<th>Fecha de Inicio</th>
 				<th>Fecha Fin</th>
-				<th>Accioness</th>
+				<th>Acciones</th>
 			</tr>
 		</thead>
 		
@@ -33,13 +31,12 @@
 					<a th:href="@{/admin/removeCurso/} + ${curso.idcurso}" method="post">
 							<button class="btn tbn-lg btn-danger btn-block text-uppercase" type="button">Eliminar Curso</button>
 					</a> 
-					
 				</td>
 			</tr>
 		</tbody>
 	</table>
-	<a th:href="@{/admin/formCurso}" >
-					<button class="btn tbn-lg btn-primary btn-block text-uppercase"type="button">Añadir Curso</button>
+	<a th:href="@{/admin/formCurso}">
+		<button class="btn tbn-lg btn-primary btn-block text-uppercase"type="button">Añadir Curso</button>
 	</a>
 	</body>
 </html>

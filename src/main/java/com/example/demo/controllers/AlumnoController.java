@@ -23,7 +23,7 @@ public class AlumnoController {
 	@Autowired
 	@Qualifier("userService")
 	public UsuarioService userService;
-	
+
 	@Autowired
 	@Qualifier("userRepository")
 	public UserRepository userRepository;
@@ -34,45 +34,45 @@ public class AlumnoController {
 		mav.addObject("alumnos", userService.listAllAlumnos());
 		return mav;
 	}
-	
+
 	@PostMapping("/alumno/updateAlumno")
 	public String updateAlumno(@ModelAttribute("alumno") UsuarioModel alumnoModel, RedirectAttributes flash) {
 		userService.updateAlumno(alumnoModel);
-			
+
 		flash.addFlashAttribute("success", "alumno actualizado correctamente");
 		return "redirect:/inicio/";
-		
+
 	}
-	
+
 	@GetMapping("/admin/removeAlumno/{id}")
 	public String deleteAlumno(@PathVariable("id") int id, RedirectAttributes flash) {
 		userService.removeAlumno(id);
-		
+
 		flash.addFlashAttribute("success", "alumno eliminado correctamente");
 		return "redirect:/admin/listaAlumnos";
-		
+
 	}
-	
+
 	@GetMapping("/admin/activateAlumno/{id}")
 	public String activateAlumno(@PathVariable("id") int id, RedirectAttributes flash) {
 		userService.activateAlumno(id);
-		
+
 		flash.addFlashAttribute("success", "alumno activado correctamente");
 		return "redirect:/admin/listaAlumnos";
-		
+
 	}
-	
+
 	@GetMapping("/admin/deactivateAlumno/{id}")
 	public String deactivateAlumno(@PathVariable("id") int id, RedirectAttributes flash) {
 		userService.deactivateAlumno(id);
-		
+
 		flash.addFlashAttribute("success", "alumno desactivado correctamente");
 		return "redirect:/admin/listaAlumnos";
-		
+
 	}
-	
+
 	@GetMapping("/alumno/formAlumno/{email}")
-	public String formAlumno(@PathVariable(name="email", required=false) String email,Model model) {
+	public String formAlumno(@PathVariable(name = "email", required = false) String email, Model model) {
 		model.addAttribute("alumno", userRepository.findByEmail(email));
 		return FORM_VIEW;
 	}

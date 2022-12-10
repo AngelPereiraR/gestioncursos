@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="UTF-8">
-<link th:href="@{/css/styles.css}"
-      rel="stylesheet">
+<link th:href="@{/css/styles.css}" rel="stylesheet">
 <title>Profesores</title>
 </head>
 <body>
-<nav th:replace="index::header" class="header"></nav>
+	<nav th:replace="index::header" class="header"></nav>
 	<table class="table">
 		<thead>
 			<tr>
@@ -24,11 +22,14 @@
 				<td th:text=${profesor.nombre}></td>
 				<td th:text=${profesor.apellidos}></td>
 				<td th:text=${profesor.email}></td>
-				<td><a th:href="@{/admin/formProfesor/} + ${profesor.id}">
+				<td>
+					<a th:href="@{/admin/formProfesor/} + ${profesor.id}">
 						<button class="btn tbn-lg btn-primary btn-block text-uppercase" type="button">Editar Profesor</button>
-				</a> <a th:href="@{/admin/removeProfesor/} + ${profesor.id}">
+					</a>
+					<a th:href="@{/admin/removeProfesor/} + ${profesor.id}">
 						<button class="btn tbn-lg btn-danger btn-block text-uppercase" type="button">Eliminar Profesor</button>
-				</a></td>
+					</a>
+				</td>
 			</tr>
 		</tbody>
 	</table>

@@ -19,74 +19,62 @@ import com.example.demo.services.CursoService;
 
 public class CourseController {
 	private static final String LAYOUT_VIEW = "inicio";
-	private static final String COURSES_VIEW="cursos";
-	private static final String FORM_VIEW="formCurso";
-	
+	private static final String COURSES_VIEW = "cursos";
+	private static final String FORM_VIEW = "formCurso";
+
 	@Autowired
 	@Qualifier("cursoService")
 	private CursoService cursoService;
-	
-	
-	
+
 	@GetMapping("/inicio/")
 	private String home() {
-		
+
 		return LAYOUT_VIEW;
 	}
-	
-	
+
 	@GetMapping("/admin/listCursos")
 	public ModelAndView listCursos() {
 		ModelAndView mav = new ModelAndView(COURSES_VIEW);
-		mav.addObject("cursos",cursoService.listAllCursos());
+		mav.addObject("cursos", cursoService.listAllCursos());
 		return mav;
 	}
-	
-	
 
 	@PostMapping("/admin/addCurso")
 	public String addCurso(@ModelAttribute("curso") CursoModel cursoModel, RedirectAttributes flash) {
-		if(cursoModel.getIdcurso()==0) {
-			
-		cursoService.addCurso(cursoModel);
-		
-		flash.addFlashAttribute("succes", "course added suff");
-		return "redirect:/admin/listCursos";
-		}
-		else {
+		if (cursoModel.getIdcurso() == 0) {
+
+			cursoService.addCurso(cursoModel);
+
+			flash.addFlashAttribute("succes", "course added suff");
+			return "redirect:/admin/listCursos";
+		} else {
 			cursoService.updateCurso(cursoModel);
-			
+
 			flash.addFlashAttribute("succes", "course updated suff");
 			return "redirect:/admin/listCursos";
-			
+
 		}
-		
+
 	}
-	
-	
-	
+
 	@GetMapping("/admin/removeCurso/{id}")
 	public String deleteCourse(@PathVariable("id") int id, RedirectAttributes flash) {
 		cursoService.removeCurso(id);
-		
+
 		flash.addFlashAttribute("succes", "curso eliminado correctamente");
 		return "redirect:/admin/listCursos";
-		
+
 	}
 
-	@GetMapping( value={"/admin/formCurso/{id}" ,"/admin/formCurso"})
-	public String formCurso(@PathVariable(name="id", required=false) Integer id,Model model) {
-		
-		
-		if(id==null) {
-		model.addAttribute("curso",new Curso());
-		}else {
-			model.addAttribute("curso",cursoService.findCurso(id));
+	@GetMapping(value = { "/admin/formCurso/{id}", "/admin/formCurso" })
+	public String formCurso(@PathVariable(name = "id", required = false) Integer id, Model model) {
+
+		if (id == null) {
+			model.addAttribute("curso", new Curso());
+		} else {
+			model.addAttribute("curso", cursoService.findCurso(id));
 		}
 		return FORM_VIEW;
 	}
-	
-	
-	
 
 }

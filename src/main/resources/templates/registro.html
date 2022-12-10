@@ -1,45 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-       <link th:href="@{/css/styles.css}"
-      rel="stylesheet">
-
-     
 <meta charset="UTF-8">
+<link th:href="@{/css/styles.css}" rel="stylesheet">
 <title>Registro de usuarios</title>
 </head>
 <body>
-<nav th:replace="index::header"></nav>
-
-	<div class="container" >
+	<nav th:replace="index::header"></nav>
+	<div class="container">
 		<form th:action="@{/auth/register}" th:object="${alumno}" method="post">
 			<div class="form-label-group mt-4 ">
 				<label>Nombre: </label>
 				<input type="text" class="form-control" placeholder="Nombre" name="nombre"/>
 			</div>
 			<br>
+			
 			<div class="form-label-group">
 				<label>Apellidos: </label>
 				<input type="text"  class="form-control" placeholder="Apellidos" name="apellidos"/>
 			</div>
 			<br>
+			
 			<div class="form-label-group">
 				<label>Email: </label>
 				<input type="text" class="form-control" placeholder="Email" name="email"/>
 			</div>
 			<br>
+			
 			<div class="form-label-group">
 				<label>Foto URL: </label>
 				<input type="text"  class="form-control" placeholder="Url" name="foto"/>
 			</div>
-			<br><div class="form-label-group">
+			<br>
+			
+			<div class="form-label-group">
 				<label>Contraseña: </label>
 				<input type="password"  class="form-control" placeholder="Contraseña" name="password"/>
 			</div>
 			<br>
-			<button class="btn tbn-lg btn-primary btn-block text-uppercase" type="submit">
-				Registrarse
-			</button>
+			
+			<button class="btn tbn-lg btn-primary btn-block text-uppercase" type="submit">Registrarse</button>
 		</form>
 	</div>
 </body>

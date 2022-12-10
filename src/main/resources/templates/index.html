@@ -1,80 +1,72 @@
-
-<html >
-    <head>
-        <meta charset="utf-8"/>
-      
-      <link th:href="@{/css/styles.css}"
-      rel="stylesheet">
-    </head>
-    <body>
-  		<header th:fragment = "header"> <nav class="navbar navbar-expand-lg bg-secondary text-uppercase " id="mainNav">
-            <div class="container">
-                <a sec:authorize="!isAuthenticated()" class="navbar-brand" th:href="@{/}">GestionCursos</a>
-                <a sec:authorize="isAuthenticated()" class="navbar-brand" th:href="@{/inicio/}">GestionCursos</a>
-              
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-
-                	<ul sec:authorize="!isAuthenticated()" class="navbar-nav ms-auto">
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/auth/login}">Login</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/auth/registerForm}">Register</a></li>
-                    </ul>
-                    
-                    <ul sec:authorize="hasRole('ROLE_ADMIN')" class="navbar-nav ms-auto">
-                    	<li class="nav-item mx-0 mx-lg-1">
-                        	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/admin/listaAlumnos}">Alumnos</a>
-                        </li>
-                      	<li class="nav-item mx-0 mx-lg-1">
-                        	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/admin/listCursos}">Cursos</a>
-                        </li>
-                        <li class="nav-item mx-0 mx-lg-1">
-                        	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/admin/listaProfesores}">Profesores</a>
-                        </li>
-                        <li class="nav-item mx-0 mx-lg-1">
-                        	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:text="'Hola ' + ${#authentication.name}"></a>
-                        </li>
-                        <li class="nav-item mx-0 mx-lg-1">
-                        <form  th:action="@{/logout}" method="post">
-                        	<button class= "nav-link py-3 px-0 px-lg-3 rounded btn" type="submit">Cerrar Sesión</button>
-                        </form>
-                        	
-                        </li>
-                    </ul>
-                    
-                    <ul sec:authorize="hasRole('ROLE_ALUMNO')" class="navbar-nav ms-auto">
-                      	<li class="nav-item mx-0 mx-lg-1">
-                        	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/alumno/formAlumno/} + ${#authentication.name}">Editar Información</a>
-                        </li>
-                        <li class="nav-item mx-0 mx-lg-1">
-                        	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:text="'Hola ' + ${#authentication.name}"></a>
-                        </li>
-                        <li class="nav-item mx-0 mx-lg-1">
-                        <form  th:action="@{/logout}" method="post">
-                        	<button class= "nav-link py-3 px-0 px-lg-3 rounded btn" type="submit">Cerrar Sesión</button>
-                        </form>
-                        	
-                        </li>
-                    </ul>
-                    
-                    <ul sec:authorize="hasRole('ROLE_PROFESOR')" class="navbar-nav ms-auto">
-                     
-                        	<li class="nav-item mx-0 mx-lg-1">
-                        	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/profesor/formProfesorUpdate/} + ${#authentication.name}">Editar Información</a>
-                        </li>
-                        <li class="nav-item mx-0 mx-lg-1">
-                        	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:text="'Hola ' + ${#authentication.name}"></a>
-                        </li>
-                        <li class="nav-item mx-0 mx-lg-1">
-                        <form  th:action="@{/logout}" method="post">
-                        	<button class= "nav-link py-3 px-0 px-lg-3 rounded btn" type="submit">Cerrar Sesión</button>
-                        </form>
-                        	
-                        </li>
-                    </ul>
-                    
-
-                    
-                </div>
-            </div>
-        </nav></header>
-    </body>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/css/styles.css}" rel="stylesheet">
+</head>
+<body>
+<header th:fragment = "header">
+	<nav class="navbar navbar-expand-lg bg-secondary text-uppercase " id="mainNav">
+	    <div class="container">
+	        <a sec:authorize="!isAuthenticated()" class="navbar-brand" th:href="@{/}">GestionCursos</a>
+	        <a sec:authorize="isAuthenticated()" class="navbar-brand" th:href="@{/inicio/}">GestionCursos</a>
+	      
+	        <div class="collapse navbar-collapse" id="navbarResponsive">
+	        	<ul sec:authorize="!isAuthenticated()" class="navbar-nav ms-auto">
+	                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/auth/login}">Login</a></li>
+	                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/auth/registerForm}">Register</a></li>
+	            </ul>
+	            
+	            <ul sec:authorize="hasRole('ROLE_ADMIN')" class="navbar-nav ms-auto">
+	            	<li class="nav-item mx-0 mx-lg-1">
+	                	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/admin/listaAlumnos}">Alumnos</a>
+	                </li>
+	              	<li class="nav-item mx-0 mx-lg-1">
+	                	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/admin/listCursos}">Cursos</a>
+	                </li>
+	                <li class="nav-item mx-0 mx-lg-1">
+	                	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/admin/listaProfesores}">Profesores</a>
+	                </li>
+	                <li class="nav-item mx-0 mx-lg-1">
+	                	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:text="'Hola ' + ${#authentication.name}"></a>
+	                </li>
+	                <li class="nav-item mx-0 mx-lg-1">
+		                <form th:action="@{/logout}" method="post">
+		                	<button class= "nav-link py-3 px-0 px-lg-3 rounded btn" type="submit">Cerrar Sesión</button>
+		                </form>
+	                </li>
+	            </ul>
+	            
+	            <ul sec:authorize="hasRole('ROLE_ALUMNO')" class="navbar-nav ms-auto">
+	              	<li class="nav-item mx-0 mx-lg-1">
+	                	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/alumno/formAlumno/} + ${#authentication.name}">Editar Información</a>
+	                </li>
+	                <li class="nav-item mx-0 mx-lg-1">
+	                	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:text="'Hola ' + ${#authentication.name}"></a>
+	                </li>
+	                <li class="nav-item mx-0 mx-lg-1">
+		                <form th:action="@{/logout}" method="post">
+		                	<button class= "nav-link py-3 px-0 px-lg-3 rounded btn" type="submit">Cerrar Sesión</button>
+		                </form>
+	                </li>
+	            </ul>
+	            
+	            <ul sec:authorize="hasRole('ROLE_PROFESOR')" class="navbar-nav ms-auto">
+	             	<li class="nav-item mx-0 mx-lg-1">
+	                	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/profesor/formProfesorUpdate/} + ${#authentication.name}">Editar Información</a>
+	                </li>
+	                <li class="nav-item mx-0 mx-lg-1">
+	                	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:text="'Hola ' + ${#authentication.name}"></a>
+	                </li>
+	                <li class="nav-item mx-0 mx-lg-1">
+		                <form th:action="@{/logout}" method="post">
+		                	<button class= "nav-link py-3 px-0 px-lg-3 rounded btn" type="submit">Cerrar Sesión</button>
+		                </form>
+	                </li>
+	            </ul>
+	        </div>
+	    </div>
+	</nav>
+</header>
+</body>
 </html>

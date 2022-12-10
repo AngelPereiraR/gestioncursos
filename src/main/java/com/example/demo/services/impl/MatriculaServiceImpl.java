@@ -15,15 +15,15 @@ import com.example.demo.services.MatriculaService;
 
 @Service("matriculaService")
 public class MatriculaServiceImpl implements MatriculaService {
-	
+
 	@Autowired
 	@Qualifier("matriculaRepository")
 	private MatriculaRepository matriculaRepository;
-	
+
 	@Override
 	public List<MatriculaModel> listAllMatriculas() {
 		List<MatriculaModel> matriculas = new ArrayList<MatriculaModel>();
-		for(Matricula matricula: matriculaRepository.findAll())
+		for (Matricula matricula : matriculaRepository.findAll())
 			matriculas.add(transform(matricula));
 		return matriculas;
 	}
@@ -56,5 +56,4 @@ public class MatriculaServiceImpl implements MatriculaService {
 		return modelMapper.map(matricula, MatriculaModel.class);
 	}
 
-	
 }

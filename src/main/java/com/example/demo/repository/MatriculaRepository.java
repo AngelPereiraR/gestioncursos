@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.entity.Matricula;
 
 @Repository("matriculaRepository")
-public interface MatriculaRepository extends JpaRepository<Matricula, Serializable>{
+public interface MatriculaRepository extends JpaRepository<Matricula, Serializable> {
 
 }

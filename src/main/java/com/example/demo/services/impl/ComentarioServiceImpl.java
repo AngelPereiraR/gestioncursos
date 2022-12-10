@@ -15,15 +15,15 @@ import com.example.demo.services.ComentarioService;
 
 @Service("comentarioService")
 public class ComentarioServiceImpl implements ComentarioService {
-	
+
 	@Autowired
 	@Qualifier("comentarioRepository")
 	private ComentarioRepository comentarioRepository;
-	
+
 	@Override
 	public List<ComentarioModel> listAllComentarios() {
 		List<ComentarioModel> comentarios = new ArrayList<ComentarioModel>();
-		for(Comentario comentario: comentarioRepository.findAll())
+		for (Comentario comentario : comentarioRepository.findAll())
 			comentarios.add(transform(comentario));
 		return comentarios;
 	}
@@ -56,5 +56,4 @@ public class ComentarioServiceImpl implements ComentarioService {
 		return modelMapper.map(comentario, ComentarioModel.class);
 	}
 
-	
 }

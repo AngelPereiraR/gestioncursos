@@ -15,15 +15,15 @@ import com.example.demo.services.NoticiaService;
 
 @Service("noticiaService")
 public class NoticiaServiceImpl implements NoticiaService {
-	
+
 	@Autowired
 	@Qualifier("noticiaRepository")
 	private NoticiaRepository noticiaRepository;
-	
+
 	@Override
 	public List<NoticiaModel> listAllNoticias() {
 		List<NoticiaModel> noticias = new ArrayList<NoticiaModel>();
-		for(Noticia noticia: noticiaRepository.findAll())
+		for (Noticia noticia : noticiaRepository.findAll())
 			noticias.add(transform(noticia));
 		return noticias;
 	}
@@ -56,5 +56,4 @@ public class NoticiaServiceImpl implements NoticiaService {
 		return modelMapper.map(noticia, NoticiaModel.class);
 	}
 
-	
 }
