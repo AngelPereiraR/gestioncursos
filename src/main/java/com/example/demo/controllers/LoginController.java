@@ -41,8 +41,8 @@ public class LoginController {
 	public String register(@ModelAttribute Usuario user, RedirectAttributes flash) {
 		user.setRole("ROLE_ALUMNO");
 		Usuario userRegistered = userService.registrar(user);
-		flash.addFlashAttribute("succes", "User registered succesfully!");
 		if(userRegistered != null) {
+			flash.addFlashAttribute("succes", "User registered succesfully!");
 			return "redirect:/auth/login";
 		} else {
 			return "redirect:/auth/registerForm?error";
