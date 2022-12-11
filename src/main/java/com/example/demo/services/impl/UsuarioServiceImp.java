@@ -51,6 +51,12 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 	}
 
 	public com.example.demo.entity.Usuario registrar(com.example.demo.entity.Usuario user) {
+		List<Usuario> usuarios = userRepository.findAll();
+		for(Usuario u : usuarios) {
+			if(u.getEmail().equals(user.getEmail())) {
+				return null;
+			}
+		}
 		if (user.getRole().equals("ROLE_ALUMNO")) {
 			user.setPassword(passwordEncoder().encode(user.getPassword()));
 			user.setEnabled(false);

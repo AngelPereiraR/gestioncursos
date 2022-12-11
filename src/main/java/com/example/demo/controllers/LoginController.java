@@ -30,8 +30,9 @@ public class LoginController {
 	}
 
 	@GetMapping("/auth/registerForm")
-	public String registerForm(Model model) {
+	public String registerForm(Model model, @RequestParam(name = "error", required = false) String error) {
 		model.addAttribute("alumno", new Usuario());
+		model.addAttribute("error", error);
 
 		return "registro";
 	}
@@ -39,9 +40,13 @@ public class LoginController {
 	@PostMapping("/auth/register")
 	public String register(@ModelAttribute Usuario user, RedirectAttributes flash) {
 		user.setRole("ROLE_ALUMNO");
-		userService.registrar(user);
+		Usuario userRegistered = userService.registrar(user);
 		flash.addFlashAttribute("succes", "User registered succesfully!");
-		return "redirect:/auth/login";
+		if(userRegistered != null) {
+			return "redirect:/auth/login";
+		} else {
+			return "redirect:/auth/registerForm?error";
+		}
 	}
 
 }
