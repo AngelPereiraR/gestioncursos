@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -96,33 +97,42 @@ public class ProfesorController {
 		return FORM_VIEW;
 	}
 
-	@GetMapping("/profesor/formProfesorUpdate/{email}")
-	public String formAlumno(@PathVariable(name = "email", required = false) String email, Model model) {
+	@GetMapping("/profesor/formProfesorUpdate")
+	public String formProfesorUpdate( Model model) {
+	String email=SecurityContextHolder.getContext().getAuthentication().getName();
+		
+		
 		model.addAttribute("profesor", userRepository.findByEmail(email));
 		return FORM_VIEW2;
 	}
 	
-	@GetMapping("/profesor/listCursos/{email}")
-	public String listCursos(@PathVariable(name = "email", required = false) String email,Model model) {
+	@GetMapping("/profesor/listCursos")
+	public String listCursos(Model model) {
+		String email=SecurityContextHolder.getContext().getAuthentication().getName();
+	
 		Usuario profesor = userRepository.findByEmail(email);
 		
 		model.addAttribute("cursos", userService.listAllCursos(userService.transform(profesor)));
 		return COURSES_VIEW;
 	}
 
-	@PostMapping("/profesor/addCurso/{email}")
-	public String addCurso(@ModelAttribute("curso") CursoModel cursoModel,@PathVariable(name = "email", required = false) String email, RedirectAttributes flash) {
+	@PostMapping("/profesor/addCurso")
+	public String addCurso(@ModelAttribute("curso") CursoModel cursoModel, RedirectAttributes flash) {
+		
+		String email=SecurityContextHolder.getContext().getAuthentication().getName();
+		
+		Usuario profesor = userRepository.findByEmail(email);
 		if (cursoModel.getIdcurso() == 0) {
-			Usuario profesor = userRepository.findByEmail(email);
+			
 			cursoModel.setIdprofesor(profesor);
 			cursoService.addCurso(cursoModel);
 			flash.addFlashAttribute("succes", "course added suff");
-			return "redirect:/profesor/listCursos/"+email;
+			return "redirect:/profesor/listCursos";
 		} else {
 			cursoService.updateCurso(cursoModel);
 
 			flash.addFlashAttribute("succes", "course updated suff");
-			return "redirect:/profesor/listCursos/"+email;
+			return "redirect:/profesor/listCursos";
 
 		}
 
@@ -133,7 +143,7 @@ public class ProfesorController {
 		cursoService.removeCurso(id);
 
 		flash.addFlashAttribute("succes", "curso eliminado correctamente");
-		return "redirect:/profesor/listCursos/{email}";
+		return "redirect:/profesor/listCursos";
 
 	}
 

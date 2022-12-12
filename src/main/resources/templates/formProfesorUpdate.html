@@ -8,7 +8,7 @@
 <body>
 	<nav th:replace="index::header" class="header"></nav>
 	<div class="container mt-sm-5">
-		<form action="#" th:action="@{/profesor/updateProfesor/}" th:object="${profesor}" method="post" class="form form-singin align-items-center">
+		<form action="#" th:action="@{/profesor/updateProfesor}" th:object="${profesor}" method="post" class="form form-singin align-items-center">
 			<input type="hidden" th:field="*{id}">
 			<input type="hidden" th:field="*{enabled}">
 			<input type="hidden" th:field="*{role}">	

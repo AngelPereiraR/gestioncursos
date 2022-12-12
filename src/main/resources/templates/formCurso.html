@@ -33,7 +33,7 @@
 			
 			<button type="submit" class="btn tbn-lg btn-primary btn-block text-uppercase">Añadir Curso</button>	
 		</form>
-		<form  sec:authorize="hasRole('ROLE_PROFESOR')" action="#" th:action="@{/profesor/addCurso/} + ${#authentication.name}" th:object="${curso}" method="post"  class="form align-items-center ">
+		<form  sec:authorize="hasRole('ROLE_PROFESOR')" action="#" th:action="@{/profesor/addCurso}" th:object="${curso}" method="post"  class="form align-items-center ">
 			<input type="hidden"  th:field="*{idcurso}">
 			
 			<label class="sr-only">Nombre:</label>
