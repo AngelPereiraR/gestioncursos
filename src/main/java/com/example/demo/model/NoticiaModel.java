@@ -12,19 +12,19 @@ public class NoticiaModel {
 
 	private String imagen;
 
-	private Usuario user;
+	private Usuario usuario;
 
 	public NoticiaModel() {
 		super();
 	}
 
-	public NoticiaModel(int idnoticia, String titulo, String descripcion, String imagen, Usuario user) {
+	public NoticiaModel(int idnoticia, String titulo, String descripcion, String imagen, Usuario usuario) {
 		super();
 		this.idnoticia = idnoticia;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.imagen = imagen;
-		this.user = user;
+		this.usuario = usuario;
 	}
 
 	public int getIdnoticia() {
@@ -59,17 +59,17 @@ public class NoticiaModel {
 		this.imagen = imagen;
 	}
 
-	public Usuario getAdministrador() {
-		return user;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setAdministrador(Usuario user) {
-		this.user = user;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	@Override
 	public String toString() {
 		return "NoticiasModel [idnoticia=" + idnoticia + ", titulo=" + titulo + ", descripcion=" + descripcion
-				+ ", imagen=" + imagen + ", usuario=" + user + "]";
+				+ ", imagen=" + imagen + ", usuario=" + usuario + "]";
 	}
 }

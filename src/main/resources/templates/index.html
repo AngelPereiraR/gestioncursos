@@ -28,6 +28,9 @@
 	                	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/admin/listaProfesores}">Profesores</a>
 	                </li>
 	                <li class="nav-item mx-0 mx-lg-1">
+	                	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/admin/listNoticias}">Noticias</a>
+	                </li>
+	                <li class="nav-item mx-0 mx-lg-1">
 	                	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:text="'Hola ' + ${#authentication.name}"></a>
 	                </li>
 	                <li class="nav-item mx-0 mx-lg-1">
@@ -54,9 +57,6 @@
 	            <ul sec:authorize="hasRole('ROLE_PROFESOR')" class="navbar-nav ms-auto">
 	             	<li class="nav-item mx-0 mx-lg-1">
 	                	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/profesor/formProfesorUpdate/} + ${#authentication.name}">Editar Información</a>
-	                </li>
-	                <li class="nav-item mx-0 mx-lg-1">
-	                	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/profesor/listCursos/}+ ${#authentication.name}">Cursos</a>
 	                </li>
 	                <li class="nav-item mx-0 mx-lg-1">
 	                	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:text="'Hola ' + ${#authentication.name}"></a>

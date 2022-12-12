@@ -44,7 +44,7 @@ public class Usuario {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
 	private List<Matricula> idmatricula;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
 	private List<Noticia> idnoticia;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idprofesor")

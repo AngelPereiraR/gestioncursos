@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/css/styles.css}" rel="stylesheet">
+<title>Formulario Noticia</title>
+</head>
+<body>
+	<nav th:replace="index::header" class="header"></nav>
+	<div class="container mt-sm-5">
+		<form action="#" th:action="@{/admin/addNoticia/} + ${#authentication.name}" th:object="${noticia}" method="post"  class="form align-items-center ">
+			<input type="hidden"  th:field="*{idnoticia}">
+			
+			<label class="sr-only">Titulo:</label>
+			<input type="text" th:field="*{titulo}" class="form-control"/>
+			<br>
+			
+			<label class="sr-only">Descripcion:</label>
+			<input type="text" th:field="*{descripcion}" class="form-control"/>
+			<br>
+			
+			<label class="sr-only">Imagen:</label>
+			<input type="url" th:field="*{imagen}" class="form-control"/>
+			<br>
+			
+			<button type="submit" class="btn tbn-lg btn-primary btn-block text-uppercase">Añadir Noticia</button>	
+		</form>
+	</div>
+</body>
+</html>

@@ -55,5 +55,10 @@ public class NoticiaServiceImpl implements NoticiaService {
 		ModelMapper modelMapper = new ModelMapper();
 		return modelMapper.map(noticia, NoticiaModel.class);
 	}
+	
+	@Override
+	public NoticiaModel findNoticia(int id) {
+		return transform(noticiaRepository.findById(id).orElse(null));
+	}
 
 }

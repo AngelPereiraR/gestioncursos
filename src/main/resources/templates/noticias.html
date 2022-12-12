@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/css/styles.css}" rel="stylesheet">
+<title>Noticias</title>
+</head>
+<body>
+	<nav th:replace="index::header" class="header"></nav>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Titulo</th>
+				<th>Descripcion</th>
+				<th>Imagen</th>
+				<th>Administrador</th>
+				<th>Acciones</th>
+			</tr>
+		</thead>
+		
+		<tbody th:each="noticia: ${noticias}">
+			<tr>
+				<td th:text=${noticia.titulo}></td>
+				<td th:text=${noticia.descripcion}></td>
+				<td th:text=${noticia.imagen}></td>
+				<td th:text=${noticia.usuario.email}></td>
+				<td>
+					<a th:href="@{/admin/formNoticia/} + ${#authentication.name} + @{/} + ${noticia.idnoticia}">
+						<button class="btn tbn-lg btn-primary btn-block text-uppercase" type="button">Editar Noticia</button>
+					</a>
+					<a th:href="@{/admin/removeNoticia/} + ${noticia.idnoticia}" method="post">
+							<button class="btn tbn-lg btn-danger btn-block text-uppercase" type="button">Eliminar Noticia</button>
+					</a> 
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<a th:href="@{/admin/formNoticia}">
+		<button class="btn tbn-lg btn-primary btn-block text-uppercase"type="button">Añadir Noticia</button>
+	</a>
+	</body>
+</html>

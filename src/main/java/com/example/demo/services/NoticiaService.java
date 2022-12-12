@@ -17,4 +17,6 @@ public interface NoticiaService {
 	public abstract Noticia transform(NoticiaModel noticiaModel);
 
 	public abstract NoticiaModel transform(Noticia noticia);
+
+	public abstract NoticiaModel findNoticia(int id);
 }
