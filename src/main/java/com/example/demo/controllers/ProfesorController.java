@@ -110,19 +110,19 @@ public class ProfesorController {
 		return COURSES_VIEW;
 	}
 
-	@PostMapping("/profesor/addCurso")
-	public String addCurso(@ModelAttribute("curso") CursoModel cursoModel, RedirectAttributes flash) {
+	@PostMapping("/profesor/addCurso/{email}")
+	public String addCurso(@ModelAttribute("curso") CursoModel cursoModel,@PathVariable(name = "email", required = false) String email, RedirectAttributes flash) {
 		if (cursoModel.getIdcurso() == 0) {
-
+			Usuario profesor = userRepository.findByEmail(email);
+			cursoModel.setIdprofesor(profesor);
 			cursoService.addCurso(cursoModel);
-
 			flash.addFlashAttribute("succes", "course added suff");
-			return "redirect:/admin/listCursos";
+			return "redirect:/profesor/listCursos/"+email;
 		} else {
 			cursoService.updateCurso(cursoModel);
 
 			flash.addFlashAttribute("succes", "course updated suff");
-			return "redirect:/profesor/listCursos";
+			return "redirect:/profesor/listCursos/"+email;
 
 		}
 
@@ -133,7 +133,7 @@ public class ProfesorController {
 		cursoService.removeCurso(id);
 
 		flash.addFlashAttribute("succes", "curso eliminado correctamente");
-		return "redirect:/profesor/listCursos";
+		return "redirect:/profesor/listCursos/{email}";
 
 	}
 

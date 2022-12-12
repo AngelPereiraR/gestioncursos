@@ -3,7 +3,9 @@ package com.example.demo.services;
 import java.util.List;
 
 import com.example.demo.entity.Usuario;
+import com.example.demo.model.CursoModel;
 import com.example.demo.model.UsuarioModel;
+
 
 public interface UsuarioService {
 
@@ -36,6 +38,8 @@ public interface UsuarioService {
 	public abstract int removeProfesor(int id);
 
 	public abstract Usuario updateProfesor(UsuarioModel usuarioModel);
+	
+	public abstract List<CursoModel> listAllCursos(UsuarioModel usuarioModel);
 
 	// Administrador
 
@@ -46,5 +50,7 @@ public interface UsuarioService {
 	public abstract int removeAdministrador(int id);
 
 	public abstract Usuario updateAdministrador(UsuarioModel usuarioModel);
+
+	
 
 }

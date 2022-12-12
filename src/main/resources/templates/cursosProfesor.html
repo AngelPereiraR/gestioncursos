@@ -25,17 +25,17 @@
 				<td th:text=${curso.fechaInicio}></td>
 				<td th:text=${curso.fechaFin}></td>
 				<td>
-					<a th:href="@{/admin/formCurso/} + ${curso.idcurso}">
+					<a th:href="@{/profesor/formCurso/} + ${curso.idcurso}">
 						<button class="btn tbn-lg btn-primary btn-block text-uppercase" type="button">Editar Curso</button>
 					</a>
-					<a th:href="@{/admin/removeCurso/} + ${curso.idcurso}" method="post">
+					<a th:href="@{/profesor/removeCurso/} + ${curso.idcurso}" method="post">
 							<button class="btn tbn-lg btn-danger btn-block text-uppercase" type="button">Eliminar Curso</button>
 					</a> 
 				</td>
 			</tr>
 		</tbody>
 	</table>
-	<a th:href="@{/admin/formCurso}">
+	<a th:href="@{/profesor/formCurso}">
 		<button class="btn tbn-lg btn-primary btn-block text-uppercase"type="button">Añadir Curso</button>
 	</a>
 	</body>

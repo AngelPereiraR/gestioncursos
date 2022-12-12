@@ -35,7 +35,7 @@ public class Curso {
 
 	@ManyToOne
 	@JoinColumn(name = "id")
-	private Usuario id;
+	private Usuario idprofesor;
 
 	private String fechaInicio;
 
@@ -56,7 +56,7 @@ public class Curso {
 		this.nivel = nivel;
 		this.idcomentario = idcomentario;
 		this.idmatricula = idmatricula;
-		this.id = id;
+		this.idprofesor = id;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 	}
@@ -110,11 +110,11 @@ public class Curso {
 	}
 
 	public Usuario getIdprofesor() {
-		return id;
+		return idprofesor;
 	}
 
 	public void setIdprofesor(Usuario id) {
-		this.id = id;
+		this.idprofesor = id;
 	}
 
 	public String getFechaInicio() {
@@ -136,7 +136,7 @@ public class Curso {
 	@Override
 	public String toString() {
 		return "Curso [idcurso=" + idcurso + ", nombre=" + nombre + ", descripcion=" + descripcion + ", nivel=" + nivel
-				+ ", idcomentario=" + idcomentario + ", idmatricula=" + idmatricula + ", id=" + id + ", fechaInicio="
+				+ ", idcomentario=" + idcomentario + ", idmatricula=" + idmatricula + ", id=" + idprofesor + ", fechaInicio="
 				+ fechaInicio + ", fechaFin=" + fechaFin + "]";
 	}
 }

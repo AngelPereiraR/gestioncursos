@@ -2,6 +2,7 @@ package com.example.demo.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Usuario;
+
+import com.example.demo.model.CursoModel;
+
 import com.example.demo.model.UsuarioModel;
+import com.example.demo.repository.CursoRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.services.UsuarioService;
 
@@ -28,6 +33,10 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 	@Autowired
 	@Qualifier("userRepository")
 	private UserRepository userRepository;
+	
+	@Autowired
+	@Qualifier("cursoRepository")
+	private CursoRepository cursoRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -184,6 +193,14 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 	public UsuarioModel findUsuario(int id) {
 
 		return transform(userRepository.findById(id).orElse(null));
+	}
+
+	@Override
+	public List<CursoModel> listAllCursos(UsuarioModel usuarioModel) {
+		// TODO Auto-generated method stub
+		ModelMapper modelMapper=new ModelMapper();
+		
+		return cursoRepository.findByIdprofesor(transform(usuarioModel)).stream().map(c->modelMapper.map(c,CursoModel.class)).collect(Collectors.toList());
 	}
 
 }

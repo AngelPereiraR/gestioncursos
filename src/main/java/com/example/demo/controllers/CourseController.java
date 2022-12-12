@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.entity.Curso;
 import com.example.demo.model.CursoModel;
 import com.example.demo.services.CursoService;
+import com.example.demo.services.UsuarioService;
 
 @Controller
 
@@ -25,10 +26,14 @@ public class CourseController {
 	@Autowired
 	@Qualifier("cursoService")
 	private CursoService cursoService;
+	
+	@Autowired
+	@Qualifier("userService")
+	private UsuarioService userService;
 
 	@GetMapping("/inicio/")
 	private String home() {
-
+	
 		return LAYOUT_VIEW;
 	}
 
