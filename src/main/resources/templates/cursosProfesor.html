@@ -7,6 +7,15 @@
 </head>
 <body>
 	<nav th:replace="index::header" class="header"></nav>
+
+	<select class="">
+		<option value="0">Ordenar por fecha descendente</option>
+		<option value="1">Ordenar por fecha ascendente</option>
+		<option value="2">Ordenar por cursos impartidos</option>
+		<option value="3">Ordenar por cursos impartiéndose</option>
+		<option value="4">Ordenar por cursos a impartir</option>
+	</select>
+	
 	<table class="table">
 		<thead>
 			<tr>

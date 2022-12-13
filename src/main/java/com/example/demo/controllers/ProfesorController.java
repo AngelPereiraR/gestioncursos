@@ -106,9 +106,9 @@ public class ProfesorController {
 		model.addAttribute("profesor", userRepository.findByEmail(email));
 		return FORM_VIEW2;
 	}
-	
-	@GetMapping("/profesor/listCursos")
-	public String listCursos(Model model) {
+
+	@GetMapping(value = { "/profesor/listCursos/{option}", "/profesor/listCursos" })
+	public String listCursos(@PathVariable(name = "option", required = false) String option, Model model) {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 	
 		Usuario profesor = userRepository.findByEmail(email);

@@ -7,6 +7,15 @@
 </head>
 <body>
 	<nav th:replace="index::header" class="header"></nav>
+
+	<select class="">
+		<option value="0">Ordenar por fecha descendente</option>
+		<option value="1">Ordenar por fecha ascendente</option>
+		<option value="2">Ordenar por cursos impartidos</option>
+		<option value="3">Ordenar por cursos impartiéndose</option>
+		<option value="4">Ordenar por cursos a impartir</option>
+	</select>
+
 	<table class="table">
 		<thead>
 			<tr>
@@ -17,26 +26,27 @@
 				<th>Acciones</th>
 			</tr>
 		</thead>
-		
+
 		<tbody th:each="curso: ${cursos}">
 			<tr>
 				<td th:text=${curso.nombre}></td>
 				<td th:text=${curso.descripcion}></td>
 				<td th:text=${curso.fechaInicio}></td>
 				<td th:text=${curso.fechaFin}></td>
-				<td>
-					<a th:href="@{/admin/formCurso/} + ${curso.idcurso}">
-						<button class="btn tbn-lg btn-primary btn-block text-uppercase" type="button">Editar Curso</button>
-					</a>
-					<a th:href="@{/admin/removeCurso/} + ${curso.idcurso}" method="post">
-							<button class="btn tbn-lg btn-danger btn-block text-uppercase" type="button">Eliminar Curso</button>
-					</a> 
-				</td>
+				<td><a th:href="@{/admin/formCurso/} + ${curso.idcurso}">
+						<button class="btn tbn-lg btn-primary btn-block text-uppercase"
+							type="button">Editar Curso</button>
+				</a> <a th:href="@{/admin/removeCurso/} + ${curso.idcurso}"
+					method="post">
+						<button class="btn tbn-lg btn-danger btn-block text-uppercase"
+							type="button">Eliminar Curso</button>
+				</a></td>
 			</tr>
 		</tbody>
 	</table>
 	<a th:href="@{/admin/formCurso}">
-		<button class="btn tbn-lg btn-primary btn-block text-uppercase"type="button">Añadir Curso</button>
+		<button class="btn tbn-lg btn-primary btn-block text-uppercase"
+			type="button">Añadir Curso</button>
 	</a>
-	</body>
+</body>
 </html>
