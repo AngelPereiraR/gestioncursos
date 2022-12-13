@@ -99,7 +99,7 @@ public class ProfesorController {
 
 	@GetMapping("/profesor/formProfesorUpdate")
 	public String formProfesorUpdate( Model model) {
-	String email=SecurityContextHolder.getContext().getAuthentication().getName();
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		
 		
 		model.addAttribute("profesor", userRepository.findByEmail(email));
@@ -108,7 +108,7 @@ public class ProfesorController {
 	
 	@GetMapping("/profesor/listCursos")
 	public String listCursos(Model model) {
-		String email=SecurityContextHolder.getContext().getAuthentication().getName();
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 	
 		Usuario profesor = userRepository.findByEmail(email);
 		
@@ -119,7 +119,7 @@ public class ProfesorController {
 	@PostMapping("/profesor/addCurso")
 	public String addCurso(@ModelAttribute("curso") CursoModel cursoModel, RedirectAttributes flash) {
 		
-		String email=SecurityContextHolder.getContext().getAuthentication().getName();
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		
 		Usuario profesor = userRepository.findByEmail(email);
 		if (cursoModel.getIdcurso() == 0) {

@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,15 +38,17 @@ public class NoticiaController {
 		return mav;
 	}
 
-	@PostMapping("/admin/addNoticia/{email}")
-	public String addNoticia(@PathVariable("email") String email, @ModelAttribute("noticia") NoticiaModel noticiaModel, RedirectAttributes flash) {
+	@PostMapping("/admin/addNoticia")
+	public String addNoticia(@ModelAttribute("noticia") NoticiaModel noticiaModel, RedirectAttributes flash) {
 		if (noticiaModel.getIdnoticia() == 0) {
+			String email = SecurityContextHolder.getContext().getAuthentication().getName();
 			Usuario usuario = userRepository.findByEmail(email);
 			noticiaModel.setUsuario(usuario);
 			noticiaService.addNoticia(noticiaModel);
 			flash.addFlashAttribute("succes", "noticia added suff");
 			return "redirect:/admin/listNoticias";
 		} else {
+			String email = SecurityContextHolder.getContext().getAuthentication().getName();
 			Usuario usuario = userRepository.findByEmail(email);
 			noticiaModel.setUsuario(usuario);
 			noticiaService.updateNoticia(noticiaModel);
