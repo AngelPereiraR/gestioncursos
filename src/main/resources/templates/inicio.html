@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link th:href="@{/css/styles.css}" rel="stylesheet">
+
 <title>Inicio</title>
 <script src="https://kit.fontawesome.com/7cb85c1f74.js" crossorigin="anonymous"></script>
 </head>
@@ -11,7 +12,8 @@
 	<header class="masthead bg-primary text-white text-center">
 	    <div class="container d-flex align-items-center flex-column">
 	        <!-- Masthead Heading-->
-	        <h1 class="masthead-heading text-uppercase mb-0">Gestion Cursos</h1>
+	        <h1 sec:authorize="hasRole('ROLE_ALUMNO')" class="masthead-heading text-uppercase mb-0">Noticias</h1>
+	         <h1 sec:authorize="hasRole('ROLE_PROFESOR')" class="masthead-heading text-uppercase mb-0">Gestion cursos</h1>
 	        <!-- Icon Divider-->
 	        <div class="divider-custom divider-light">
 	            <div class="divider-custom-line"></div>
@@ -19,8 +21,48 @@
 	            <div class="divider-custom-line"></div>
 	        </div>
 	        <!-- Masthead Subheading-->
-	        <p class="masthead-subheading font-weight-light mb-0">Graphic Artist - Web Designer - Illustrator</p>
 	    </div>
 	</header>
+	<div sec:authorize="hasRole('ROLE_ALUMNO')"> 
+		<section>
+
+		<div class="customer-feedback">
+		<div class="container text-center">
+			<div class="row d-flex align-items-center flex-column">
+				<div class="col-sm-offset-2 col-sm-8">
+					<div>
+						<h2 class="section-title">What Clients Say</h2>
+					</div>
+				</div><!-- /End col -->
+			</div><!-- /End row -->
+
+			<div class="row d-flex align-items-center flex-column ">
+				<div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
+					<div class="owl-carousel feedback-slider">
+
+						<!-- slider item -->
+						<div class="feedback-slider-item  text-white" th:each="noticia: ${noticias}">
+							<img th:src="${noticia.imagen}" class="center-block img-circle" alt="Customer Feedback">
+							<h3  th:text=${noticia.titulo} class="customer-name"></h3>
+							<p th:text=${noticia.descripcion}></p>
+							<span  th:text=${noticia.usuario.email} class="light-bg">
+								
+								<i class="fa fa-star"></i>
+							</span>
+						</div>
+						
+
+						
+					</div><!-- /End feedback-slider -->
+
+					
+				</div><!-- /End col -->
+			</div><!-- /End row -->
+		</div>
+	</div>
+</section>
+
+
+	</div>
 </body>
 </html>

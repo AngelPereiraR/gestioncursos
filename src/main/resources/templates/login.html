@@ -19,7 +19,7 @@
 			<input type="password" class="form-control" placeholder="Password" name="password" id="password"/>
 			<br>
 			
-			<div th:if="${error!=null}" class="alert alert-danger" role="alert">Invalid username</div>
+			<div th:if="${error!=null}" class="alert alert-danger" role="alert">Email o password incorrecto</div>
 			<div th:if="${logout!=null}" class="alert alert-info" role="alert">Logout successful</div>
 			
 			<button class="btn tbn-lg btn-primary btn-block text-uppercase" type="submit">Iniciar Sesión</button>

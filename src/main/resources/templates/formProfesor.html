@@ -10,8 +10,7 @@
 	<div class="container mt-sm-5">
 		<form action="#" th:action="@{/admin/addProfesor/}" th:object="${usuario}" method="post" class="form form-singin align-items-center">
 			<input type="hidden" th:field="*{id}">
-			<input type="hidden" th:field="*{password}">
-			
+		
 			<label class="sr-only">Nombre:</label>
 			<input type="text" th:field="*{nombre}" class="form-control"/>
 			<br>
@@ -24,7 +23,15 @@
 			<input type="text" th:field="*{email}" class="form-control"/>
 			<br>
 			
-		 	<button class="btn tbn-lg btn-primary btn-block text-uppercase"  type="submit">Añadir Profesor</button>	
+			<label class="sr-only">Password:</label>
+			<input th:if="${id==null}" type="password" th:field="*{password}" class="form-control"/>
+			<input th:unless="${id==null}" type="text" th:field="*{password}" class="form-control"/>
+			
+			<br>
+			
+		 	<button th:if="${id==null}" class="btn tbn-lg btn-primary btn-block text-uppercase"  type="submit">Añadir Profesor</button>	
+		 	<button th:unless="${id==null}" class="btn tbn-lg btn-primary btn-block text-uppercase"  type="submit">Editar Profesor</button>	
+		 
 		</form>
 	</div>
 </body>

@@ -21,7 +21,7 @@ public class Noticia {
 	@Size(max = 45)
 	private String descripcion;
 
-	@Size(max = 45)
+	@Size(max = 200 )
 	private String imagen;
 
 	@ManyToOne

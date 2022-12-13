@@ -8,7 +8,7 @@
 <body>
 	<nav th:replace="index::header" class="header"></nav>
 	<div class="container mt-sm-5">
-		<form action="#" th:action="@{/admin/addNoticia/} + ${#authentication.name}" th:object="${noticia}" method="post"  class="form align-items-center ">
+		<form action="#" th:action="@{/admin/addNoticia}" th:object="${noticia}" method="post"  class="form align-items-center ">
 			<input type="hidden"  th:field="*{idnoticia}">
 			
 			<label class="sr-only">Titulo:</label>

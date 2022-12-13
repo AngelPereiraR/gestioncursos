@@ -40,7 +40,7 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		com.example.demo.entity.Usuario usuario = userRepository.findByEmail(email);
+		Usuario usuario = userRepository.findByEmail(email);
 
 		UserBuilder builder = null;
 		if (usuario != null) {
@@ -59,12 +59,10 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 		return new BCryptPasswordEncoder();
 	}
 
-	public com.example.demo.entity.Usuario registrar(com.example.demo.entity.Usuario user) {
-		List<Usuario> usuarios = userRepository.findAll();
-		for(Usuario u : usuarios) {
-			if(u.getEmail().equals(user.getEmail())) {
-				return null;
-			}
+	public Usuario registrar(Usuario user) {
+		Usuario u = userRepository.findByEmail(user.getEmail());
+		if(u != null) {
+			return null;
 		}
 		if (user.getRole().equals("ROLE_ALUMNO")) {
 			user.setPassword(passwordEncoder().encode(user.getPassword()));

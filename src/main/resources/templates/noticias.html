@@ -25,7 +25,7 @@
 				<td th:text=${noticia.imagen}></td>
 				<td th:text=${noticia.usuario.email}></td>
 				<td>
-					<a th:href="@{/admin/formNoticia/} + ${#authentication.name} + @{/} + ${noticia.idnoticia}">
+					<a th:href="@{/admin/formNoticia/} + ${noticia.idnoticia}">
 						<button class="btn tbn-lg btn-primary btn-block text-uppercase" type="button">Editar Noticia</button>
 					</a>
 					<a th:href="@{/admin/removeNoticia/} + ${noticia.idnoticia}" method="post">

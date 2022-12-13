@@ -28,6 +28,15 @@ public class NoticiaServiceImpl implements NoticiaService {
 		return noticias;
 	}
 
+	
+	@Override
+	public List<NoticiaModel> listAllOrderNoticias() {
+		List<NoticiaModel> noticias = new ArrayList<NoticiaModel>();
+		//noticiaRepository.findByOrderByFechaCreacionDesc()
+		for (Noticia noticia : noticiaRepository.findAll())
+			noticias.add(transform(noticia));
+		return noticias;
+	}
 	@Override
 	public Noticia addNoticia(NoticiaModel noticiaModel) {
 		return noticiaRepository.save(transform(noticiaModel));
