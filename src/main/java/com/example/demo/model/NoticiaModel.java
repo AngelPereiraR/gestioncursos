@@ -11,6 +11,8 @@ public class NoticiaModel {
 	private String descripcion;
 
 	private String imagen;
+	
+	private String fechaCreacion;
 
 	private Usuario usuario;
 
@@ -18,12 +20,13 @@ public class NoticiaModel {
 		super();
 	}
 
-	public NoticiaModel(int idnoticia, String titulo, String descripcion, String imagen, Usuario usuario) {
+	public NoticiaModel(int idnoticia, String titulo, String descripcion, String imagen, String fechaCreacion, Usuario usuario) {
 		super();
 		this.idnoticia = idnoticia;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.imagen = imagen;
+		this.fechaCreacion = fechaCreacion;
 		this.usuario = usuario;
 	}
 
@@ -59,6 +62,14 @@ public class NoticiaModel {
 		this.imagen = imagen;
 	}
 
+	public String getFechaCreacion() {
+		return fechaCreacion;
+	}
+
+	public void setFechaCreacion(String fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -69,7 +80,7 @@ public class NoticiaModel {
 
 	@Override
 	public String toString() {
-		return "NoticiasModel [idnoticia=" + idnoticia + ", titulo=" + titulo + ", descripcion=" + descripcion
-				+ ", imagen=" + imagen + ", usuario=" + usuario + "]";
+		return "NoticiaModel [idnoticia=" + idnoticia + ", titulo=" + titulo + ", descripcion=" + descripcion
+				+ ", imagen=" + imagen + ", fechaCreacion=" + fechaCreacion + ", usuario=" + usuario + "]";
 	}
 }

@@ -23,6 +23,9 @@ public class Noticia {
 
 	@Size(max = 200 )
 	private String imagen;
+	
+	@Size(max = 45)
+	private String fechaCreacion;
 
 	@ManyToOne
 	@JoinColumn(name = "idadministrador")
@@ -33,12 +36,13 @@ public class Noticia {
 	}
 
 	public Noticia(int idnoticia, @Size(max = 45) String titulo, @Size(max = 45) String descripcion,
-			@Size(max = 45) String imagen, Usuario usuario) {
+			@Size(max = 45) String imagen, String fechaCreacion, Usuario usuario) {
 		super();
 		this.idnoticia = idnoticia;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.imagen = imagen;
+		this.fechaCreacion = fechaCreacion;
 		this.usuario = usuario;
 	}
 
@@ -74,6 +78,14 @@ public class Noticia {
 		this.imagen = imagen;
 	}
 
+	public String getFechaCreacion() {
+		return fechaCreacion;
+	}
+
+	public void setFechaCreacion(String fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -85,7 +97,7 @@ public class Noticia {
 	@Override
 	public String toString() {
 		return "Noticia [idnoticia=" + idnoticia + ", titulo=" + titulo + ", descripcion=" + descripcion + ", imagen="
-				+ imagen + ", usuario=" + usuario + "]";
+				+ imagen + ", fechaCreacion=" + fechaCreacion + ", usuario=" + usuario + "]";
 	}
 
 }

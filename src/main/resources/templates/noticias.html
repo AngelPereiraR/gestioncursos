@@ -13,6 +13,7 @@
 				<th>Titulo</th>
 				<th>Descripcion</th>
 				<th>Imagen</th>
+				<th>Fecha Creacion</th>
 				<th>Administrador</th>
 				<th>Acciones</th>
 			</tr>
@@ -22,7 +23,10 @@
 			<tr>
 				<td th:text=${noticia.titulo}></td>
 				<td th:text=${noticia.descripcion}></td>
-				<td th:text=${noticia.imagen}></td>
+				<td>
+					<img th:src="${#strings.isEmpty(noticia.imagen)} ? 'http://localhost:8080/imgs/sinimagen.jpg' : ${noticia.imagen}" class="img-responsive center-block" alt="Imagen" style="height: 200px; width: 250px">
+				</td>
+				<td th:text=${noticia.fechaCreacion}></td>
 				<td th:text=${noticia.usuario.email}></td>
 				<td>
 					<a th:href="@{/admin/formNoticia/} + ${noticia.idnoticia}">
