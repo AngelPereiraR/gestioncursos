@@ -32,8 +32,8 @@ public class NoticiaServiceImpl implements NoticiaService {
 	@Override
 	public List<NoticiaModel> listAllOrderNoticias() {
 		List<NoticiaModel> noticias = new ArrayList<NoticiaModel>();
-		//noticiaRepository.findByOrderByFechaCreacionDesc()
-		for (Noticia noticia : noticiaRepository.findAll())
+		
+		for (Noticia noticia : noticiaRepository.findByOrderByFechaCreacionDesc())
 			noticias.add(transform(noticia));
 		return noticias;
 	}

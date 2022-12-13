@@ -53,7 +53,7 @@ public class IndexController {
 		if(usuario.getRole().equalsIgnoreCase("ROLE_ALUMNO")) {
 		
 			
-		mav.addObject("noticias", noticiaService.listAllNoticias());}
+		mav.addObject("noticias", noticiaService.listAllOrderNoticias());}
 		return mav;
 	}
 
