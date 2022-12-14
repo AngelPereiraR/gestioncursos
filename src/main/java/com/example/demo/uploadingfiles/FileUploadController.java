@@ -40,7 +40,7 @@ public class FileUploadController {
 						"serveFile", path.getFileName().toString()).build().toUri().toString())
 				.collect(Collectors.toList()));
 
-		return "uploadForm";
+		return "index";
 	}
 
 	@GetMapping("/imgs/{filename:.+}")

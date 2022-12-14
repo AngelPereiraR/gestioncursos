@@ -1,6 +1,9 @@
 package com.example.demo.controllers;
 
-import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -63,8 +66,18 @@ public class NoticiaController {
 			flash.addFlashAttribute("succes", "noticia added suff");
 			return "redirect:/admin/listNoticias";
 		} else {
+			NoticiaModel noticia = noticiaService.findNoticia(noticiaModel.getIdnoticia());
 			String email = SecurityContextHolder.getContext().getAuthentication().getName();
 			Usuario usuario = userRepository.findByEmail(email);
+			String[] array = noticia.getImagen().split("/");
+			String ruta = "src/main/resources/static/imgs/" + array[array.length - 1];
+			Path path = Paths.get(ruta);
+			try {
+				Files.delete(path);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			noticiaModel.setUsuario(usuario);
 			if(!file.isEmpty()) {
 				String imagen = storageService.store(file);
@@ -79,8 +92,17 @@ public class NoticiaController {
 
 	@GetMapping("/admin/removeNoticia/{id}")
 	public String deleteNoticia(@PathVariable("id") int id, RedirectAttributes flash) {
+		NoticiaModel noticia = noticiaService.findNoticia(id);
 		noticiaService.removeNoticia(id);
-
+		String[] array = noticia.getImagen().split("/");
+		String ruta = "src/main/resources/static/imgs/" + array[array.length - 1];
+		Path path = Paths.get(ruta);
+		try {
+			Files.delete(path);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		flash.addFlashAttribute("succes", "noticia eliminada correctamente");
 		return "redirect:/admin/listNoticias";
 	}
