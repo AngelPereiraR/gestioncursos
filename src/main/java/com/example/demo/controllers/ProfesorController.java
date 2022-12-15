@@ -107,8 +107,8 @@ public class ProfesorController {
 		return FORM_VIEW2;
 	}
 
-	@GetMapping(value = { "/profesor/listCursos/{option}", "/profesor/listCursos" })
-	public String listCursos(@PathVariable(name = "option", required = false) String option, Model model) {
+	@GetMapping("/profesor/listCursos" )
+	public String listCursos(Model model) {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 	
 		Usuario profesor = userRepository.findByEmail(email);
@@ -130,6 +130,7 @@ public class ProfesorController {
 			flash.addFlashAttribute("succes", "course added suff");
 			return "redirect:/profesor/listCursos";
 		} else {
+			cursoModel.setIdprofesor(profesor);
 			cursoService.updateCurso(cursoModel);
 
 			flash.addFlashAttribute("succes", "course updated suff");
