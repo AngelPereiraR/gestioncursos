@@ -1,6 +1,5 @@
 package com.example.demo.services;
 
-import java.text.ParseException;
 import java.util.List;
 
 import com.example.demo.entity.Curso;
@@ -21,19 +20,4 @@ public interface CursoService {
 
 	public abstract CursoModel findCurso(int id);
 
-	public abstract List<CursoModel> listAllOrderCursos();
-
-	public abstract List<CursoModel> listOrderCursosByFechaDesc();
-	
-	public abstract List<CursoModel> listOrderCursosByFechaAsc();
-
-	List<CursoModel> listOrderCursosByImpartidos() throws ParseException;
-
-	List<CursoModel> listOrderCursosByImpartiendo() throws ParseException;
-
-	List<CursoModel> listOrderCursosByImpartiran() throws ParseException;
-	
-
-	
-	
 }

@@ -1,11 +1,11 @@
 package com.example.demo.services;
 
+import java.text.ParseException;
 import java.util.List;
 
 import com.example.demo.entity.Usuario;
 import com.example.demo.model.CursoModel;
 import com.example.demo.model.UsuarioModel;
-
 
 public interface UsuarioService {
 
@@ -38,8 +38,18 @@ public interface UsuarioService {
 	public abstract int removeProfesor(int id);
 
 	public abstract Usuario updateProfesor(UsuarioModel usuarioModel);
-	
+
 	public abstract List<CursoModel> listAllCursos(UsuarioModel usuarioModel);
+
+	public abstract List<CursoModel> listOrderCursosByFechaDesc(UsuarioModel usuarioModel);
+
+	public abstract List<CursoModel> listOrderCursosByFechaAsc(UsuarioModel usuarioModel);
+
+	public abstract List<CursoModel> listOrderCursosByImpartidos(UsuarioModel usuarioModel) throws ParseException;
+
+	public abstract List<CursoModel> listOrderCursosByImpartiendo(UsuarioModel usuarioModel) throws ParseException;
+
+	public abstract List<CursoModel> listOrderCursosByImpartiran(UsuarioModel usuarioModel) throws ParseException;
 
 	// Administrador
 
@@ -50,7 +60,5 @@ public interface UsuarioService {
 	public abstract int removeAdministrador(int id);
 
 	public abstract Usuario updateAdministrador(UsuarioModel usuarioModel);
-
-	
 
 }

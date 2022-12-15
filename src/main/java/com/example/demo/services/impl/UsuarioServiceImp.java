@@ -1,6 +1,8 @@
 package com.example.demo.services.impl;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,9 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Usuario;
-
 import com.example.demo.model.CursoModel;
-
 import com.example.demo.model.UsuarioModel;
 import com.example.demo.repository.CursoRepository;
 import com.example.demo.repository.UserRepository;
@@ -33,7 +33,7 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 	@Autowired
 	@Qualifier("userRepository")
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	@Qualifier("cursoRepository")
 	private CursoRepository cursoRepository;
@@ -61,7 +61,7 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 
 	public Usuario registrar(Usuario user) {
 		Usuario u = userRepository.findByEmail(user.getEmail());
-		if(u != null) {
+		if (u != null) {
 			return null;
 		}
 		if (user.getRole().equals("ROLE_ALUMNO")) {
@@ -196,9 +196,55 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 	@Override
 	public List<CursoModel> listAllCursos(UsuarioModel usuarioModel) {
 		// TODO Auto-generated method stub
-		ModelMapper modelMapper=new ModelMapper();
-		
-		return cursoRepository.findByIdprofesor(transform(usuarioModel)).stream().map(c->modelMapper.map(c,CursoModel.class)).collect(Collectors.toList());
+		ModelMapper modelMapper = new ModelMapper();
+
+		return cursoRepository.findByIdprofesor(transform(usuarioModel)).stream()
+				.map(c -> modelMapper.map(c, CursoModel.class)).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<CursoModel> listOrderCursosByFechaDesc(UsuarioModel usuarioModel) {
+		ModelMapper modelMapper = new ModelMapper();
+		return cursoRepository.findByIdprofesorOrderByFechaInicioDesc(transform(usuarioModel)).stream()
+				.map(c -> modelMapper.map(c, CursoModel.class)).collect(Collectors.toList());
+
+	}
+
+	@Override
+	public List<CursoModel> listOrderCursosByFechaAsc(UsuarioModel usuarioModel) {
+		ModelMapper modelMapper = new ModelMapper();
+		return cursoRepository.findByIdprofesorOrderByFechaInicioAsc(transform(usuarioModel)).stream()
+				.map(c -> modelMapper.map(c, CursoModel.class)).collect(Collectors.toList());
+
+	}
+
+	@Override
+	public List<CursoModel> listOrderCursosByImpartidos(UsuarioModel usuarioModel) throws ParseException {
+		String fechaActual = (Calendar.YEAR + "-" + Calendar.MONTH + "-" + Calendar.DATE);
+		ModelMapper modelMapper = new ModelMapper();
+		return cursoRepository
+				.findByFechaFinAfterAndIdprofesor(fechaActual, transform(usuarioModel)).stream()
+				.map(c -> modelMapper.map(c, CursoModel.class)).collect(Collectors.toList());
+
+	}
+
+	@Override
+	public List<CursoModel> listOrderCursosByImpartiendo(UsuarioModel usuarioModel) throws ParseException {
+		String fechaActual = (Calendar.YEAR + "-" + Calendar.MONTH + "-" + Calendar.DATE);
+		ModelMapper modelMapper = new ModelMapper();
+		return cursoRepository
+				.findByFechaInicioAfterAndFechaFinBeforeAndIdprofesor(fechaActual, fechaActual, transform(usuarioModel)).stream()
+				.map(c -> modelMapper.map(c, CursoModel.class)).collect(Collectors.toList());
+
+	}
+
+	@Override
+	public List<CursoModel> listOrderCursosByImpartiran(UsuarioModel usuarioModel) throws ParseException {
+		String fechaActual = (Calendar.YEAR + "-" + Calendar.MONTH + "-" + Calendar.DATE);
+		ModelMapper modelMapper = new ModelMapper();
+		return cursoRepository.findByFechaInicioBeforeAndIdprofesor(fechaActual, transform(usuarioModel)).stream()
+				.map(c -> modelMapper.map(c, CursoModel.class)).collect(Collectors.toList());
+
 	}
 
 }

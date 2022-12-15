@@ -1,5 +1,7 @@
 package com.example.demo.controllers;
 
+import java.text.ParseException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -26,18 +29,17 @@ public class ProfesorController {
 	private static final String PROFESSORS_VIEW = "profesores";
 	private static final String FORM_VIEW = "formProfesor";
 	private static final String FORM_VIEW2 = "formProfesorUpdate";
-	
+
 	private static final String COURSES_VIEW = "cursosProfesor";
 	private static final String FORMCURSO_VIEW = "formCurso";
 
 	@Autowired
 	@Qualifier("userService")
 	public UsuarioServiceImp userService;
-	
+
 	@Autowired
 	@Qualifier("cursoService")
 	private CursoService cursoService;
-
 
 	@Autowired
 	@Qualifier("userRepository")
@@ -53,11 +55,11 @@ public class ProfesorController {
 	@PostMapping("/admin/addProfesor")
 	public String addProfesor(@ModelAttribute("Profesor") UsuarioModel usuarioModel, RedirectAttributes flash) {
 		if (usuarioModel.getId() == 0) {
-		usuarioModel.setRole("ROLE_PROFESOR");
-		userService.registrar(userService.transform(usuarioModel));
+			usuarioModel.setRole("ROLE_PROFESOR");
+			userService.registrar(userService.transform(usuarioModel));
 
-		flash.addFlashAttribute("succes", "profesor añadido satisfactoriamente");
-		}else {
+			flash.addFlashAttribute("succes", "profesor añadido satisfactoriamente");
+		} else {
 			usuarioModel.setRole("ROLE_PROFESOR");
 			userService.updateProfesor(usuarioModel);
 
@@ -66,7 +68,6 @@ public class ProfesorController {
 
 		}
 		return "redirect:/admin/listaProfesores";
-		
 
 	}
 
@@ -99,32 +100,46 @@ public class ProfesorController {
 	}
 
 	@GetMapping("/profesor/formProfesorUpdate")
-	public String formProfesorUpdate( Model model) {
+	public String formProfesorUpdate(Model model) {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
-		
-		
+
 		model.addAttribute("profesor", userRepository.findByEmail(email));
 		return FORM_VIEW2;
 	}
 
-	@GetMapping("/profesor/listCursos" )
-	public String listCursos(Model model) {
+	@GetMapping("/profesor/listCursos")
+	public String listCursos(@RequestParam(name = "opcion", required = false, defaultValue="asc") String opcion, Model model) throws ParseException {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
-	
+
 		Usuario profesor = userRepository.findByEmail(email);
-		
-		model.addAttribute("cursos", userService.listAllCursos(userService.transform(profesor)));
+		if(opcion.equals("asc")) {
+			model.addAttribute("cursos", userService.listOrderCursosByFechaAsc(userService.transform(profesor)));
+		}else if(opcion.equals("desc")) {
+			model.addAttribute("cursos", userService.listOrderCursosByFechaDesc(userService.transform(profesor)));
+			
+		}else if(opcion.equals("antes")) {
+			model.addAttribute("cursos", userService.listOrderCursosByImpartiran(userService.transform(profesor)));
+			
+		}else if(opcion.equals("despues")) {
+			model.addAttribute("cursos", userService.listOrderCursosByImpartidos(userService.transform(profesor)));
+			
+		}else if(opcion.equals("entre")) {
+			model.addAttribute("cursos", userService.listOrderCursosByImpartiendo(userService.transform(profesor)));
+			
+		} else {
+			model.addAttribute("cursos", userService.listAllCursos(userService.transform(profesor)));
+		}
 		return COURSES_VIEW;
 	}
 
 	@PostMapping("/profesor/addCurso")
 	public String addCurso(@ModelAttribute("curso") CursoModel cursoModel, RedirectAttributes flash) {
-		
+
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
-		
+
 		Usuario profesor = userRepository.findByEmail(email);
 		if (cursoModel.getIdcurso() == 0) {
-			
+
 			cursoModel.setIdprofesor(profesor);
 			cursoService.addCurso(cursoModel);
 			flash.addFlashAttribute("succes", "course added suff");

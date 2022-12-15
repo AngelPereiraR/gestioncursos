@@ -13,11 +13,16 @@ import com.example.demo.entity.Usuario;
 public interface CursoRepository extends JpaRepository<Curso, Serializable> {
 	public abstract List<Curso> findByIdprofesor(Usuario id);
 
-	public abstract List<Curso> findByOrderByFechaInicioDesc();
+	public abstract List<Curso> findByIdprofesorOrderByFechaInicioDesc(Usuario id);
 
-	public abstract List<Curso> findByOrderByFechaInicioAsc();
+	public abstract List<Curso> findByIdprofesorOrderByFechaInicioAsc(Usuario id);
 	
-	public abstract List<Curso> findByOrderByFechaFinDesc();
+	public abstract List<Curso> findByFechaInicioBeforeAndIdprofesor(String actual, Usuario id);
 
-	public abstract List<Curso> findByOrderByFechaFinAsc();
+	public abstract List<Curso> findByFechaFinAfterAndIdprofesor(String actual, Usuario id);
+
+	public abstract List<Curso> findByFechaInicioAfterAndFechaFinBeforeAndIdprofesor(String actual, String actual1, Usuario id);
+	
+	//public abstract List<Curso> findByOrderByFechaFinDesc();
+
 }
