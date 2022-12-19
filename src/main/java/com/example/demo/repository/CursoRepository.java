@@ -11,21 +11,18 @@ import com.example.demo.entity.Usuario;
 
 @Repository("cursoRepository")
 public interface CursoRepository extends JpaRepository<Curso, Serializable> {
-	public abstract List<Curso> findByIdprofesor(Usuario id);
+	public abstract List<Curso> findByProfesor(Usuario id);
 
-	public abstract List<Curso> findByIdprofesorOrderByFechaInicioDesc(Usuario id);
+	public abstract List<Curso> findByProfesorOrderByFechaInicioDesc(Usuario id);
 
-	public abstract List<Curso> findByIdprofesorOrderByFechaInicioAsc(Usuario id);
+	public abstract List<Curso> findByProfesorOrderByFechaInicioAsc(Usuario id);
 	
-	public abstract List<Curso> findByFechaInicioAfterAndIdprofesor(String actual, Usuario id);
+	public abstract List<Curso> findByFechaInicioAfterAndProfesor(String actual, Usuario id);
 
-	public abstract List<Curso> findByFechaFinBeforeAndIdprofesor(String actual, Usuario id);
+	public abstract List<Curso> findByFechaFinBeforeAndProfesor(String actual, Usuario id);
 
-	public abstract List<Curso> findByFechaInicioBeforeAndFechaFinAfterAndIdprofesor(String actual, String actual1, Usuario id);
+	public abstract List<Curso> findByFechaInicioBeforeAndFechaFinAfterAndProfesor(String actual, String actual1, Usuario id);
 	
 	public abstract List<Curso> findByNivelBetween(int nivel1, int nivel2);
-
-
-	//public abstract List<Curso> findByOrderByFechaFinDesc();
 
 }

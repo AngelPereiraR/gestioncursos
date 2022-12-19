@@ -35,7 +35,7 @@ public class Curso {
 
 	@ManyToOne
 	@JoinColumn(name = "id")
-	private Usuario idprofesor;
+	private Usuario profesor;
 
 	private String fechaInicio;
 
@@ -47,7 +47,7 @@ public class Curso {
 	}
 
 	public Curso(int idcurso, @Size(max = 45) String nombre, @Size(max = 45) String descripcion, int nivel,
-			List<Comentario> idcomentario, List<Matricula> idmatricula, Usuario id, String fechaInicio,
+			List<Comentario> idcomentario, List<Matricula> idmatricula, Usuario profesor, String fechaInicio,
 			String fechaFin) {
 		super();
 		this.idcurso = idcurso;
@@ -56,7 +56,7 @@ public class Curso {
 		this.nivel = nivel;
 		this.idcomentario = idcomentario;
 		this.idmatricula = idmatricula;
-		this.idprofesor = id;
+		this.profesor = profesor;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 	}
@@ -109,12 +109,12 @@ public class Curso {
 		this.idmatricula = idmatricula;
 	}
 
-	public Usuario getIdprofesor() {
-		return idprofesor;
+	public Usuario getProfesor() {
+		return profesor;
 	}
 
-	public void setIdprofesor(Usuario id) {
-		this.idprofesor = id;
+	public void setProfesor(Usuario profesor) {
+		this.profesor = profesor;
 	}
 
 	public String getFechaInicio() {
@@ -136,7 +136,7 @@ public class Curso {
 	@Override
 	public String toString() {
 		return "Curso [idcurso=" + idcurso + ", nombre=" + nombre + ", descripcion=" + descripcion + ", nivel=" + nivel
-				+ ", idcomentario=" + idcomentario + ", idmatricula=" + idmatricula + ", id=" + idprofesor + ", fechaInicio="
+				+ ", idcomentario=" + idcomentario + ", idmatricula=" + idmatricula + ", profesor=" + profesor + ", fechaInicio="
 				+ fechaInicio + ", fechaFin=" + fechaFin + "]";
 	}
 }

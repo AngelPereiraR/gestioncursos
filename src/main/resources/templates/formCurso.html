@@ -23,12 +23,20 @@
 			<input type="number" th:field="*{nivel}" class="form-control"/>
 			<br>
 			
-			<label class="sr-only"> Fecha de inicio:</label> 
+			<label class="sr-only">Fecha de inicio:</label> 
 			<input type="date" th:field="*{fechaInicio}" class="form-control"/>
 			<br>
 			
-			<label class="sr-only">Fecha de fin :</label> 
+			<label class="sr-only">Fecha de fin:</label> 
 			<input type="date" th:field="*{fechaFin}" class="form-control"/>
+			<br>
+			
+			<label class="sr-only">Profesor:</label> 
+			<br>
+			<select class="form-select" th:field="*{profesor.id}">
+				<option th:each="profesor: ${profesores}" th:value="${profesor.id}" th:text="${profesor.nombre}"></option>
+			</select>
+			<br>
 			<br>
 			
 			<button th:if="${curso.idcurso == 0}"type="submit" class="btn tbn-lg btn-primary btn-block text-uppercase">Añadir Curso</button>	
@@ -51,11 +59,11 @@
 			<input type="number" th:field="*{nivel}" class="form-control"/>
 			<br>
 			
-			<label class="sr-only"> Fecha de inicio:</label> 
+			<label class="sr-only">Fecha de inicio:</label> 
 			<input type="date" th:field="*{fechaInicio}" class="form-control"/>
 			<br>
 			
-			<label class="sr-only">Fecha de fin :</label> 
+			<label class="sr-only">Fecha de fin:</label> 
 			<input type="date" th:field="*{fechaFin}" class="form-control"/>
 			<br>
 			

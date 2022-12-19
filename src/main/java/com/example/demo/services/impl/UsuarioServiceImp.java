@@ -3,8 +3,8 @@ package com.example.demo.services.impl;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -21,10 +21,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entity.Curso;
+import com.example.demo.entity.Matricula;
 import com.example.demo.entity.Usuario;
 import com.example.demo.model.CursoModel;
 import com.example.demo.model.UsuarioModel;
 import com.example.demo.repository.CursoRepository;
+import com.example.demo.repository.MatriculaRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.services.CursoService;
 import com.example.demo.services.UsuarioService;
@@ -43,6 +46,10 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 	@Autowired
 	@Qualifier("cursoService")
 	private CursoService cursoService;
+	
+	@Autowired
+	@Qualifier("matriculaRepository")
+	private MatriculaRepository matriculaRepository;
 
 
 	@Override
@@ -205,14 +212,14 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 		// TODO Auto-generated method stub
 		ModelMapper modelMapper = new ModelMapper();
 
-		return cursoRepository.findByIdprofesor(transform(usuarioModel)).stream()
+		return cursoRepository.findByProfesor(transform(usuarioModel)).stream()
 				.map(c -> modelMapper.map(c, CursoModel.class)).collect(Collectors.toList());
 	}
 
 	@Override
 	public List<CursoModel> listOrderCursosByFechaDesc(UsuarioModel usuarioModel) {
 		ModelMapper modelMapper = new ModelMapper();
-		return cursoRepository.findByIdprofesorOrderByFechaInicioDesc(transform(usuarioModel)).stream()
+		return cursoRepository.findByProfesorOrderByFechaInicioDesc(transform(usuarioModel)).stream()
 				.map(c -> modelMapper.map(c, CursoModel.class)).collect(Collectors.toList());
 
 	}
@@ -221,7 +228,7 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 	public List<CursoModel> listOrderCursosByFechaAsc(UsuarioModel usuarioModel) {
 		ModelMapper modelMapper = new ModelMapper();
 		
-		return cursoRepository.findByIdprofesorOrderByFechaInicioAsc(transform(usuarioModel)).stream()
+		return cursoRepository.findByProfesorOrderByFechaInicioAsc(transform(usuarioModel)).stream()
 				.map(c -> modelMapper.map(c, CursoModel.class)).collect(Collectors.toList());
 
 	}
@@ -234,7 +241,7 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 		System.out.println(fechaActual);
 		ModelMapper modelMapper = new ModelMapper();
 		return cursoRepository
-				.findByFechaFinBeforeAndIdprofesor(fechaActual, transform(usuarioModel)).stream()
+				.findByFechaFinBeforeAndProfesor(fechaActual, transform(usuarioModel)).stream()
 				.map(c -> modelMapper.map(c, CursoModel.class)).collect(Collectors.toList());
 
 	}
@@ -247,7 +254,7 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 		ModelMapper modelMapper = new ModelMapper();
 		System.out.println(fechaActual);
 		return cursoRepository
-				.findByFechaInicioBeforeAndFechaFinAfterAndIdprofesor(fechaActual, fechaActual, transform(usuarioModel)).stream()
+				.findByFechaInicioBeforeAndFechaFinAfterAndProfesor(fechaActual, fechaActual, transform(usuarioModel)).stream()
 				.map(c -> modelMapper.map(c, CursoModel.class)).collect(Collectors.toList());
 
 	}
@@ -260,7 +267,7 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 		String fechaActual = ( Integer.toString(c1.get(Calendar.YEAR)) + "-" + Integer.toString(c1.get(Calendar.MONTH)+1) + "-" + Integer.toString(c1.get(Calendar.DATE))+" "+Integer.toString(c1.get(Calendar.HOUR_OF_DAY))+"OO:OO");
 		ModelMapper modelMapper = new ModelMapper();
 		System.out.println(fechaActual);
-		return cursoRepository.findByFechaInicioAfterAndIdprofesor(fechaActual, transform(usuarioModel)).stream()
+		return cursoRepository.findByFechaInicioAfterAndProfesor(fechaActual, transform(usuarioModel)).stream()
 				.map(c -> modelMapper.map(c, CursoModel.class)).collect(Collectors.toList());
 
 	}
@@ -272,12 +279,27 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 		if(nivel<=4) {
 			return cursoRepository.findByNivelBetween(0, 4).stream().map(c->modelMapper.map(c, CursoModel.class)).collect(Collectors.toList());		
 		}else if(nivel>=5 && nivel<=8){
-			return  cursoRepository.findByNivelBetween(5, 8).stream().map(c->modelMapper.map(c, CursoModel.class)).collect(Collectors.toList());
+			return cursoRepository.findByNivelBetween(5, 8).stream().map(c->modelMapper.map(c, CursoModel.class)).collect(Collectors.toList());
 			
 		}else if(nivel>=9){
 			return cursoRepository.findByNivelBetween(9, 10).stream().map(c->modelMapper.map(c, CursoModel.class)).collect(Collectors.toList());
 		}
 		return null;
+	}
+
+	@Override
+	public List<UsuarioModel> listAlumnosByMatricula(int idcurso) {
+		ModelMapper modelMapper = new ModelMapper();
+		Optional<Curso> curso = cursoRepository.findById(idcurso);
+		List<Matricula> matriculas = matriculaRepository.findByIdcurso(curso.get());
+		List<UsuarioModel> alumnos = new ArrayList<UsuarioModel>();
+		/*
+		 * for(Matricula m : matriculas) {
+		 * alumnos.add(transform(userRepository.findById(m.getIdalumno().getId()).get())
+		 * ); }
+		 */
+		
+		return userRepository.findAllByIdmatriculaIn(matriculas).stream().map(u->modelMapper.map(u, UsuarioModel.class)).collect(Collectors.toList());
 	}
 
 	

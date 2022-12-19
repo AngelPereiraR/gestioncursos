@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.example.demo.entity.Usuario;
 import com.example.demo.model.CursoModel;
+import com.example.demo.model.MatriculaModel;
 import com.example.demo.model.UsuarioModel;
 
 public interface UsuarioService {
@@ -62,5 +63,7 @@ public interface UsuarioService {
 	public abstract int removeAdministrador(int id);
 
 	public abstract Usuario updateAdministrador(UsuarioModel usuarioModel);
+	
+	public abstract List<UsuarioModel> listAlumnosByMatricula(int idcurso);
 
 }

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/css/styles.css}" rel="stylesheet">
+<title>Alumnos</title>
+</head>
+<body>
+	<nav th:replace="index::header"></nav>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Apellidos</th>
+				<th>Email</th>
+			</tr>
+		</thead>
+		
+		<tbody th:each="alumno: ${alumnos}">
+			<tr>
+				<td th:text=${alumno.nombre}></td>
+				<td th:text=${alumno.apellidos}></td>
+				<td th:text=${alumno.email}></td>
+			</tr>
+		</tbody>
+	</table>
+	<a th:href="@{/admin/listCursos}" method="post">
+		<button class="btn tbn-lg btn-primary btn-block text-uppercase" type="button">Volver</button>
+	</a>
+</body>
+</html>

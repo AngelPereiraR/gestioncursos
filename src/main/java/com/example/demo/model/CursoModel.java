@@ -12,7 +12,7 @@ public class CursoModel {
 
 	private int nivel;
 
-	private Usuario id;
+	private Usuario profesor;
 
 	private String fechaInicio;
 
@@ -23,14 +23,14 @@ public class CursoModel {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CursoModel(int idcurso, String nombre, String descripcion, int nivel, Usuario id, String fechaInicio,
+	public CursoModel(int idcurso, String nombre, String descripcion, int nivel, Usuario profesor, String fechaInicio,
 			String fechaFin) {
 		super();
 		this.idcurso = idcurso;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.nivel = nivel;
-		this.id = id;
+		this.profesor = profesor;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 	}
@@ -67,12 +67,12 @@ public class CursoModel {
 		this.nivel = nivel;
 	}
 
-	public Usuario getIdprofesor() {
-		return id;
+	public Usuario getProfesor() {
+		return profesor;
 	}
 
-	public void setIdprofesor(Usuario id) {
-		this.id = id;
+	public void setProfesor(Usuario profesor) {
+		this.profesor = profesor;
 	}
 
 	public String getFechaInicio() {
@@ -94,7 +94,7 @@ public class CursoModel {
 	@Override
 	public String toString() {
 		return "CursosModel [idcurso=" + idcurso + ", nombre=" + nombre + ", descripcion=" + descripcion + ", nivel="
-				+ nivel + ", usuario=" + id + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + "]";
+				+ nivel + ", profesor=" + profesor + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + "]";
 	}
 
 }

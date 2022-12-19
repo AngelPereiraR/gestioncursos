@@ -1,5 +1,7 @@
 package com.example.demo.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.Curso;
+import com.example.demo.entity.Usuario;
 import com.example.demo.model.CursoModel;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.services.CursoService;
@@ -20,8 +23,8 @@ import com.example.demo.services.UsuarioService;
 @Controller
 
 public class CourseController {
-	private static final String LAYOUT_VIEW = "inicio";
 	private static final String COURSES_VIEW = "cursos";
+	private static final String ALUMNOS_VIEW = "alumnosCurso";
 	private static final String FORM_VIEW = "formCurso";
 
 	@Autowired
@@ -36,19 +39,23 @@ public class CourseController {
 	@Qualifier("userRepository")
 	public UserRepository userRepository;
 
-	
-
 	@GetMapping("/admin/listCursos")
 	public ModelAndView listCursos() {
 		ModelAndView mav = new ModelAndView(COURSES_VIEW);
 		mav.addObject("cursos", cursoService.listAllCursos());
 		return mav;
 	}
+	
+	@GetMapping("/admin/listAlumnos/{id}")
+	public ModelAndView listAlumnos(@PathVariable("id") int id) {
+		ModelAndView mav = new ModelAndView(ALUMNOS_VIEW);
+		mav.addObject("alumnos", userService.listAlumnosByMatricula(id));
+		return mav;
+	}
 
 	@PostMapping("/admin/addCurso")
 	public String addCurso(@ModelAttribute("curso") CursoModel cursoModel, RedirectAttributes flash) {
 		if (cursoModel.getIdcurso() == 0) {
-
 			cursoService.addCurso(cursoModel);
 
 			flash.addFlashAttribute("succes", "curso añadido satisfactoriamente");
@@ -74,7 +81,8 @@ public class CourseController {
 
 	@GetMapping(value = { "/admin/formCurso/{id}", "/admin/formCurso" })
 	public String formCurso(@PathVariable(name = "id", required = false) Integer id, Model model) {
-
+		List<Usuario> profesores = userRepository.findAllByRole("ROLE_PROFESOR");
+		model.addAttribute("profesores", profesores);
 		if (id == null) {
 			model.addAttribute("curso", new Curso());
 		} else {
