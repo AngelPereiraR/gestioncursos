@@ -26,6 +26,7 @@ import com.example.demo.model.CursoModel;
 import com.example.demo.model.UsuarioModel;
 import com.example.demo.repository.CursoRepository;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.services.CursoService;
 import com.example.demo.services.UsuarioService;
 
 @Service("userService")
@@ -38,6 +39,11 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 	@Autowired
 	@Qualifier("cursoRepository")
 	private CursoRepository cursoRepository;
+	
+	@Autowired
+	@Qualifier("cursoService")
+	private CursoService cursoService;
+
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -258,5 +264,24 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 				.map(c -> modelMapper.map(c, CursoModel.class)).collect(Collectors.toList());
 
 	}
+
+	@Override
+	public List<CursoModel> listCursosAlumno(int nivel) {
+		// TODO Auto-generated method stub
+		ModelMapper modelMapper = new ModelMapper();
+		if(nivel<=4) {
+			return cursoRepository.findByNivelBetween(0, 4).stream().map(c->modelMapper.map(c, CursoModel.class)).collect(Collectors.toList());		
+		}else if(nivel>=5 && nivel<=8){
+			return  cursoRepository.findByNivelBetween(5, 8).stream().map(c->modelMapper.map(c, CursoModel.class)).collect(Collectors.toList());
+			
+		}else if(nivel>=9){
+			return cursoRepository.findByNivelBetween(9, 10).stream().map(c->modelMapper.map(c, CursoModel.class)).collect(Collectors.toList());
+		}
+		return null;
+	}
+
+	
+	
+		
 
 }

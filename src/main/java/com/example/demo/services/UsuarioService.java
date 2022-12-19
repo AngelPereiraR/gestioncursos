@@ -28,6 +28,8 @@ public interface UsuarioService {
 	public abstract int activateAlumno(int id);
 
 	public abstract int deactivateAlumno(int id);
+	
+	public abstract List<CursoModel> listCursosAlumno(int nivel);
 
 	// Profesor
 

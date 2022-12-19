@@ -23,6 +23,7 @@ public interface CursoRepository extends JpaRepository<Curso, Serializable> {
 
 	public abstract List<Curso> findByFechaInicioBeforeAndFechaFinAfterAndIdprofesor(String actual, String actual1, Usuario id);
 	
+	public abstract List<Curso> findByNivelBetween(int nivel1, int nivel2);
 
 
 	//public abstract List<Curso> findByOrderByFechaFinDesc();

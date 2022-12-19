@@ -31,7 +31,7 @@ public class Curso {
 	private List<Comentario> idcomentario;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idcurso")
-	private List<Comentario> idmatricula;
+	private List<Matricula> idmatricula;
 
 	@ManyToOne
 	@JoinColumn(name = "id")
@@ -47,7 +47,7 @@ public class Curso {
 	}
 
 	public Curso(int idcurso, @Size(max = 45) String nombre, @Size(max = 45) String descripcion, int nivel,
-			List<Comentario> idcomentario, List<Comentario> idmatricula, Usuario id, String fechaInicio,
+			List<Comentario> idcomentario, List<Matricula> idmatricula, Usuario id, String fechaInicio,
 			String fechaFin) {
 		super();
 		this.idcurso = idcurso;
@@ -101,11 +101,11 @@ public class Curso {
 		this.idcomentario = idcomentario;
 	}
 
-	public List<Comentario> getIdmatricula() {
+	public List<Matricula> getIdmatricula() {
 		return idmatricula;
 	}
 
-	public void setIdmatricula(List<Comentario> idmatricula) {
+	public void setIdmatricula(List<Matricula> idmatricula) {
 		this.idmatricula = idmatricula;
 	}
 
