@@ -17,12 +17,14 @@ public interface CursoRepository extends JpaRepository<Curso, Serializable> {
 
 	public abstract List<Curso> findByIdprofesorOrderByFechaInicioAsc(Usuario id);
 	
-	public abstract List<Curso> findByFechaInicioBeforeAndIdprofesor(String actual, Usuario id);
+	public abstract List<Curso> findByFechaInicioAfterAndIdprofesor(String actual, Usuario id);
 
-	public abstract List<Curso> findByFechaFinAfterAndIdprofesor(String actual, Usuario id);
+	public abstract List<Curso> findByFechaFinBeforeAndIdprofesor(String actual, Usuario id);
 
-	public abstract List<Curso> findByFechaInicioAfterAndFechaFinBeforeAndIdprofesor(String actual, String actual1, Usuario id);
+	public abstract List<Curso> findByFechaInicioBeforeAndFechaFinAfterAndIdprofesor(String actual, String actual1, Usuario id);
 	
+
+
 	//public abstract List<Curso> findByOrderByFechaFinDesc();
 
 }

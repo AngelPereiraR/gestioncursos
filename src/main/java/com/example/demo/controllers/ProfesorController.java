@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.entity.Curso;
 import com.example.demo.entity.Usuario;
 import com.example.demo.model.CursoModel;
+import com.example.demo.model.Opcion;
 import com.example.demo.model.UsuarioModel;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.services.CursoService;
@@ -108,29 +111,40 @@ public class ProfesorController {
 	}
 
 	@GetMapping("/profesor/listCursos")
-	public String listCursos(@RequestParam(name = "opcion", required = false, defaultValue="asc") String opcion, Model model) throws ParseException {
+	public String listCursos(@RequestParam(name = "name", required = false, defaultValue="") Opcion opcion, Model model) throws ParseException {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
-
+		
 		Usuario profesor = userRepository.findByEmail(email);
-		if(opcion.equals("asc")) {
+		if(opcion.getName().equals("asc")) {
+			
+			model.addAttribute("opcion",opcion);
 			model.addAttribute("cursos", userService.listOrderCursosByFechaAsc(userService.transform(profesor)));
-		}else if(opcion.equals("desc")) {
+			
+		}else if(opcion.getName().equals("desc")) {
+			model.addAttribute("opcion",opcion);
 			model.addAttribute("cursos", userService.listOrderCursosByFechaDesc(userService.transform(profesor)));
 			
-		}else if(opcion.equals("antes")) {
+		}else if(opcion.getName().equals("antes")) {
+		
+			model.addAttribute("opcion",opcion);
 			model.addAttribute("cursos", userService.listOrderCursosByImpartiran(userService.transform(profesor)));
 			
-		}else if(opcion.equals("despues")) {
+		}else if(opcion.getName().equals("despues")) {
+			model.addAttribute("opcion",opcion);
 			model.addAttribute("cursos", userService.listOrderCursosByImpartidos(userService.transform(profesor)));
 			
-		}else if(opcion.equals("entre")) {
+		}else if(opcion.getName().equals("entre")) {
+			model.addAttribute("opcion",opcion);
 			model.addAttribute("cursos", userService.listOrderCursosByImpartiendo(userService.transform(profesor)));
 			
 		} else {
+			model.addAttribute("opcion",opcion);
 			model.addAttribute("cursos", userService.listAllCursos(userService.transform(profesor)));
 		}
 		return COURSES_VIEW;
 	}
+	
+	
 
 	@PostMapping("/profesor/addCurso")
 	public String addCurso(@ModelAttribute("curso") CursoModel cursoModel, RedirectAttributes flash) {

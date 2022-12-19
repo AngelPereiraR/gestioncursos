@@ -3,6 +3,7 @@ package com.example.demo.services.impl;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -213,6 +214,7 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 	@Override
 	public List<CursoModel> listOrderCursosByFechaAsc(UsuarioModel usuarioModel) {
 		ModelMapper modelMapper = new ModelMapper();
+		
 		return cursoRepository.findByIdprofesorOrderByFechaInicioAsc(transform(usuarioModel)).stream()
 				.map(c -> modelMapper.map(c, CursoModel.class)).collect(Collectors.toList());
 
@@ -220,29 +222,39 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 
 	@Override
 	public List<CursoModel> listOrderCursosByImpartidos(UsuarioModel usuarioModel) throws ParseException {
-		String fechaActual = (Calendar.YEAR + "-" + Calendar.MONTH + "-" + Calendar.DATE);
+		Calendar c1 = Calendar.getInstance();
+		String fechaActual = ( Integer.toString(c1.get(Calendar.YEAR)) + "-" + Integer.toString(c1.get(Calendar.MONTH)+1) + "-" + Integer.toString(c1.get(Calendar.DATE))+" "+Integer.toString(c1.get(Calendar.HOUR_OF_DAY))+"OO:OO");
+		
+		System.out.println(fechaActual);
 		ModelMapper modelMapper = new ModelMapper();
 		return cursoRepository
-				.findByFechaFinAfterAndIdprofesor(fechaActual, transform(usuarioModel)).stream()
+				.findByFechaFinBeforeAndIdprofesor(fechaActual, transform(usuarioModel)).stream()
 				.map(c -> modelMapper.map(c, CursoModel.class)).collect(Collectors.toList());
 
 	}
 
 	@Override
 	public List<CursoModel> listOrderCursosByImpartiendo(UsuarioModel usuarioModel) throws ParseException {
-		String fechaActual = (Calendar.YEAR + "-" + Calendar.MONTH + "-" + Calendar.DATE);
+		Calendar c1 = Calendar.getInstance();
+		String fechaActual = ( Integer.toString(c1.get(Calendar.YEAR)) + "-" + Integer.toString(c1.get(Calendar.MONTH)+1) + "-" + Integer.toString(c1.get(Calendar.DATE))+" "+Integer.toString(c1.get(Calendar.HOUR_OF_DAY))+"OO:OO");
+
 		ModelMapper modelMapper = new ModelMapper();
+		System.out.println(fechaActual);
 		return cursoRepository
-				.findByFechaInicioAfterAndFechaFinBeforeAndIdprofesor(fechaActual, fechaActual, transform(usuarioModel)).stream()
+				.findByFechaInicioBeforeAndFechaFinAfterAndIdprofesor(fechaActual, fechaActual, transform(usuarioModel)).stream()
 				.map(c -> modelMapper.map(c, CursoModel.class)).collect(Collectors.toList());
 
 	}
 
 	@Override
 	public List<CursoModel> listOrderCursosByImpartiran(UsuarioModel usuarioModel) throws ParseException {
-		String fechaActual = (Calendar.YEAR + "-" + Calendar.MONTH + "-" + Calendar.DATE);
+	
+		Calendar c1 = Calendar.getInstance();
+		
+		String fechaActual = ( Integer.toString(c1.get(Calendar.YEAR)) + "-" + Integer.toString(c1.get(Calendar.MONTH)+1) + "-" + Integer.toString(c1.get(Calendar.DATE))+" "+Integer.toString(c1.get(Calendar.HOUR_OF_DAY))+"OO:OO");
 		ModelMapper modelMapper = new ModelMapper();
-		return cursoRepository.findByFechaInicioBeforeAndIdprofesor(fechaActual, transform(usuarioModel)).stream()
+		System.out.println(fechaActual);
+		return cursoRepository.findByFechaInicioAfterAndIdprofesor(fechaActual, transform(usuarioModel)).stream()
 				.map(c -> modelMapper.map(c, CursoModel.class)).collect(Collectors.toList());
 
 	}

@@ -31,7 +31,7 @@
 			<div class="row d-flex align-items-center flex-column">
 				<div class="col-sm-offset-2 col-sm-8">
 					<div>
-						<h2 class="section-title">What Clients Say</h2>
+						<h2 class="section-title"></h2>
 					</div>
 				</div><!-- /End col -->
 			</div><!-- /End row -->
@@ -42,7 +42,7 @@
 
 						<!-- slider item -->
 						<div class="feedback-slider-item  text-white" th:each="noticia: ${noticias}">
-							<img th:src="${#strings.isEmpty(noticia.imagen)} ? 'http://localhost:8080/imgs/sinimagen.jpg' : ${noticia.imagen}" class="center-block img-circle" alt="Customer Feedback" style="width: 500px">
+							<img th:src="${#strings.isEmpty(noticia.imagen)} ? 'http://localhost:8080/imgs/sinimagen.jpg' : ${noticia.imagen}" class="center-block img-circle" alt="Customer Feedback" style="width: 400px">
 							<h3  th:text=${noticia.titulo} class="customer-name"></h3>
 							<p th:text=${noticia.descripcion}></p>
 							<span  th:text=${noticia.usuario.email} class="light-bg">

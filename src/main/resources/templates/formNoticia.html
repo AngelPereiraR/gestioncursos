@@ -27,7 +27,8 @@
 			<input type="date" th:field="*{fechaCreacion}" class="form-control"/>
 			<br>
 			
-			<button type="submit" class="btn tbn-lg btn-primary btn-block text-uppercase">Añadir Noticia</button>	
+			<button th:if="${noticia.idnoticia == 0}"type="submit" class="btn tbn-lg btn-primary btn-block text-uppercase">Añadir Noticia</button>	
+			<button th:unless="${noticia.idnoticia == 0}"type="submit" class="btn tbn-lg btn-primary btn-block text-uppercase">Editar Noticia</button>	
 		</form>
 	</div>
 </body>

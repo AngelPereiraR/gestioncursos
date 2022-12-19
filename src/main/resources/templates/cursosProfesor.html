@@ -5,21 +5,28 @@
 <link th:href="@{/css/styles.css}" rel="stylesheet">
 <title>Cursos</title>
 </head>
-<body>
-	<nav th:replace="index::header" class="header"></nav>
 
-	<form action="#" th:action="@{/profesor/listCursos/}"
-		th:object="${opcion}" method="post"
+	<nav th:replace="index::header" class="header"></nav>
+	<br>
+	<div class="container">
+	<form action="#" th:action="@{/profesor/listCursos}"
+		 method="GET" th:object="${opcion}"
 		class="form form-singin align-items-center">
-		<select class="">
-			<option value="desc">Ordenar por fecha descendente</option>
-			<option value="asc">Ordenar por fecha ascendente</option>
-			<option value="despues">Ordenar por cursos impartidos</option>
-			<option value="entre">Ordenar por cursos impartiéndose</option>
-			<option value="antes">Ordenar por cursos a impartir</option>
+		<div>
+		<select class="form-select" th:field="*{name}">
+			<option  th:value="default" selected>Seleccionar filtro</option>
+			<option  th:value="desc">Ordenar por fecha descendente</option>
+			<option  th:value="asc">Ordenar por fecha ascendente</option>
+			<option  th:value="despues">Ordenar por cursos impartidos</option>
+			<option  th:value="entre">Ordenar por cursos impartiéndose</option>
+			<option  th:value="antes">Ordenar por cursos a impartir</option>
+			
 		</select>
+		
 		<button class="btn tbn-lg btn-primary btn-block text-uppercase"
 			type="submit">Filtrar</button>
+			</div>
+			<br>
 	</form>
 
 	<table class="table">
@@ -54,5 +61,6 @@
 		<button class="btn tbn-lg btn-primary btn-block text-uppercase"
 			type="button">Añadir Curso</button>
 	</a>
+	</div>
 </body>
 </html>

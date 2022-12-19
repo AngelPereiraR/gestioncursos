@@ -31,7 +31,8 @@
 			<input type="date" th:field="*{fechaFin}" class="form-control"/>
 			<br>
 			
-			<button type="submit" class="btn tbn-lg btn-primary btn-block text-uppercase">Añadir Curso</button>	
+			<button th:if="${curso.idcurso == 0}"type="submit" class="btn tbn-lg btn-primary btn-block text-uppercase">Añadir Curso</button>	
+			<button th:unless="${curso.idcurso == 0}"type="submit" class="btn tbn-lg btn-primary btn-block text-uppercase">Editar Curso</button>	
 		</form>
 		
 		<form  sec:authorize="hasRole('ROLE_PROFESOR')" action="#" th:action="@{/profesor/addCurso}" th:object="${curso}" method="post"  class="form align-items-center ">
@@ -58,7 +59,8 @@
 			<input type="date" th:field="*{fechaFin}" class="form-control"/>
 			<br>
 			
-			<button type="submit" class="btn tbn-lg btn-primary btn-block text-uppercase">Añadir Curso</button>	
+			<button th:if="${curso.idcurso == 0}"type="submit" class="btn tbn-lg btn-primary btn-block text-uppercase">Añadir Curso</button>	
+			<button th:unless="${curso.idcurso == 0}"type="submit" class="btn tbn-lg btn-primary btn-block text-uppercase">Editar Curso</button>	
 		</form>
 	</div>
 </body>
