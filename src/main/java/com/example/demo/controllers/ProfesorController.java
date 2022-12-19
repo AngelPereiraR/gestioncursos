@@ -154,12 +154,12 @@ public class ProfesorController {
 		Usuario profesor = userRepository.findByEmail(email);
 		if (cursoModel.getIdcurso() == 0) {
 
-			cursoModel.setIdprofesor(profesor);
+			cursoModel.setProfesor(profesor);
 			cursoService.addCurso(cursoModel);
 			flash.addFlashAttribute("succes", "course added suff");
 			return "redirect:/profesor/listCursos";
 		} else {
-			cursoModel.setIdprofesor(profesor);
+			cursoModel.setProfesor(profesor);
 			cursoService.updateCurso(cursoModel);
 
 			flash.addFlashAttribute("succes", "course updated suff");
