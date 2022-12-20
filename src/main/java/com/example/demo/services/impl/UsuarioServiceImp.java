@@ -25,6 +25,7 @@ import com.example.demo.entity.Curso;
 import com.example.demo.entity.Matricula;
 import com.example.demo.entity.Usuario;
 import com.example.demo.model.CursoModel;
+import com.example.demo.model.MatriculaModel;
 import com.example.demo.model.UsuarioModel;
 import com.example.demo.repository.CursoRepository;
 import com.example.demo.repository.MatriculaRepository;
@@ -300,6 +301,13 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 		 */
 		
 		return userRepository.findAllByIdmatriculaIn(matriculas).stream().map(u->modelMapper.map(u, UsuarioModel.class)).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<MatriculaModel> listMatriculasAlumno(Usuario id) {
+		// TODO Auto-generated method stub
+		ModelMapper modelMapper = new ModelMapper();
+		return matriculaRepository.findById(id).stream().map(u->modelMapper.map(u, MatriculaModel.class)).collect(Collectors.toList());
 	}
 
 	

@@ -39,12 +39,20 @@
 		</thead>
 
 		<tbody th:each="curso: ${cursos}">
-			<tr>
+			
+			<tr >
 				<td th:text=${curso.nombre}></td>
 				<td th:text=${curso.descripcion}></td>
 				<td th:text=${curso.fechaInicio}></td>
 				<td th:text=${curso.fechaFin}></td>
-				
+				<td th:if="${#lists.contains(matriculas, curso.idcurso) OR curso.fechaInicio<fecha}"><a >
+						<button class="btn tbn-lg btn-danger btn-block text-uppercase"
+							type="button">No disponible</button>
+				</a></td>
+				<td th:unless="${#lists.contains(matriculas, curso.idcurso) OR curso.fechaInicio<fecha}"><a >
+						<button class="btn tbn-lg btn-primary btn-block text-uppercase"
+							type="button">Matricularse</button>
+				</a></td>
 				
 			</tr>
 		</tbody>

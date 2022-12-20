@@ -1,6 +1,9 @@
 package com.example.demo.controllers;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,10 +19,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.Usuario;
+import com.example.demo.model.MatriculaModel;
 import com.example.demo.model.Opcion;
 import com.example.demo.model.UsuarioModel;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.services.CursoService;
+import com.example.demo.services.MatriculaService;
 import com.example.demo.services.NoticiaService;
 import com.example.demo.services.UsuarioService;
 
@@ -46,6 +51,10 @@ public class AlumnoController {
 	@Autowired
 	@Qualifier("noticiaService")
 	private NoticiaService noticiaService;
+	
+	@Autowired
+	@Qualifier("matriculaService")
+	private MatriculaService matriculaService;
 	
 	
 
@@ -111,9 +120,19 @@ public class AlumnoController {
 	@GetMapping("/alumno/listCursos")
 	public String listCursos(@RequestParam(name = "name", required = false, defaultValue="") Opcion opcion, Model model) throws ParseException {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+		Usuario user=userRepository.findByEmail(email);
+		Calendar c1 = Calendar.getInstance();
+		String fechaActual = ( Integer.toString(c1.get(Calendar.YEAR)) + "-" + Integer.toString(c1.get(Calendar.MONTH)+1) + "-" + Integer.toString(c1.get(Calendar.DATE))+" "+Integer.toString(c1.get(Calendar.HOUR_OF_DAY))+"OO:OO");
+		List<MatriculaModel> matriculas= userService.listMatriculasAlumno(user);
+		ArrayList<Integer> idcursos = new ArrayList<>();
 		
-		
+		for(MatriculaModel m: matriculas) {
+			idcursos.add(m.getCurso().getIdcurso());
+		}
+		model.addAttribute("fecha",fechaActual);
+		model.addAttribute("matriculas",idcursos);
 		if(opcion.getName().equals("basico")) {
+		
 			
 			model.addAttribute("opcion",opcion);
 			model.addAttribute("cursos", userService.listCursosAlumno(2));

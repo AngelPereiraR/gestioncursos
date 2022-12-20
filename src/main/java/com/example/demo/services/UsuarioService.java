@@ -31,6 +31,8 @@ public interface UsuarioService {
 	public abstract int deactivateAlumno(int id);
 	
 	public abstract List<CursoModel> listCursosAlumno(int nivel);
+	
+	public abstract List<MatriculaModel> listMatriculasAlumno(Usuario id);
 
 	// Profesor
 
