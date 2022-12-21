@@ -27,7 +27,7 @@
 						<button class="btn tbn-lg btn-primary btn-block text-uppercase" type="button">Editar Profesor</button>
 					</a>
 					<a th:href="@{/admin/removeProfesor/} + ${profesor.id}">
-						<button class="btn tbn-lg btn-danger btn-block text-uppercase" type="button">Eliminar Profesor</button>
+						<button class="btn tbn-lg btn-danger btn-block text-uppercase" type="button" onclick="return confirm('¿Seguro que desea eliminar?')">Eliminar Profesor</button>
 					</a>
 				</td>
 			</tr>

@@ -32,7 +32,7 @@
 						<button class="btn tbn-lg btn-danger btn-block text-uppercase" type="button">Desactivar Alumno</button>
 					</a>
 					<a th:href="@{/admin/removeAlumno/} + ${alumno.id}" method="post">
-						<button class="btn tbn-lg btn-danger btn-block text-uppercase" type="button">Eliminar Alumno</button>
+						<button class="btn tbn-lg btn-danger btn-block text-uppercase" type="button" onclick="return confirm('¿Seguro que desea eliminar?')">Eliminar Alumno</button>
 					</a>
 				</td>
 			</tr>

@@ -52,7 +52,7 @@
 				</a> <a th:href="@{/profesor/removeCurso/} + ${curso.idcurso}"
 					method="post">
 						<button class="btn tbn-lg btn-danger btn-block text-uppercase"
-							type="button">Eliminar Curso</button>
+							type="button" onclick="return confirm('¿Seguro que desea eliminar?')">Eliminar Curso</button>
 				</a></td>
 			</tr>
 		</tbody>

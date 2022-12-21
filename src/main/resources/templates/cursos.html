@@ -40,7 +40,7 @@
 						</button>
 					</a>
 					<a th:href="@{/admin/removeCurso/} + ${curso.idcurso}" method="post">
-						<button class="btn tbn-lg btn-danger btn-block text-uppercase" type="button">
+						<button class="btn tbn-lg btn-danger btn-block text-uppercase" type="button" onclick="return confirm('¿Seguro que desea eliminar?')">
 							Eliminar Curso
 						</button>
 					</a>
