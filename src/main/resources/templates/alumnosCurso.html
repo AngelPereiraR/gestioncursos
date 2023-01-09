@@ -7,7 +7,7 @@
 </head>
 <body>
 	<nav th:replace="index::header"></nav>
-	<table class="table">
+	<table class="table" sec:authorize="hasRole('ROLE_ADMIN')">
 		<thead>
 			<tr>
 				<th>Nombre</th>
@@ -24,7 +24,36 @@
 			</tr>
 		</tbody>
 	</table>
-	<a th:href="@{/admin/listCursos}" method="post">
+	<table class="table" sec:authorize="hasRole('ROLE_PROFESOR')">
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Apellidos</th>
+				<th>Email</th>
+				<th>Calificar</th>
+			</tr>
+		</thead>
+		
+		<tbody th:each="alumno: ${alumnos}">
+			<tr>
+				<td th:text=${alumno.nombre}></td>
+				<td th:text=${alumno.apellidos}></td>
+				<td th:text=${alumno.email}></td>
+				<td>
+					<form action="#" th:action="@{/profesor/listAlumnos/} + ${curso} + @{/} + ${alumno.id}" th:object="${matricula}" method="post" class="form align-items-center">
+						<label class="sr-only">Nota:</label>
+						<input id="nota" name="nota" type="number" class="form-control-nota"/>
+						<br><br>
+						<button class="btn tbn-lg btn-primary btn-block text-uppercase" type="submit">Calificar</button>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<a th:href="@{/admin/listCursos}" method="post" sec:authorize="hasRole('ROLE_ADMIN')">
+		<button class="btn tbn-lg btn-primary btn-block text-uppercase" type="button">Volver</button>
+	</a>
+	<a th:href="@{/profesor/listCursos}" method="post" sec:authorize="hasRole('ROLE_PROFESOR')">
 		<button class="btn tbn-lg btn-primary btn-block text-uppercase" type="button">Volver</button>
 	</a>
 </body>

@@ -127,7 +127,7 @@ public class AlumnoController {
 		ArrayList<Integer> idcursos = new ArrayList<>();
 		
 		for(MatriculaModel m: matriculas) {
-			idcursos.add(m.getCurso().getIdcurso());
+			idcursos.add(m.getIdcurso().getIdcurso());
 		}
 		model.addAttribute("fecha",fechaActual);
 		model.addAttribute("matriculas",idcursos);

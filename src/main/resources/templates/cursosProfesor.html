@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <link th:href="@{/css/styles.css}" rel="stylesheet">
 <title>Cursos</title>
+<script src="https://kit.fontawesome.com/7cb85c1f74.js" crossorigin="anonymous"></script>
 </head>
 
 	<nav th:replace="index::header" class="header"></nav>
@@ -46,14 +47,21 @@
 				<td th:text=${curso.descripcion}></td>
 				<td th:text=${curso.fechaInicio}></td>
 				<td th:text=${curso.fechaFin}></td>
-				<td><a th:href="@{/profesor/formCurso/} + ${curso.idcurso}">
+				<td>
+					<a th:href="@{/profesor/listAlumnos/} + ${curso.idcurso}">
+						<button class="btn tbn-lg btn-secondary btn-block" type="button">
+							<i class="fa-solid fa-graduation-cap"></i>
+						</button>
+					</a>
+					<a th:href="@{/profesor/formCurso/} + ${curso.idcurso}">
 						<button class="btn tbn-lg btn-primary btn-block text-uppercase"
 							type="button">Editar Curso</button>
-				</a> <a th:href="@{/profesor/removeCurso/} + ${curso.idcurso}"
-					method="post">
+					</a>
+					<a th:href="@{/profesor/removeCurso/} + ${curso.idcurso}" method="post">
 						<button class="btn tbn-lg btn-danger btn-block text-uppercase"
 							type="button" onclick="return confirm('¿Seguro que desea eliminar?')">Eliminar Curso</button>
-				</a></td>
+					</a>
+				</td>
 			</tr>
 		</tbody>
 	</table>

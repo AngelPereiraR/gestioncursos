@@ -14,10 +14,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.Curso;
+import com.example.demo.entity.Matricula;
 import com.example.demo.entity.Usuario;
 import com.example.demo.model.CursoModel;
+import com.example.demo.model.MatriculaModel;
+import com.example.demo.repository.MatriculaRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.services.CursoService;
+import com.example.demo.services.MatriculaService;
 import com.example.demo.services.UsuarioService;
 
 @Controller
@@ -36,6 +40,14 @@ public class CourseController {
 	private UsuarioService userService;
 	
 	@Autowired
+	@Qualifier("matriculaRepository")
+	private MatriculaRepository matriculaRepository;
+	
+	@Autowired
+	@Qualifier("matriculaService")
+	private MatriculaService matriculaService;
+	
+	@Autowired
 	@Qualifier("userRepository")
 	public UserRepository userRepository;
 
@@ -47,9 +59,29 @@ public class CourseController {
 	}
 	
 	@GetMapping("/admin/listAlumnos/{id}")
-	public ModelAndView listAlumnos(@PathVariable("id") int id) {
+	public ModelAndView listAlumnosAdmin(@PathVariable("id") int id) {
 		ModelAndView mav = new ModelAndView(ALUMNOS_VIEW);
 		mav.addObject("alumnos", userService.listAlumnosByMatricula(id));
+		return mav;
+	}
+	
+	@PostMapping("/profesor/listAlumnos/{idCurso}/{idAlumno}")
+	public String calificar(@PathVariable("idCurso") int idCurso, @PathVariable("idAlumno") int idAlumno, @ModelAttribute("nota") String nota, RedirectAttributes flash) {
+		Usuario usuario = userService.transform(userService.findUsuario(idAlumno));
+		Curso curso = cursoService.transform(cursoService.findCurso(idCurso));
+		Matricula matricula = matriculaRepository.findByIdAndIdcurso(usuario, curso);
+		matricula.setValoracion(Integer.parseInt(nota));
+		matriculaService.updateMatricula(matriculaService.transform(matricula));
+		flash.addFlashAttribute("succes", "curso actualizado satisfactoriamente");
+		return "redirect:/profesor/listCursos";
+
+	}
+	
+	@GetMapping("/profesor/listAlumnos/{id}")
+	public ModelAndView listAlumnosProfesor(@PathVariable("id") int id) {
+		ModelAndView mav = new ModelAndView(ALUMNOS_VIEW);
+		mav.addObject("alumnos", userService.listAlumnosByMatricula(id));
+		mav.addObject("curso", id);
 		return mav;
 	}
 

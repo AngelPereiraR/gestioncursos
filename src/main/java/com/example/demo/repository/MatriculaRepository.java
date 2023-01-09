@@ -16,5 +16,7 @@ public interface MatriculaRepository extends JpaRepository<Matricula, Serializab
 	
 	public abstract List<Matricula> findById(Usuario id);
 	
+	public abstract Matricula findByIdAndIdcurso(Usuario id, Curso idcurso);
+	
 	
 }
