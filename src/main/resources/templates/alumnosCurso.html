@@ -13,14 +13,16 @@
 				<th>Nombre</th>
 				<th>Apellidos</th>
 				<th>Email</th>
+				<th>Nota</th>
 			</tr>
 		</thead>
 		
-		<tbody th:each="alumno: ${alumnos}">
+		<tbody th:each="m: ${map}">
 			<tr>
-				<td th:text=${alumno.nombre}></td>
-				<td th:text=${alumno.apellidos}></td>
-				<td th:text=${alumno.email}></td>
+				<td th:text="${m.key.nombre}"></td>
+				<td th:text="${m.key.apellidos}"></td>
+				<td th:text="${m.key.email}"></td>
+				<td th:text="${m.value.valoracion}"></td>
 			</tr>
 		</tbody>
 	</table>
@@ -30,17 +32,19 @@
 				<th>Nombre</th>
 				<th>Apellidos</th>
 				<th>Email</th>
+				<th>Nota</th>
 				<th>Calificar</th>
 			</tr>
 		</thead>
 		
-		<tbody th:each="alumno: ${alumnos}">
+		<tbody th:each="m: ${map}">
 			<tr>
-				<td th:text=${alumno.nombre}></td>
-				<td th:text=${alumno.apellidos}></td>
-				<td th:text=${alumno.email}></td>
+				<td th:text="${m.key.nombre}"></td>
+				<td th:text="${m.key.apellidos}"></td>
+				<td th:text="${m.key.email}"></td>
+				<td th:text="${m.value.valoracion}"></td>
 				<td>
-					<form action="#" th:action="@{/profesor/listAlumnos/} + ${curso} + @{/} + ${alumno.id}" th:object="${matricula}" method="post" class="form align-items-center">
+					<form action="#" th:action="@{/profesor/listAlumnos/} + ${curso} + @{/} + ${m.key.id}" th:object="${matricula}" method="post" class="form align-items-center">
 						<label class="sr-only">Nota:</label>
 						<input id="nota" name="nota" type="number" class="form-control-nota"/>
 						<br><br>
