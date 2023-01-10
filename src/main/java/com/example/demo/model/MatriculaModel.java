@@ -7,9 +7,9 @@ public class MatriculaModel {
 
 	private int idmatricula;
 
-	private Usuario user;
+	private Usuario id;
 
-	private Curso curso;
+	private Curso idcurso;
 
 	private int valoracion;
 
@@ -18,11 +18,11 @@ public class MatriculaModel {
 		// TODO Auto-generated constructor stub
 	}
 
-	public MatriculaModel(int idmatricula, Usuario user, Curso curso, int valoracion) {
+	public MatriculaModel(int idmatricula, Usuario id, Curso idcurso, int valoracion) {
 		super();
 		this.idmatricula = idmatricula;
-		this.user = user;
-		this.curso = curso;
+		this.id = id;
+		this.idcurso = idcurso;
 		this.valoracion = valoracion;
 	}
 
@@ -34,20 +34,20 @@ public class MatriculaModel {
 		this.idmatricula = idmatricula;
 	}
 
-	public Usuario getAlumno() {
-		return user;
+	public Usuario getId() {
+		return id;
 	}
 
-	public void setAlumno(Usuario user) {
-		this.user = user;
+	public void setId(Usuario id) {
+		this.id = id;
 	}
 
-	public Curso getCurso() {
-		return curso;
+	public Curso getIdcurso() {
+		return idcurso;
 	}
 
-	public void setCurso(Curso curso) {
-		this.curso = curso;
+	public void setIdcurso(Curso idcurso) {
+		this.idcurso = idcurso;
 	}
 
 	public int getValoracion() {
@@ -60,7 +60,7 @@ public class MatriculaModel {
 
 	@Override
 	public String toString() {
-		return "MatriculaModel [idmatricula=" + idmatricula + ", usuario=" + user + ", curso=" + curso + ", valoracion="
+		return "MatriculaModel [idmatricula=" + idmatricula + ", id=" + id + ", idcurso=" + idcurso + ", valoracion="
 				+ valoracion + "]";
 	}
 
