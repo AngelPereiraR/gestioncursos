@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Comentario;
+import com.example.demo.entity.Curso;
+import com.example.demo.entity.Usuario;
 import com.example.demo.model.ComentarioModel;
+import com.example.demo.model.CursoModel;
 import com.example.demo.repository.ComentarioRepository;
 import com.example.demo.services.ComentarioService;
 
@@ -30,7 +33,14 @@ public class ComentarioServiceImpl implements ComentarioService {
 
 	@Override
 	public Comentario addComentario(ComentarioModel comentarioModel) {
-		return comentarioRepository.save(transform(comentarioModel));
+		Curso curso = comentarioModel.getCurso();
+		Usuario user =comentarioModel.getUser();
+		Comentario comentario = transform(comentarioModel);
+		comentario.setIdcurso(curso);
+		comentario.setId(user);
+		System.out.println(comentario.getIdcurso().getDescripcion());
+
+		return comentarioRepository.save(comentario);
 	}
 
 	@Override
@@ -54,6 +64,12 @@ public class ComentarioServiceImpl implements ComentarioService {
 	public ComentarioModel transform(Comentario comentario) {
 		ModelMapper modelMapper = new ModelMapper();
 		return modelMapper.map(comentario, ComentarioModel.class);
+	}
+
+	@Override
+	public ComentarioModel findComentario(int id) {
+
+		return transform(comentarioRepository.findById(id).orElse(null));
 	}
 
 }

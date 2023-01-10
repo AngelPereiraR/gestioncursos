@@ -34,11 +34,11 @@ public class ComentarioModel {
 		this.idcomentario = idcomentario;
 	}
 
-	public Usuario getAlumno() {
+	public Usuario getUser() {
 		return user;
 	}
 
-	public void setAlumno(Usuario alumno) {
+	public void setUser(Usuario alumno) {
 		this.user = alumno;
 	}
 

@@ -54,11 +54,11 @@ public class Comentario {
 		this.comentario = comentario;
 	}
 
-	public Usuario getIdalumno() {
+	public Usuario getId() {
 		return id;
 	}
 
-	public void setIdalumno(Usuario id) {
+	public void setId(Usuario id) {
 		this.id = id;
 	}
 

@@ -6,25 +6,25 @@
 <title>Cursos</title>
 </head>
 
-	<nav th:replace="index::header" class="header"></nav>
-	<br>
-	<div class="container">
-	<form action="#" th:action="@{/alumno/listCursos}"
-		 method="GET" th:object="${opcion}"
-		class="form form-singin align-items-center">
+<nav th:replace="index::header" class="header"></nav>
+<br>
+<div class="container">
+	<form action="#" th:action="@{/alumno/listCursos}" method="GET"
+		th:object="${opcion}" class="form form-singin align-items-center">
 		<div>
-		<select class="form-select" th:field="*{name}">
-			<option  th:value="default" selected>Seleccionar filtro</option>
-			<option  th:value="basico">Filtrar por cursos nivel basico</option>
-			<option  th:value="medio">Filtrar por cursos nivel medio</option>
-			<option  th:value="avanzado">Filtrar por cursos nivel avanzado</option>
-			
-		</select>
-		
-		<button class="btn tbn-lg btn-primary btn-block text-uppercase"
-			type="submit">Filtrar</button>
-			</div>
-			<br>
+			<select class="form-select" th:field="*{name}">
+				<option th:value="default" selected>Seleccionar filtro</option>
+				<option th:value="basico">Filtrar por cursos nivel basico</option>
+				<option th:value="medio">Filtrar por cursos nivel medio</option>
+				<option th:value="avanzado">Filtrar por cursos nivel
+					avanzado</option>
+
+			</select>
+
+			<button class="btn tbn-lg btn-primary btn-block text-uppercase"
+				type="submit">Filtrar</button>
+		</div>
+		<br>
 	</form>
 
 	<table class="table">
@@ -39,24 +39,33 @@
 		</thead>
 
 		<tbody th:each="curso: ${cursos}">
-			
-			<tr >
+
+			<tr>
 				<td th:text=${curso.nombre}></td>
 				<td th:text=${curso.descripcion}></td>
 				<td th:text=${curso.fechaInicio}></td>
 				<td th:text=${curso.fechaFin}></td>
-				<td th:if="${#lists.contains(matriculas, curso.idcurso) OR curso.fechaInicio<fecha}"><a >
+				<td
+					th:if="${#lists.contains(matriculas, curso.idcurso) OR curso.fechaInicio<fecha}"><a>
 						<button class="btn tbn-lg btn-danger btn-block text-uppercase"
 							type="button">No disponible</button>
 				</a></td>
-				<td th:unless="${#lists.contains(matriculas, curso.idcurso) OR curso.fechaInicio<fecha}"><a >
+				<td
+					th:unless="${#lists.contains(matriculas, curso.idcurso) OR curso.fechaInicio<fecha}"><a>
 						<button class="btn tbn-lg btn-primary btn-block text-uppercase"
 							type="button">Matricularse</button>
 				</a></td>
-				
+
+				<td><a th:href="@{/alumno/formComentario/} + ${curso.idcurso}">
+						
+							<button class="btn tbn-lg btn-primary btn-block text-uppercase"
+								type="button">Comentar</button>
+						
+				</a></td>
+
 			</tr>
 		</tbody>
 	</table>
-	</div>
+</div>
 </body>
 </html>

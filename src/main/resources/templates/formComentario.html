@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/css/styles.css}" rel="stylesheet">
+<title>Formulario Noticia</title>
+</head>
+<body>
+	<nav th:replace="index::header" class="header"></nav>
+	<div class="container mt-sm-5">
+		<form action="#" th:action="@{/alumno/comentarCurso/} + ${curso}" th:object="${comentario}" method="post"  class="form align-items-center" enctype="multipart/form-data">
+			<input type="hidden"  th:field="*{idcomentario}">
+			
+			
+			
+			
+			<label class="sr-only">Descripcion:</label>
+			<textarea type="text" th:field="*{comentario}" class="form-control"></textarea>
+			<br>
+			
+			
+			
+			<button th:if="${comentario.idcomentario == 0}"type="submit" class="btn tbn-lg btn-primary btn-block text-uppercase">Comentar</button>	
+			
+		</form>
+	</div>
+</body>
+</html>

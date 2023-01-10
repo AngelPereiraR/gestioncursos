@@ -61,6 +61,8 @@ public class Curso {
 		this.fechaFin = fechaFin;
 	}
 
+
+
 	public int getIdcurso() {
 		return idcurso;
 	}
