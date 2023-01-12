@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -141,5 +142,25 @@ public class CourseController {
 		}
 		return FORM_VIEW;
 	}
+	
+	@PostMapping("/alumno/matricular/{idcurso}")
+	public String addMatricula(@PathVariable("idcurso")int idCurso,RedirectAttributes flash) {
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+		Usuario usuario = userRepository.findByEmail(email);
+		Curso curso=cursoService.transform(cursoService.findCurso(idCurso));
+		MatriculaModel matriculaModel=new MatriculaModel();
+		matriculaModel.setId(usuario);
+		matriculaModel.setIdcurso(curso);
+		matriculaService.addMatricula(matriculaModel);
+		
+		
+		return "redirect:/alumno/listCursos";
+		
 
+	}
+	
+
+	
 }
+
+

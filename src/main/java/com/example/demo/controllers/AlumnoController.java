@@ -122,10 +122,10 @@ public class AlumnoController {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		Usuario user=userRepository.findByEmail(email);
 		Calendar c1 = Calendar.getInstance();
-		String fechaActual = ( Integer.toString(c1.get(Calendar.YEAR)) + "-" + Integer.toString(c1.get(Calendar.MONTH)+1) + "-" + Integer.toString(c1.get(Calendar.DATE))+" "+Integer.toString(c1.get(Calendar.HOUR_OF_DAY))+"OO:OO");
+		String fechaActual = ( Integer.toString(c1.get(Calendar.YEAR)) + "-" + Integer.toString(c1.get(Calendar.MONTH)+1) + "-" + Integer.toString(c1.get(Calendar.DATE)));
 		List<MatriculaModel> matriculas= userService.listMatriculasAlumno(user);
 		ArrayList<Integer> idcursos = new ArrayList<>();
-		
+		System.out.println(fechaActual);
 		for(MatriculaModel m: matriculas) {
 			idcursos.add(m.getIdcurso().getIdcurso());
 		}
