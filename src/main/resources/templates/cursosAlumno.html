@@ -46,27 +46,27 @@
 				<td th:text=${curso.fechaInicio}></td>
 				<td th:text=${curso.fechaFin}></td>
 				<td
-					th:if="${#lists.contains(matriculas, curso.idcurso)}"><a>
+					th:if="${#lists.contains(matriculas, curso.idcurso) or curso.fechaFin < fecha or curso.fechaInicio < fecha}"><a>
 						<button class="btn tbn-lg btn-danger btn-block text-uppercase"
 							type="button">No disponible</button>
 				</a></td>
 				
-				<td th:unless="${#lists.contains(matriculas, curso.idcurso)}">
+				<td th:unless="${#lists.contains(matriculas, curso.idcurso) or curso.fechaFin < fecha or curso.fechaInicio < fecha}">
 				<form action="submit" th:action="@{/alumno/matricular/} + ${curso.idcurso}" th:object="${matricula}" method="post"  class="form align-items-center" enctype="multipart/form-data">
 						<button class="btn tbn-lg btn-primary btn-block text-uppercase"
 							type="submit">Matricularse</button>
 								</form>
 				</td>
 				
-				<td th:if="curso.fechaFin<fecha"><a th:href="@{/alumno/formComentario/} + ${curso.idcurso}">
+				<td th:if="${#lists.contains(matriculas, curso.idcurso) and curso.fechaFin < fecha}"><a th:href="@{/alumno/formComentario/} + ${curso.idcurso}">
 						
 							<button class="btn tbn-lg btn-primary btn-block text-uppercase"
 								type="button">Comentar</button>
 						
 				</a></td>
-				<td th:unless="curso.fechaFin < fecha)"><a th:href="@{/alumno/formComentario/} + ${curso.idcurso}">
+				<td th:unless="${#lists.contains(matriculas, curso.idcurso) and curso.fechaFin < fecha}"><a th:href="@{/alumno/formComentario/} + ${curso.idcurso}">
 						
-							<button class="btn tbn-lg btn-primary btn-block text-uppercase"
+							<button class="btn tbn-lg btn-danger btn-block text-uppercase"
 								type="button">No disponible</button>
 						 
 				</a></td>

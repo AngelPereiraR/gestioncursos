@@ -44,11 +44,16 @@
 				<td th:text="${m.key.email}"></td>
 				<td th:text="${m.value.valoracion}"></td>
 				<td>
-					<form action="#" th:action="@{/profesor/listAlumnos/} + ${curso} + @{/} + ${m.key.id}" th:object="${matricula}" method="post" class="form align-items-center">
-						<label class="sr-only">Nota:</label>
-						<input id="nota" name="nota" type="number" class="form-control-nota"/>
-						<br><br>
-						<button class="btn tbn-lg btn-primary btn-block text-uppercase" type="submit">Calificar</button>
+					<form action="#" th:action="@{/profesor/listAlumnos/} + ${curso.idcurso} + @{/} + ${m.key.id}" th:object="${matricula}" method="post" class="form align-items-center">
+						<div th:if="${cursoFecha < localDate}">
+							<label class="sr-only">Nota:</label>
+							<input id="nota" name="nota" type="number" class="form-control-nota"/>
+							<br><br>
+							<button class="btn tbn-lg btn-primary btn-block text-uppercase" type="submit">Calificar</button>
+						</div>
+						<div th:unless="${cursoFecha < localDate}">
+							<label class="sr-only">No es posible calificar</label>
+						</div>
 					</form>
 				</td>
 			</tr>
