@@ -4,7 +4,6 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.Usuario;
+import com.example.demo.model.Counter;
 import com.example.demo.model.MatriculaModel;
 import com.example.demo.model.Opcion;
 import com.example.demo.model.UsuarioModel;
@@ -125,11 +125,19 @@ public class AlumnoController {
 		Usuario user=userRepository.findByEmail(email);
 		List<MatriculaModel> matriculas= userService.listMatriculasAlumno(user);
 		ArrayList<Integer> idcursos = new ArrayList<>();
+		ArrayList<Integer> idalumnos = new ArrayList<>();
+		ArrayList<Integer> valoraciones = new ArrayList<>();
 		for(MatriculaModel m: matriculas) {
 			idcursos.add(m.getIdcurso().getIdcurso());
+			idalumnos.add(m.getId().getId());
+			valoraciones.add(m.getValoracion());
 		}
 		model.addAttribute("fecha", Date.valueOf(LocalDate.now()).toString());
-		model.addAttribute("matriculas",idcursos);
+		model.addAttribute("idcursos",idcursos);
+		model.addAttribute("id", user.getId());
+		model.addAttribute("idalumnos", idalumnos);
+		model.addAttribute("valoraciones", valoraciones);
+		model.addAttribute("counter", new Counter(0));
 		if(opcion.getName().equals("basico")) {
 		
 			

@@ -34,43 +34,58 @@
 				<th>Descripcion</th>
 				<th>Fecha de Inicio</th>
 				<th>Fecha Fin</th>
+				<th>Nota</th>
 				<th>Acciones</th>
 			</tr>
 		</thead>
 
 		<tbody th:each="curso: ${cursos}">
-
 			<tr>
 				<td th:text=${curso.nombre}></td>
 				<td th:text=${curso.descripcion}></td>
 				<td th:text=${curso.fechaInicio}></td>
 				<td th:text=${curso.fechaFin}></td>
+				<td th:if="${#lists.contains(idalumnos, id) and #lists.contains(idcursos, curso.idcurso)}">
+					<p th:if="${valoraciones[counter.getCount()]} != 0" th:text="${valoraciones[counter.getCount()]}"></p>
+					<button th:unless="${valoraciones[counter.getCount()]} != 0" class="btn tbn-lg btn-danger btn-block text-uppercase"
+							type="button">No calificado</button>
+					<span th:object="${counter.increment()}"></span>
+				</td>
+				<td th:unless="${#lists.contains(idalumnos, id) and #lists.contains(idcursos, curso.idcurso)}">
+					<button class="btn tbn-lg btn-danger btn-block text-uppercase"
+							type="button">No matriculado</button>
+				</td>
 				<td
-					th:if="${#lists.contains(matriculas, curso.idcurso) or curso.fechaFin < fecha or curso.fechaInicio < fecha}"><a>
+					th:if="${#lists.contains(idcursos, curso.idcurso) or curso.fechaFin < fecha or curso.fechaInicio < fecha}"><a>
 						<button class="btn tbn-lg btn-danger btn-block text-uppercase"
 							type="button">No disponible</button>
 				</a></td>
 				
-				<td th:unless="${#lists.contains(matriculas, curso.idcurso) or curso.fechaFin < fecha or curso.fechaInicio < fecha}">
+				<td th:unless="${#lists.contains(idcursos, curso.idcurso) or curso.fechaFin < fecha or curso.fechaInicio < fecha}">
 				<form action="submit" th:action="@{/alumno/matricular/} + ${curso.idcurso}" th:object="${matricula}" method="post"  class="form align-items-center" enctype="multipart/form-data">
 						<button class="btn tbn-lg btn-primary btn-block text-uppercase"
 							type="submit">Matricularse</button>
 								</form>
 				</td>
 				
-				<td th:if="${#lists.contains(matriculas, curso.idcurso) and curso.fechaFin < fecha}"><a th:href="@{/alumno/formComentario/} + ${curso.idcurso}">
+				<td th:if="${#lists.contains(idcursos, curso.idcurso) and curso.fechaFin < fecha}"><a th:href="@{/alumno/formComentario/} + ${curso.idcurso}">
 						
 							<button class="btn tbn-lg btn-primary btn-block text-uppercase"
 								type="button">Comentar</button>
 						
 				</a></td>
+<<<<<<< HEAD
 
 				<td th:unless="${#lists.contains(matriculas, curso.idcurso) and curso.fechaFin < fecha}">
 
 				
 
+=======
+				<td th:unless="${#lists.contains(idcursos, curso.idcurso) and curso.fechaFin < fecha}">
+>>>>>>> branch 'main' of https://github.com/SpiritVideogames/gestioncursos.git
 						
 							<button class="btn tbn-lg btn-danger btn-block text-uppercase"
+<<<<<<< HEAD
 								type="button">No disponible</button>
 						 
 				</td>
@@ -80,6 +95,9 @@
 								type="button">Ver comentarios</button>
 						
 				</a></td>
+=======
+								type="button">No disponible</button></td>
+>>>>>>> branch 'main' of https://github.com/SpiritVideogames/gestioncursos.git
 
 			</tr>
 		</tbody>
