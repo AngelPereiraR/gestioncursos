@@ -76,9 +76,14 @@ public class ComentarioServiceImpl implements ComentarioService {
 	public  List<ComentarioModel> findComentarioByCurso(Curso id) {
 
 		List<ComentarioModel> comentarios = new ArrayList<ComentarioModel>();
-		for (Comentario comentario :comentarioRepository.findByIdcurso(id))
-			comentarios.add(transform(comentario));
-		return comentarios;
+		for (Comentario comentario :comentarioRepository.findByIdcurso(id)) {
+			ComentarioModel com= new ComentarioModel();
+			com.setComentario(comentario.getComentario());
+			com.setCurso(comentario.getIdcurso());
+			com.setUser(comentario.getAlumno());
+			com.setIdcomentario(comentario.getIdcomentario());
+			comentarios.add(com);
+		}		return comentarios;
 	
 	}
 

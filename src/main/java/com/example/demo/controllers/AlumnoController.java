@@ -1,6 +1,8 @@
 package com.example.demo.controllers;
 
+import java.sql.Date;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -121,15 +123,12 @@ public class AlumnoController {
 	public String listCursos(@RequestParam(name = "name", required = false, defaultValue="") Opcion opcion, Model model) throws ParseException {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		Usuario user=userRepository.findByEmail(email);
-		Calendar c1 = Calendar.getInstance();
-		String fechaActual = ( Integer.toString(c1.get(Calendar.YEAR)) + "-" + Integer.toString(c1.get(Calendar.MONTH)+1) + "-" + Integer.toString(c1.get(Calendar.DATE)));
 		List<MatriculaModel> matriculas= userService.listMatriculasAlumno(user);
 		ArrayList<Integer> idcursos = new ArrayList<>();
-		System.out.println(fechaActual);
 		for(MatriculaModel m: matriculas) {
 			idcursos.add(m.getIdcurso().getIdcurso());
 		}
-		model.addAttribute("fecha",fechaActual);
+		model.addAttribute("fecha", Date.valueOf(LocalDate.now()).toString());
 		model.addAttribute("matriculas",idcursos);
 		if(opcion.getName().equals("basico")) {
 		

@@ -1,5 +1,7 @@
 package com.example.demo.controllers;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.entity.Comentario;
 import com.example.demo.entity.Curso;
 import com.example.demo.entity.Matricula;
 import com.example.demo.entity.Usuario;
@@ -36,7 +39,11 @@ public class CourseController {
 	private static final String COURSES_VIEW = "cursos";
 	private static final String ALUMNOS_VIEW = "alumnosCurso";
 	private static final String FORM_VIEW = "formCurso";
+
 	private static final String COMENTARIOS_VIEW = "comentarios";
+
+	private static final String FORM_VIEWCOMENTARIO = "formComentario";
+
 
 	@Autowired
 	@Qualifier("cursoService")
@@ -61,6 +68,7 @@ public class CourseController {
 	@Autowired
 	@Qualifier("userRepository")
 	public UserRepository userRepository;
+	
 
 	@GetMapping("/admin/listCursos")
 	public ModelAndView listCursos() {
@@ -98,9 +106,40 @@ public class CourseController {
 
 	}
 
+	
+	@PostMapping("/alumno/comentarCurso/{id}")
+	public String commentCurso(@PathVariable(name = "id") Integer id,@ModelAttribute("comentario") ComentarioModel comentarioModel,
+			RedirectAttributes flash) {
+
+			String email = SecurityContextHolder.getContext().getAuthentication().getName();
+			Usuario user=userRepository.findByEmail(email);
+			CursoModel curso =cursoService.findCurso(id);
+
+			comentarioModel.setUser(user);
+			comentarioModel.setCurso(cursoService.transform(curso));
+			comentarioService.addComentario(comentarioModel);
+
+			flash.addFlashAttribute("succes", "comentario añadido satisfactoriamente");
+			return "redirect:/alumno/listCursos";
+
+
+	}
+	
+	@GetMapping("/alumno/formComentario/{id}")
+	public String formComentario(@PathVariable(name = "id", required = false) Integer id, Model model) {
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+
+			model.addAttribute("curso" ,id);
+			model.addAttribute("comentario", new Comentario());
+
+		return FORM_VIEWCOMENTARIO;
+	}
+	
+
 	@GetMapping("/profesor/listAlumnos/{id}")
 	public ModelAndView listAlumnosProfesor(@PathVariable("id") int id) {
 		ModelAndView mav = new ModelAndView(ALUMNOS_VIEW);
+		CursoModel curso = cursoService.findCurso(id);
 		List<UsuarioModel> alumnos = userService.listAlumnosByMatricula(id);
 		List<Matricula> matriculas = matriculaRepository
 				.findByIdcurso(cursoService.transform(cursoService.findCurso(id)));
@@ -111,7 +150,9 @@ public class CourseController {
 			}
 		}
 		mav.addObject("map", map);
-		mav.addObject("curso", id);
+		mav.addObject("curso", curso);
+		mav.addObject("localDate", Date.valueOf(LocalDate.now()));
+		mav.addObject("cursoFecha", Date.valueOf(curso.getFechaFin()));
 		return mav;
 	}
 
@@ -120,7 +161,7 @@ public class CourseController {
 		ModelAndView mav = new ModelAndView(COMENTARIOS_VIEW);
 		Curso curso= cursoService.transform(cursoService.findCurso(id));
 		List<ComentarioModel> comentarios = comentarioService.findComentarioByCurso(curso);
-		System.out.println(comentarios.get(0).getUser());
+		
 		mav.addObject("comentarios", comentarios);
 		return mav;
 	}

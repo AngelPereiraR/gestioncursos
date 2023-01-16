@@ -22,7 +22,7 @@
 		<tbody th:each="comentario: ${comentarios}">
 			<tr>
 				<td th:text=${comentario.user.email}></td>
-				
+				<td th:text=${comentario.curso.nombre}></td>
 				<td th:text=${comentario.comentario}></td>
 			</tr>
 		</tbody>
