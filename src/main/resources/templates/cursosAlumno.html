@@ -46,12 +46,14 @@
 				<td th:text=${curso.fechaInicio}></td>
 				<td th:text=${curso.fechaFin}></td>
 				<td th:if="${#lists.contains(idalumnos, id) and #lists.contains(idcursos, curso.idcurso)}">
-					<p th:text="${valoraciones[counter.getCount()]}"></p>
+					<p th:if="${valoraciones[counter.getCount()]} != 0" th:text="${valoraciones[counter.getCount()]}"></p>
+					<button th:unless="${valoraciones[counter.getCount()]} != 0" class="btn tbn-lg btn-danger btn-block text-uppercase"
+							type="button">No calificado</button>
 					<span th:object="${counter.increment()}"></span>
 				</td>
 				<td th:unless="${#lists.contains(idalumnos, id) and #lists.contains(idcursos, curso.idcurso)}">
 					<button class="btn tbn-lg btn-danger btn-block text-uppercase"
-							type="button">No disponible</button>
+							type="button">No matriculado</button>
 				</td>
 				<td
 					th:if="${#lists.contains(idcursos, curso.idcurso) or curso.fechaFin < fecha or curso.fechaInicio < fecha}"><a>
