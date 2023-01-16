@@ -74,32 +74,16 @@
 								type="button">Comentar</button>
 						
 				</a></td>
-<<<<<<< HEAD
-
-				<td th:unless="${#lists.contains(matriculas, curso.idcurso) and curso.fechaFin < fecha}">
-
-				
-
-=======
 				<td th:unless="${#lists.contains(idcursos, curso.idcurso) and curso.fechaFin < fecha}">
->>>>>>> branch 'main' of https://github.com/SpiritVideogames/gestioncursos.git
 						
 							<button class="btn tbn-lg btn-danger btn-block text-uppercase"
-<<<<<<< HEAD
-								type="button">No disponible</button>
-						 
-				</td>
+								type="button">No disponible</button></td>
 				<td ><a th:href="@{/alumno/listComentarios/} + ${curso.idcurso}">
 						
 							<button class="btn tbn-lg btn-primary btn-block text-uppercase"
 								type="button">Ver comentarios</button>
 						
-				</a></td>
-=======
-								type="button">No disponible</button></td>
->>>>>>> branch 'main' of https://github.com/SpiritVideogames/gestioncursos.git
-
-			</tr>
+				</a></td></tr>
 		</tbody>
 	</table>
 </div>
