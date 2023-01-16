@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 10-12-2022 a las 16:23:01
+-- Tiempo de generación: 16-01-2023 a las 13:00:42
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -30,9 +30,17 @@ SET time_zone = "+00:00";
 CREATE TABLE `comentario` (
   `idcomentario` int(11) NOT NULL,
   `comentario` varchar(255) DEFAULT NULL,
-  `id` int(11) DEFAULT NULL,
+  `alumno` int(11) DEFAULT NULL,
   `idcurso` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `comentario`
+--
+
+INSERT INTO `comentario` (`idcomentario`, `comentario`, `alumno`, `idcurso`) VALUES
+(15, 'Buen curso donde aprender Python', 11, 5),
+(16, 'Me ha encantado el curso', 11, 5);
 
 -- --------------------------------------------------------
 
@@ -55,9 +63,10 @@ CREATE TABLE `curso` (
 --
 
 INSERT INTO `curso` (`idcurso`, `descripcion`, `fecha_fin`, `fecha_inicio`, `nivel`, `nombre`, `id`) VALUES
-(30, 'Curso para aprender Java', '2022-12-31', '2022-12-01', 3, 'Java', NULL),
-(31, 'Curso para aprender Python', '2023-01-31', '2023-01-01', 2, 'Python', NULL),
-(33, 'Curso para aprender Laravel', '2023-02-28', '2023-02-01', 5, 'Laravel', NULL);
+(4, 'Curso para aprender Java', '2023-01-31', '2023-01-01', 8, 'Java', 2),
+(5, 'Curso para aprender Python', '2023-01-15', '2023-01-05', 7, 'Python', 3),
+(8, 'Curso para aprender Laravel', '2023-01-15', '2023-01-01', 3, 'Laravel', 2),
+(9, 'Curso para aprender Flutter', '2023-02-08', '2023-01-31', 8, 'Flutter', 3);
 
 -- --------------------------------------------------------
 
@@ -74,7 +83,7 @@ CREATE TABLE `hibernate_sequence` (
 --
 
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(34);
+(18);
 
 -- --------------------------------------------------------
 
@@ -89,6 +98,14 @@ CREATE TABLE `matricula` (
   `idcurso` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `matricula`
+--
+
+INSERT INTO `matricula` (`idmatricula`, `valoracion`, `id`, `idcurso`) VALUES
+(14, 7, 11, 5),
+(17, 0, 11, 9);
+
 -- --------------------------------------------------------
 
 --
@@ -98,10 +115,19 @@ CREATE TABLE `matricula` (
 CREATE TABLE `noticia` (
   `idnoticia` int(11) NOT NULL,
   `descripcion` varchar(255) DEFAULT NULL,
+  `fecha_creacion` varchar(255) DEFAULT NULL,
   `imagen` varchar(255) DEFAULT NULL,
   `titulo` varchar(255) DEFAULT NULL,
   `idadministrador` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `noticia`
+--
+
+INSERT INTO `noticia` (`idnoticia`, `descripcion`, `fecha_creacion`, `imagen`, `titulo`, `idadministrador`) VALUES
+(6, 'Esta es la primera noticia', '2023-01-16', 'http://localhost:8080/imgs/2020-mayo-el-periodico-xavi-savin-b6a18975-2a47-4c8b-92b0-ab18b21cd3f6.jpg', 'Primera Noticia', 1),
+(7, 'Esta es la segunda noticia', '2023-01-07', 'http://localhost:8080/imgs/fotonoticia_20220225004313_1200.jpg', 'Segunda Noticia', 1);
 
 -- --------------------------------------------------------
 
@@ -110,28 +136,28 @@ CREATE TABLE `noticia` (
 --
 
 CREATE TABLE `usuario` (
-  `id` bigint(20) NOT NULL,
+  `id` int(11) NOT NULL,
+  `apellidos` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
   `enabled` bit(1) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `role` varchar(255) DEFAULT NULL,
-  `apellidos` varchar(255) DEFAULT NULL,
   `foto` varchar(255) DEFAULT NULL,
-  `nombre` varchar(255) DEFAULT NULL
+  `nombre` varchar(255) DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` varchar(255) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `email`, `enabled`, `password`, `role`, `apellidos`, `foto`, `nombre`) VALUES
-(1, 'admin@gmail.com', b'1', '$2a$10$aZp/pscdhzHU2Wsiv1mGceTSkpFxs.QBZozjBmeSv1zAoi.k2jqGu', 'ROLE_ADMIN', NULL, NULL, NULL),
-(28, 'pepa@gmail.com', b'1', '$2a$10$1IjZ9GkRBb0WgBnBd6fQ/.DRryk8rMiiL2EHfN7Cv1MhUXTUMMj1u', 'ROLE_ALUMNO', 'Romero', 'http:www.url.com', 'Pepa'),
-(27, 'paco@gmail.com', b'0', '$2a$10$ewOPkXymrKdk9jf6Mt8tJ./4unLIpibKXAZTqVzlnWfBOdgP604Ti', 'ROLE_ALUMNO', 'García', 'http:www.url.com', 'Paco'),
-(26, 'pepe@gmail.com', b'1', '$2a$10$1aMjD7akQxrJu7j9KFdtTeNaTePCVOyYb0M4Yq0LxyuHaQtkHDGre', 'ROLE_ALUMNO', 'Gómez', 'http:www.url.com', 'Pepe'),
-(21, 'maria@gmail.com', b'1', '$2a$10$3iwQ0urH.CU12ohogGq.VuaQLzhpHIv9iATMwgNiaR0A/q0iC0UXy', 'ROLE_PROFESOR', 'Rodríguez', NULL, 'María'),
-(23, 'pedro@gmail.com', b'1', '$2a$10$EukE5g8AOQDZP8MzMLlMNOg3r/DaVipbAHtv..6BBogZ51mYQ00g.', 'ROLE_PROFESOR', 'Pereira', NULL, 'Pedro'),
-(25, 'manuel@gmail.com', b'1', '$2a$10$LvrGPTINTcQ8AXfAHc3lNuIn0OYvCmJlHXd5s45OoWoddffKU1.uS', 'ROLE_PROFESOR', 'Mellado', NULL, 'Manuel');
+INSERT INTO `usuario` (`id`, `apellidos`, `email`, `enabled`, `foto`, `nombre`, `password`, `role`) VALUES
+(1, '', 'admin@gmail.com', b'0', '', '', '$2a$10$iX3FmXNX52NyN4RgkkGEhumm.B8oTdIXB0P5OuNOgK5du1IoNEBv2', 'ROLE_ADMIN'),
+(2, 'Gómez', 'pepe@gmail.com', b'1', NULL, 'Pepe', '$2a$10$CAcQvSYfsfUAl4zWu3LveeS9wtHczevEA7NfAX9gshkQq5/P/xxq2', 'ROLE_PROFESOR'),
+(3, 'Pereira', 'angel@gmail.com', b'1', NULL, 'Angel', '$2a$10$4sCyyIipl.HWv0M1P4jLbuAd38vUqhXaC9wbHLw9x3LY9NrE3YG8u', 'ROLE_PROFESOR'),
+(10, 'García', 'paco@gmail.com', b'1', '', 'Paco', '$2a$10$i8y3dkl7WSoTm91RUQsN9ubnGQQe6qvibEK/Yjeg1vJFWphtO79CW', 'ROLE_ALUMNO'),
+(11, 'Mellado', 'pedro@gmail.com', b'0', '', 'Pedro', '$2a$10$QN07onDonKBiBzEbWjiC5uanR9aF/8RrQ.9qm4qty2PMQelfDlC7K', 'ROLE_ALUMNO'),
+(12, 'Rodríguez', 'maria@gmail.com', b'1', '', 'María', '$2a$10$03fvFPDS/hkuuif61H5NZuqBQeFcc13Unnjyrs5FcQGfedUx50TVK', 'ROLE_ALUMNO'),
+(13, 'Romero', 'manuel@gmail.com', b'0', '', 'Manuel', '$2a$10$CpdyJrlora/xdAXVL7afYu1jUkG5pzuS2chVyGRgZaWxnzUpURnN6', 'ROLE_ALUMNO');
 
 --
 -- Índices para tablas volcadas
@@ -142,7 +168,7 @@ INSERT INTO `usuario` (`id`, `email`, `enabled`, `password`, `role`, `apellidos`
 --
 ALTER TABLE `comentario`
   ADD PRIMARY KEY (`idcomentario`),
-  ADD KEY `FKqfm6rdu9qcdamfo9srf4q9kg6` (`id`),
+  ADD KEY `FKh077qhhmgt2l9nd1kj7fwe8hf` (`alumno`),
   ADD KEY `FKsnu5vylks0rctei8d0j7b10mr` (`idcurso`);
 
 --
