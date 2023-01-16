@@ -3,6 +3,7 @@ package com.example.demo.services;
 import java.util.List;
 
 import com.example.demo.entity.Comentario;
+import com.example.demo.entity.Curso;
 import com.example.demo.model.ComentarioModel;
 import com.example.demo.model.CursoModel;
 
@@ -20,4 +21,6 @@ public interface ComentarioService {
 	public abstract ComentarioModel transform(Comentario comentario);
 	
 	public abstract ComentarioModel findComentario(int id);
+
+	public abstract List<ComentarioModel> findComentarioByCurso(Curso id);
 }

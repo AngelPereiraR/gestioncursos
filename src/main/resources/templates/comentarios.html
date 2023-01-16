@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/css/styles.css}" rel="stylesheet">
+<title>Cursos</title>
+<script src="https://kit.fontawesome.com/7cb85c1f74.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<nav th:replace="index::header" class="header"></nav>
+<div class="container">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Autor</th>
+				<th>Curso</th>
+				<th>Comentario</th>
+				
+			</tr>
+		</thead>
+
+		<tbody th:each="comentario: ${comentarios}">
+			<tr>
+				<td th:text=${comentario.user.email}></td>
+				
+				<td th:text=${comentario.comentario}></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

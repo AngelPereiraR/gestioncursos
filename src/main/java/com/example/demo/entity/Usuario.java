@@ -38,7 +38,7 @@ public class Usuario {
 	@Size(max = 45)
 	private String foto;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "alumno")
 	private List<Comentario> idcomentario;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "id")

@@ -19,8 +19,8 @@ public class Comentario {
 	private String comentario;
 
 	@ManyToOne
-	@JoinColumn(name = "id")
-	private Usuario id;
+	@JoinColumn(name = "alumno")
+	private Usuario alumno;
 
 	@ManyToOne
 	@JoinColumn(name = "idcurso")
@@ -30,11 +30,11 @@ public class Comentario {
 		super();
 	}
 
-	public Comentario(int idcomentario, @Size(max = 45) String comentario, Usuario id, Curso idcurso) {
+	public Comentario(int idcomentario, @Size(max = 45) String comentario, Usuario alumno, Curso idcurso) {
 		super();
 		this.idcomentario = idcomentario;
 		this.comentario = comentario;
-		this.id = id;
+		this.alumno = alumno;
 		this.idcurso = idcurso;
 	}
 
@@ -54,12 +54,12 @@ public class Comentario {
 		this.comentario = comentario;
 	}
 
-	public Usuario getId() {
-		return id;
+	public Usuario getAlumno() {
+		return alumno;
 	}
 
-	public void setId(Usuario id) {
-		this.id = id;
+	public void setAlumno(Usuario alumno) {
+		this.alumno = alumno;
 	}
 
 	public Curso getIdcurso() {
@@ -72,7 +72,7 @@ public class Comentario {
 
 	@Override
 	public String toString() {
-		return "Comentario [idcomentario=" + idcomentario + ", comentario=" + comentario + ", id=" + id + ", idcurso="
+		return "Comentario [idcomentario=" + idcomentario + ", comentario=" + comentario + ", alumno=" + alumno + ", idcurso="
 				+ idcurso + "]";
 	}
 

@@ -19,11 +19,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.entity.Curso;
 import com.example.demo.entity.Matricula;
 import com.example.demo.entity.Usuario;
+import com.example.demo.model.ComentarioModel;
 import com.example.demo.model.CursoModel;
 import com.example.demo.model.MatriculaModel;
 import com.example.demo.model.UsuarioModel;
 import com.example.demo.repository.MatriculaRepository;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.services.ComentarioService;
 import com.example.demo.services.CursoService;
 import com.example.demo.services.MatriculaService;
 import com.example.demo.services.UsuarioService;
@@ -34,23 +36,28 @@ public class CourseController {
 	private static final String COURSES_VIEW = "cursos";
 	private static final String ALUMNOS_VIEW = "alumnosCurso";
 	private static final String FORM_VIEW = "formCurso";
+	private static final String COMENTARIOS_VIEW = "comentarios";
 
 	@Autowired
 	@Qualifier("cursoService")
 	private CursoService cursoService;
 	
 	@Autowired
+	@Qualifier("comentarioService")
+	private ComentarioService comentarioService;
+
+	@Autowired
 	@Qualifier("userService")
 	private UsuarioService userService;
-	
+
 	@Autowired
 	@Qualifier("matriculaRepository")
 	private MatriculaRepository matriculaRepository;
-	
+
 	@Autowired
 	@Qualifier("matriculaService")
 	private MatriculaService matriculaService;
-	
+
 	@Autowired
 	@Qualifier("userRepository")
 	public UserRepository userRepository;
@@ -61,24 +68,26 @@ public class CourseController {
 		mav.addObject("cursos", cursoService.listAllCursos());
 		return mav;
 	}
-	
+
 	@GetMapping("/admin/listAlumnos/{id}")
 	public ModelAndView listAlumnosAdmin(@PathVariable("id") int id) {
 		ModelAndView mav = new ModelAndView(ALUMNOS_VIEW);
 		List<UsuarioModel> alumnos = userService.listAlumnosByMatricula(id);
-		List<Matricula> matriculas = matriculaRepository.findByIdcurso(cursoService.transform(cursoService.findCurso(id)));
+		List<Matricula> matriculas = matriculaRepository
+				.findByIdcurso(cursoService.transform(cursoService.findCurso(id)));
 		Map<UsuarioModel, Matricula> map = new HashMap<UsuarioModel, Matricula>();
-		for(UsuarioModel alumno : alumnos) {
-			for(Matricula matricula: matriculas) {
+		for (UsuarioModel alumno : alumnos) {
+			for (Matricula matricula : matriculas) {
 				map.put(alumno, matricula);
 			}
 		}
 		mav.addObject("map", map);
 		return mav;
 	}
-	
+
 	@PostMapping("/profesor/listAlumnos/{idCurso}/{idAlumno}")
-	public String calificar(@PathVariable("idCurso") int idCurso, @PathVariable("idAlumno") int idAlumno, @ModelAttribute("nota") String nota, RedirectAttributes flash) {
+	public String calificar(@PathVariable("idCurso") int idCurso, @PathVariable("idAlumno") int idAlumno,
+			@ModelAttribute("nota") String nota, RedirectAttributes flash) {
 		Usuario usuario = userService.transform(userService.findUsuario(idAlumno));
 		Curso curso = cursoService.transform(cursoService.findCurso(idCurso));
 		Matricula matricula = matriculaRepository.findByIdAndIdcurso(usuario, curso);
@@ -88,20 +97,31 @@ public class CourseController {
 		return "redirect:/profesor/listCursos";
 
 	}
-	
+
 	@GetMapping("/profesor/listAlumnos/{id}")
 	public ModelAndView listAlumnosProfesor(@PathVariable("id") int id) {
 		ModelAndView mav = new ModelAndView(ALUMNOS_VIEW);
 		List<UsuarioModel> alumnos = userService.listAlumnosByMatricula(id);
-		List<Matricula> matriculas = matriculaRepository.findByIdcurso(cursoService.transform(cursoService.findCurso(id)));
+		List<Matricula> matriculas = matriculaRepository
+				.findByIdcurso(cursoService.transform(cursoService.findCurso(id)));
 		Map<UsuarioModel, Matricula> map = new HashMap<UsuarioModel, Matricula>();
-		for(UsuarioModel alumno : alumnos) {
-			for(Matricula matricula: matriculas) {
+		for (UsuarioModel alumno : alumnos) {
+			for (Matricula matricula : matriculas) {
 				map.put(alumno, matricula);
 			}
 		}
 		mav.addObject("map", map);
 		mav.addObject("curso", id);
+		return mav;
+	}
+
+	@GetMapping("/alumno/listComentarios/{id}")
+	public ModelAndView listComentariosAlumno(@PathVariable("id") int id) {
+		ModelAndView mav = new ModelAndView(COMENTARIOS_VIEW);
+		Curso curso= cursoService.transform(cursoService.findCurso(id));
+		List<ComentarioModel> comentarios = comentarioService.findComentarioByCurso(curso);
+		System.out.println(comentarios.get(0).getUser());
+		mav.addObject("comentarios", comentarios);
 		return mav;
 	}
 
@@ -142,25 +162,19 @@ public class CourseController {
 		}
 		return FORM_VIEW;
 	}
-	
+
 	@PostMapping("/alumno/matricular/{idcurso}")
-	public String addMatricula(@PathVariable("idcurso")int idCurso,RedirectAttributes flash) {
+	public String addMatricula(@PathVariable("idcurso") int idCurso, RedirectAttributes flash) {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		Usuario usuario = userRepository.findByEmail(email);
-		Curso curso=cursoService.transform(cursoService.findCurso(idCurso));
-		MatriculaModel matriculaModel=new MatriculaModel();
+		Curso curso = cursoService.transform(cursoService.findCurso(idCurso));
+		MatriculaModel matriculaModel = new MatriculaModel();
 		matriculaModel.setId(usuario);
 		matriculaModel.setIdcurso(curso);
 		matriculaService.addMatricula(matriculaModel);
-		
-		
+
 		return "redirect:/alumno/listCursos";
-		
 
 	}
-	
 
-	
 }
-
-

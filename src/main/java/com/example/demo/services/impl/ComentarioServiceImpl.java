@@ -37,7 +37,7 @@ public class ComentarioServiceImpl implements ComentarioService {
 		Usuario user =comentarioModel.getUser();
 		Comentario comentario = transform(comentarioModel);
 		comentario.setIdcurso(curso);
-		comentario.setId(user);
+		comentario.setAlumno(user);
 		System.out.println(comentario.getIdcurso().getDescripcion());
 
 		return comentarioRepository.save(comentario);
@@ -70,6 +70,16 @@ public class ComentarioServiceImpl implements ComentarioService {
 	public ComentarioModel findComentario(int id) {
 
 		return transform(comentarioRepository.findById(id).orElse(null));
+	}
+	
+	@Override
+	public  List<ComentarioModel> findComentarioByCurso(Curso id) {
+
+		List<ComentarioModel> comentarios = new ArrayList<ComentarioModel>();
+		for (Comentario comentario :comentarioRepository.findByIdcurso(id))
+			comentarios.add(transform(comentario));
+		return comentarios;
+	
 	}
 
 }

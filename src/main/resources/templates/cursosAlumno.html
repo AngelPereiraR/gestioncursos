@@ -64,11 +64,17 @@
 								type="button">Comentar</button>
 						
 				</a></td>
-				<td th:unless="curso.fechaFin < fecha)"><a th:href="@{/alumno/formComentario/} + ${curso.idcurso}">
+				<td th:unless="curso.fechaFin < fecha"><a th:href="@{/alumno/formComentario/} + ${curso.idcurso}">
 						
 							<button class="btn tbn-lg btn-primary btn-block text-uppercase"
 								type="button">No disponible</button>
 						 
+				</a></td>
+				<td ><a th:href="@{/alumno/listComentarios/} + ${curso.idcurso}">
+						
+							<button class="btn tbn-lg btn-primary btn-block text-uppercase"
+								type="button">Ver comentarios</button>
+						
 				</a></td>
 
 			</tr>
