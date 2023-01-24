@@ -37,6 +37,7 @@ import com.example.demo.services.UsuarioService;
 
 public class CourseController {
 	private static final String COURSES_VIEW = "cursos";
+	private static final String COURSES2_VIEW = "cursosSolicitados";
 	private static final String ALUMNOS_VIEW = "alumnosCurso";
 	private static final String FORM_VIEW = "formCurso";
 
@@ -216,6 +217,31 @@ public class CourseController {
 
 		return "redirect:/alumno/listCursos";
 
+	}
+	
+	@GetMapping("admin/lisCursosSolicitados")
+	public ModelAndView listCursosSolicitados() {
+		List<CursoModel>cursos=cursoService.listAllCursos();
+		List<CursoModel>cursosOrdenados = null;
+		boolean mayor=false;
+		ModelAndView mav = new ModelAndView(COURSES2_VIEW);
+		if(cursos.size()==1) {
+			mav.addObject("cursos",cursos);
+		}else {
+		for(int i =0; i<cursos.size(); i++) {
+			for(int j =0; j<cursos.size()-1; j++) {
+				
+				if(matriculaService.numMatriculasByIdcurso(cursoService.transform(cursos.get(i)))>matriculaService.numMatriculasByIdcurso(cursoService.transform(cursos.get(j)))) {
+					mayor=true;
+				}
+				if(mayor==true) {
+					cursosOrdenados.add(cursos.get(i));
+					mayor=false;
+				}
+			}
+		}mav.addObject("cursos",cursosOrdenados);}
+		
+		return mav;
 	}
 
 }

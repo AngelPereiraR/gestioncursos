@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entity.Curso;
 import com.example.demo.entity.Matricula;
 import com.example.demo.model.MatriculaModel;
 import com.example.demo.repository.MatriculaRepository;
@@ -27,6 +28,7 @@ public class MatriculaServiceImpl implements MatriculaService {
 			matriculas.add(transform(matricula));
 		return matriculas;
 	}
+	
 
 	@Override
 	public Matricula addMatricula(MatriculaModel matriculaModel) {
@@ -55,5 +57,13 @@ public class MatriculaServiceImpl implements MatriculaService {
 		ModelMapper modelMapper = new ModelMapper();
 		return modelMapper.map(matricula, MatriculaModel.class);
 	}
-
+	
+	@Override
+	public int numMatriculasByIdcurso(Curso idcurso) {
+		List<MatriculaModel> matriculas = new ArrayList<MatriculaModel>();
+		for (Matricula matricula : matriculaRepository.findByIdcurso(idcurso))
+			matriculas.add(transform(matricula));
+		int num=matriculas.size();
+		return num;
+	}
 }

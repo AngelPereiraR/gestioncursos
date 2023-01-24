@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import java.util.List;
 
+import com.example.demo.entity.Curso;
 import com.example.demo.entity.Matricula;
 import com.example.demo.model.MatriculaModel;
 
@@ -17,6 +18,8 @@ public interface MatriculaService {
 	public abstract Matricula transform(MatriculaModel matriculaModel);
 
 	public abstract MatriculaModel transform(Matricula matricula);
+
+	public abstract int numMatriculasByIdcurso(Curso idcurso);
 	
 	
 }
