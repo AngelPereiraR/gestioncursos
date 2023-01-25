@@ -235,10 +235,11 @@ public class CourseController {
 				if(matriculaService.numMatriculasByIdcurso(cursoService.transform(cursos.get(i)))>matriculaService.numMatriculasByIdcurso(cursoService.transform(cursos.get(j)))) {
 					mayor=true;
 				}
-				if(mayor==true) {
-					cursosOrdenados.add(cursos.get(i));
-					mayor=false;
-				}
+				
+			}
+			if(mayor==true) {
+				cursosOrdenados.add(cursos.get(i));
+				mayor=false;
 			}
 		}mav.addObject("cursos",cursosOrdenados);}
 		
