@@ -19,23 +19,26 @@
 	            
 	            <ul sec:authorize="hasRole('ROLE_ADMIN')" class="navbar-nav ms-auto">
 	            	<li class="nav-item mx-0 mx-lg-1">
-	                	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/admin/listaAlumnos}">Alumnos</a>
+	                	<a class="nav-link py-3 px-0 px-lg-1 rounded" th:href="@{/admin/listaAlumnos}">Alumnos</a>
 	                </li>
 	              	<li class="nav-item mx-0 mx-lg-1">
-	                	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/admin/listCursos}">Cursos</a>
+	                	<a class="nav-link py-3 px-0 px-lg-1 rounded" th:href="@{/admin/listCursos}">Cursos</a>
 	                </li>
 	                <li class="nav-item mx-0 mx-lg-1">
-	                	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/admin/listaProfesores}">Profesores</a>
+	                	<a class="nav-link py-3 px-0 px-lg-1 rounded" th:href="@{/admin/listaProfesores}">Profesores</a>
 	                </li>
 	                <li class="nav-item mx-0 mx-lg-1">
-	                	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/admin/listNoticias}">Noticias</a>
+	                	<a class="nav-link py-3 px-0 px-lg-1 rounded" th:href="@{/admin/listNoticias}">Noticias</a>
 	                </li>
 	                <li class="nav-item mx-0 mx-lg-1">
-	                	<a class="nav-link py-3 px-0 px-lg-3 rounded" th:text="'Hola ' + ${#authentication.name}"></a>
+	                	<a class="nav-link py-3 px-0 px-lg-1 rounded" th:href="@{/admin/listCursosSolicitados}">Cursos Más Alumnos</a>
+	                </li>
+	                <li class="nav-item mx-0 mx-lg-1">
+	                	<a class="nav-link py-3 px-0 px-lg-1 rounded" th:text="'Hola ' + ${#authentication.name}"></a>
 	                </li>
 	                <li class="nav-item mx-0 mx-lg-1">
 		                <form th:action="@{/logout}" method="post">
-		                	<button class= "nav-link py-3 px-0 px-lg-3 rounded btn" type="submit">Cerrar Sesión</button>
+		                	<button class= "nav-link py-3 px-0 px-lg-1 rounded btn" type="submit">Cerrar Sesión</button>
 		                </form>
 	                </li>
 	            </ul>

@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -219,10 +220,10 @@ public class CourseController {
 
 	}
 	
-	@GetMapping("admin/lisCursosSolicitados")
+	@GetMapping("admin/listCursosSolicitados")
 	public ModelAndView listCursosSolicitados() {
 		List<CursoModel>cursos=cursoService.listAllCursos();
-		List<CursoModel>cursosOrdenados = null;
+		List<CursoModel>cursosOrdenados = new ArrayList<>();
 		boolean mayor=false;
 		ModelAndView mav = new ModelAndView(COURSES2_VIEW);
 		if(cursos.size()==1) {
