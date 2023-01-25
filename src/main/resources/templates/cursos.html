@@ -34,6 +34,11 @@
 							<i class="fa-solid fa-graduation-cap"></i>
 						</button>
 					</a>
+					<a th:href="@{/admin/listMejoresAlumnos/} + ${curso.idcurso}">
+						<button class="btn tbn-lg btn-secondary btn-block text-uppercase" type="button">
+							Mejores Alumnos
+						</button>
+					</a>
 					<a th:href="@{/admin/formCurso/} + ${curso.idcurso}">
 						<button class="btn tbn-lg btn-primary btn-block text-uppercase" type="button">
 							Editar Curso

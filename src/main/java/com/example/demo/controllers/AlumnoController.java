@@ -4,7 +4,12 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -63,7 +68,59 @@ public class AlumnoController {
 	@GetMapping("/admin/listaAlumnos")
 	public ModelAndView listaAlumnos() {
 		ModelAndView mav = new ModelAndView(ALUMNOS_VIEW);
-		mav.addObject("alumnos", userService.listAllAlumnos());
+		List<UsuarioModel> alumnos = userService.listAllAlumnos();
+		List<MatriculaModel> matriculas = matriculaService.listAllMatriculas();
+		
+		//Conseguir la nota total de todos los cursos matriculados por el alumno y el número de cursos en los que está matriculado
+		Map<UsuarioModel, Map<Integer, Integer>> notasTotalAlumno = new HashMap<UsuarioModel, Map<Integer, Integer>>();
+		for(UsuarioModel alumno : alumnos) {
+			for(MatriculaModel matricula : matriculas) {
+				if(alumno.getId() == matricula.getId().getId()) {
+					 Map<Integer, Integer> notas = notasTotalAlumno.get(alumno);
+					 notasTotalAlumno.remove(alumno);
+					 if(notas == null) {
+						 notas = new HashMap<Integer, Integer>();
+						 notas.put(matricula.getValoracion(), 1);
+						 notasTotalAlumno.put(alumno, notas);
+					 }
+					 else {
+						 for (Entry<Integer, Integer> entry : notas.entrySet()) {
+								Integer nota = entry.getKey();
+								Integer numCursos = entry.getValue();
+								notas.remove(nota);
+								nota += matricula.getValoracion();
+								numCursos += 1;
+								notas.put(nota, numCursos);
+							}
+						 notasTotalAlumno.put(alumno, notas);
+					 }
+				}
+			}
+		}
+		
+		//Conseguir las notas medias de los alumnos
+		Map<UsuarioModel, Float> notasMediasAlumno = new HashMap<UsuarioModel, Float>();
+		for(Entry<UsuarioModel, Map<Integer, Integer>> entry : notasTotalAlumno.entrySet()) {
+			UsuarioModel alumno = entry.getKey();
+			Map<Integer, Integer> notas = entry.getValue();
+			for(Entry<Integer, Integer> entry2 : notas.entrySet()) {
+				Integer nota = entry2.getKey();
+				Integer numCursos = entry2.getValue();
+				
+				Float notaMedia = nota / (float) numCursos;
+				notasMediasAlumno.put(alumno, notaMedia);
+			}
+		}
+		
+		//Ordenar la lista de las notas medias
+		List<Map.Entry<UsuarioModel, Float>> notasMediasOrdenadasAlumno = new ArrayList<Map.Entry<UsuarioModel, Float>>(notasMediasAlumno.entrySet());
+		Collections.sort(notasMediasOrdenadasAlumno, new Comparator<Map.Entry<UsuarioModel, Float>>() {
+		    @Override
+		    public int compare(Map.Entry<UsuarioModel, Float> o1, Map.Entry<UsuarioModel, Float> o2) {
+		    	return o1.getValue().compareTo(o2.getValue());
+		    }
+		});
+		mav.addObject("alumnos", notasMediasOrdenadasAlumno);
 		return mav;
 	}
 

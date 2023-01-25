@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -86,10 +87,8 @@ public class CourseController {
 		List<Matricula> matriculas = matriculaRepository
 				.findByIdcurso(cursoService.transform(cursoService.findCurso(id)));
 		Map<UsuarioModel, Matricula> map = new HashMap<UsuarioModel, Matricula>();
-		for (UsuarioModel alumno : alumnos) {
-			for (Matricula matricula : matriculas) {
-				map.put(alumno, matricula);
-			}
+		for (int i = 0; i < alumnos.size(); i++) {
+			map.put(alumnos.get(i), matriculas.get(i));
 		}
 		mav.addObject("map", map);
 		return mav;
@@ -146,10 +145,8 @@ public class CourseController {
 		List<Matricula> matriculas = matriculaRepository
 				.findByIdcurso(cursoService.transform(cursoService.findCurso(id)));
 		Map<UsuarioModel, Matricula> map = new HashMap<UsuarioModel, Matricula>();
-		for (UsuarioModel alumno : alumnos) {
-			for (Matricula matricula : matriculas) {
-				map.put(alumno, matricula);
-			}
+		for (int i = 0; i < alumnos.size(); i++) {
+			map.put(alumnos.get(i), matriculas.get(i));
 		}
 		mav.addObject("map", map);
 		mav.addObject("curso", curso);
@@ -243,6 +240,34 @@ public class CourseController {
 			}
 		}mav.addObject("cursos",cursosOrdenados);}
 		
+		return mav;
+	}
+	
+	@GetMapping("/admin/listMejoresAlumnos/{id}")
+	public ModelAndView listMejoresAlumnosAdmin(@PathVariable("id") int id) {
+		ModelAndView mav = new ModelAndView(ALUMNOS_VIEW);
+		List<UsuarioModel> alumnos = userService.listAlumnosByMatricula(id);
+		List<Matricula> matriculas = matriculaRepository
+				.findByIdcurso(cursoService.transform(cursoService.findCurso(id)));
+		Map<UsuarioModel, Matricula> map = new HashMap<UsuarioModel, Matricula>();
+		for (int i = 0; i < alumnos.size(); i++) {
+			map.put(alumnos.get(i), matriculas.get(i));
+		}
+		Map<UsuarioModel, Matricula> mejoresAlumnos = new HashMap<UsuarioModel, Matricula>();
+		int mejorNota = 0;
+		for (Entry<UsuarioModel, Matricula> entry : map.entrySet()) {
+			UsuarioModel alumno = entry.getKey();
+		    Matricula matricula = entry.getValue();
+		    if(mejorNota == matricula.getValoracion()) {
+		    	mejoresAlumnos.put(alumno, matricula);
+		    }
+		    else if(mejorNota < matricula.getValoracion()){
+		    	mejoresAlumnos.clear();
+		    	mejoresAlumnos.put(alumno, matricula);
+		    	mejorNota = matricula.getValoracion();
+		    }
+		}
+		mav.addObject("map", mejoresAlumnos);
 		return mav;
 	}
 
