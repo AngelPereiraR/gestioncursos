@@ -44,10 +44,6 @@ public class ProfesorController {
 	@Qualifier("cursoService")
 	private CursoService cursoService;
 
-	@Autowired
-	@Qualifier("userRepository")
-	public UserRepository userRepository;
-
 	@GetMapping("/admin/listaProfesores")
 	public ModelAndView listaProfesores() {
 		ModelAndView mav = new ModelAndView(PROFESSORS_VIEW);
@@ -106,7 +102,7 @@ public class ProfesorController {
 	public String formProfesorUpdate(Model model) {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 
-		model.addAttribute("profesor", userRepository.findByEmail(email));
+		model.addAttribute("profesor", userService.findByEmail(email));
 		return FORM_VIEW2;
 	}
 
@@ -114,7 +110,7 @@ public class ProfesorController {
 	public String listCursos(@RequestParam(name = "name", required = false, defaultValue="") Opcion opcion, Model model) throws ParseException {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		
-		Usuario profesor = userRepository.findByEmail(email);
+		Usuario profesor = userService.findByEmail(email);
 		if(opcion.getName().equals("asc")) {
 			
 			model.addAttribute("opcion",opcion);
@@ -151,7 +147,7 @@ public class ProfesorController {
 
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 
-		Usuario profesor = userRepository.findByEmail(email);
+		Usuario profesor = userService.findByEmail(email);
 		if (cursoModel.getIdcurso() == 0) {
 
 			cursoModel.setProfesor(profesor);

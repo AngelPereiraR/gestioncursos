@@ -33,11 +33,6 @@ public class IndexController {
 	@Autowired
 	@Qualifier("userService")
 	private UsuarioService userService;
-	
-	@Autowired
-	@Qualifier("userRepository")
-	public UserRepository userRepository;
-	
 
 	@Autowired
 	@Qualifier("noticiaService")
@@ -48,7 +43,7 @@ public class IndexController {
 	private ModelAndView home() {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		
-		Usuario usuario = userRepository.findByEmail(email);
+		Usuario usuario = userService.findByEmail(email);
 		ModelAndView mav = new ModelAndView(LAYOUT_VIEW);
 		if(usuario.getRole().equalsIgnoreCase("ROLE_ALUMNO")) {
 		

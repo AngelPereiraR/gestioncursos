@@ -24,12 +24,11 @@ import com.example.demo.entity.Comentario;
 import com.example.demo.entity.Curso;
 import com.example.demo.entity.Matricula;
 import com.example.demo.entity.Usuario;
+import com.example.demo.model.AlumnoMatriculado;
 import com.example.demo.model.ComentarioModel;
 import com.example.demo.model.CursoModel;
 import com.example.demo.model.MatriculaModel;
 import com.example.demo.model.UsuarioModel;
-import com.example.demo.repository.MatriculaRepository;
-import com.example.demo.repository.UserRepository;
 import com.example.demo.services.ComentarioService;
 import com.example.demo.services.CursoService;
 import com.example.demo.services.MatriculaService;
@@ -61,16 +60,8 @@ public class CourseController {
 	private UsuarioService userService;
 
 	@Autowired
-	@Qualifier("matriculaRepository")
-	private MatriculaRepository matriculaRepository;
-
-	@Autowired
 	@Qualifier("matriculaService")
 	private MatriculaService matriculaService;
-
-	@Autowired
-	@Qualifier("userRepository")
-	public UserRepository userRepository;
 	
 
 	@GetMapping("/admin/listCursos")
@@ -84,13 +75,12 @@ public class CourseController {
 	public ModelAndView listAlumnosAdmin(@PathVariable("id") int id) {
 		ModelAndView mav = new ModelAndView(ALUMNOS_VIEW);
 		List<UsuarioModel> alumnos = userService.listAlumnosByMatricula(id);
-		List<Matricula> matriculas = matriculaRepository
-				.findByIdcurso(cursoService.transform(cursoService.findCurso(id)));
-		Map<UsuarioModel, Matricula> map = new HashMap<UsuarioModel, Matricula>();
+		List<Matricula> matriculas = matriculaService.findByIdcurso(id);
+		List<AlumnoMatriculado> alumnosMatriculados = new ArrayList<>();
 		for (int i = 0; i < alumnos.size(); i++) {
-			map.put(alumnos.get(i), matriculas.get(i));
+			alumnosMatriculados.add(new AlumnoMatriculado(alumnos.get(i), matriculas.get(i), 0, 0, 0));
 		}
-		mav.addObject("map", map);
+		mav.addObject("alumnosMatriculados", alumnosMatriculados);
 		return mav;
 	}
 
@@ -99,7 +89,7 @@ public class CourseController {
 			@ModelAttribute("nota") String nota, RedirectAttributes flash) {
 		Usuario usuario = userService.transform(userService.findUsuario(idAlumno));
 		Curso curso = cursoService.transform(cursoService.findCurso(idCurso));
-		Matricula matricula = matriculaRepository.findByIdAndIdcurso(usuario, curso);
+		Matricula matricula = matriculaService.findByIdAndIdcurso(usuario, curso);
 		matricula.setValoracion(Integer.parseInt(nota));
 		matriculaService.updateMatricula(matriculaService.transform(matricula));
 		flash.addFlashAttribute("succes", "curso actualizado satisfactoriamente");
@@ -113,7 +103,7 @@ public class CourseController {
 			RedirectAttributes flash) {
 
 			String email = SecurityContextHolder.getContext().getAuthentication().getName();
-			Usuario user=userRepository.findByEmail(email);
+			Usuario user=userService.findByEmail(email);
 			CursoModel curso =cursoService.findCurso(id);
 
 			comentarioModel.setUser(user);
@@ -128,8 +118,6 @@ public class CourseController {
 	
 	@GetMapping("/alumno/formComentario/{id}")
 	public String formComentario(@PathVariable(name = "id", required = false) Integer id, Model model) {
-		String email = SecurityContextHolder.getContext().getAuthentication().getName();
-
 			model.addAttribute("curso" ,id);
 			model.addAttribute("comentario", new Comentario());
 
@@ -142,13 +130,12 @@ public class CourseController {
 		ModelAndView mav = new ModelAndView(ALUMNOS_VIEW);
 		CursoModel curso = cursoService.findCurso(id);
 		List<UsuarioModel> alumnos = userService.listAlumnosByMatricula(id);
-		List<Matricula> matriculas = matriculaRepository
-				.findByIdcurso(cursoService.transform(cursoService.findCurso(id)));
-		Map<UsuarioModel, Matricula> map = new HashMap<UsuarioModel, Matricula>();
+		List<Matricula> matriculas = matriculaService.findByIdcurso(id);
+		List<AlumnoMatriculado> alumnosMatriculados = new ArrayList<>();
 		for (int i = 0; i < alumnos.size(); i++) {
-			map.put(alumnos.get(i), matriculas.get(i));
+			alumnosMatriculados.add(new AlumnoMatriculado(alumnos.get(i), matriculas.get(i), 0, 0, 0));
 		}
-		mav.addObject("map", map);
+		mav.addObject("alumnosMatriculados", alumnosMatriculados);
 		mav.addObject("curso", curso);
 		mav.addObject("localDate", Date.valueOf(LocalDate.now()));
 		mav.addObject("cursoFecha", Date.valueOf(curso.getFechaFin()));
@@ -193,7 +180,7 @@ public class CourseController {
 
 	@GetMapping(value = { "/admin/formCurso/{id}", "/admin/formCurso" })
 	public String formCurso(@PathVariable(name = "id", required = false) Integer id, Model model) {
-		List<Usuario> profesores = userRepository.findAllByRole("ROLE_PROFESOR");
+		List<Usuario> profesores = userService.findAllByRole("ROLE_PROFESOR");
 		model.addAttribute("profesores", profesores);
 		if (id == null) {
 			model.addAttribute("curso", new Curso());
@@ -206,7 +193,7 @@ public class CourseController {
 	@PostMapping("/alumno/matricular/{idcurso}")
 	public String addMatricula(@PathVariable("idcurso") int idCurso, RedirectAttributes flash) {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
-		Usuario usuario = userRepository.findByEmail(email);
+		Usuario usuario = userService.findByEmail(email);
 		Curso curso = cursoService.transform(cursoService.findCurso(idCurso));
 		MatriculaModel matriculaModel = new MatriculaModel();
 		matriculaModel.setId(usuario);
@@ -228,11 +215,9 @@ public class CourseController {
 		}else {
 		for(int i =0; i<cursos.size(); i++) {
 			for(int j =0; j<cursos.size()-1; j++) {
-				
 				if(matriculaService.numMatriculasByIdcurso(cursoService.transform(cursos.get(i)))>matriculaService.numMatriculasByIdcurso(cursoService.transform(cursos.get(j)))) {
 					mayor=true;
 				}
-				
 			}
 			if(mayor==true) {
 				cursosOrdenados.add(cursos.get(i));
@@ -247,27 +232,9 @@ public class CourseController {
 	public ModelAndView listMejoresAlumnosAdmin(@PathVariable("id") int id) {
 		ModelAndView mav = new ModelAndView(ALUMNOS_VIEW);
 		List<UsuarioModel> alumnos = userService.listAlumnosByMatricula(id);
-		List<Matricula> matriculas = matriculaRepository
-				.findByIdcurso(cursoService.transform(cursoService.findCurso(id)));
-		Map<UsuarioModel, Matricula> map = new HashMap<UsuarioModel, Matricula>();
-		for (int i = 0; i < alumnos.size(); i++) {
-			map.put(alumnos.get(i), matriculas.get(i));
-		}
-		Map<UsuarioModel, Matricula> mejoresAlumnos = new HashMap<UsuarioModel, Matricula>();
-		int mejorNota = 0;
-		for (Entry<UsuarioModel, Matricula> entry : map.entrySet()) {
-			UsuarioModel alumno = entry.getKey();
-		    Matricula matricula = entry.getValue();
-		    if(mejorNota == matricula.getValoracion()) {
-		    	mejoresAlumnos.put(alumno, matricula);
-		    }
-		    else if(mejorNota < matricula.getValoracion()){
-		    	mejoresAlumnos.clear();
-		    	mejoresAlumnos.put(alumno, matricula);
-		    	mejorNota = matricula.getValoracion();
-		    }
-		}
-		mav.addObject("map", mejoresAlumnos);
+		List<Matricula> matriculas = matriculaService.findByIdcurso(id);
+		List<AlumnoMatriculado> mejoresAlumnos = userService.listMejoresAlumnosAdmin(alumnos, matriculas);
+		mav.addObject("alumnosMatriculados", mejoresAlumnos);
 		return mav;
 	}
 

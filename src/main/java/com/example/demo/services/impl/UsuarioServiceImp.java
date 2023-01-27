@@ -3,6 +3,8 @@ package com.example.demo.services.impl;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,6 +26,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.entity.Curso;
 import com.example.demo.entity.Matricula;
 import com.example.demo.entity.Usuario;
+import com.example.demo.model.AlumnoMatriculado;
 import com.example.demo.model.CursoModel;
 import com.example.demo.model.MatriculaModel;
 import com.example.demo.model.UsuarioModel;
@@ -31,6 +34,7 @@ import com.example.demo.repository.CursoRepository;
 import com.example.demo.repository.MatriculaRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.services.CursoService;
+import com.example.demo.services.MatriculaService;
 import com.example.demo.services.UsuarioService;
 
 @Service("userService")
@@ -51,7 +55,10 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 	@Autowired
 	@Qualifier("matriculaRepository")
 	private MatriculaRepository matriculaRepository;
-
+	
+	@Autowired
+	@Qualifier("matriculaService")
+	private MatriculaService matriculaService;
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -310,8 +317,101 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 		return matriculaRepository.findById(id).stream().map(u->modelMapper.map(u, MatriculaModel.class)).collect(Collectors.toList());
 	}
 
-	
-	
-		
+	@Override
+	public Usuario findByEmail(String email) {
+		Usuario user=userRepository.findByEmail(email);
+		return user;
+	}
 
+	@Override
+	public List<Usuario> findAllByRole(String role) {
+		List<Usuario> profesores = userRepository.findAllByRole("ROLE_PROFESOR");
+		return profesores;
+	}
+
+	@Override
+	public List<AlumnoMatriculado> listMejoresAlumnosAdmin(List<UsuarioModel> alumnos, List<Matricula> matriculas) {
+		List<AlumnoMatriculado> alumnosMatriculados = new ArrayList<>();
+		for(UsuarioModel alumno : alumnos) {
+			for(Matricula matricula : matriculas) {
+				if(alumno.getId() == matricula.getId().getId()) {
+					int index = 0;
+					boolean existe = false;
+					for(int k = 0; k < alumnosMatriculados.size(); k++) {
+						if(alumnosMatriculados.get(k).getUsuarioModel().getId() == alumno.getId()) {
+							index = k;
+							existe = true;
+						}
+					}
+					if(existe == true) {
+						alumnosMatriculados.get(index).setCalificacion(alumnosMatriculados.get(index).getCalificacion() + matricula.getValoracion());
+						alumnosMatriculados.get(index).setNumCursos(alumnosMatriculados.get(index).getNumCursos() + 1);
+					}
+					else {
+						alumnosMatriculados.add(new AlumnoMatriculado(alumno, matricula, matricula.getValoracion(), 1, 0));
+					}
+				}
+			}
+		}
+		List<AlumnoMatriculado> mejoresAlumnos = new ArrayList<>();
+		int mejorNota = 0;
+		for (AlumnoMatriculado alumno : alumnosMatriculados) {
+			UsuarioModel alumnoModel = alumno.getUsuarioModel();
+		    Matricula matricula = alumno.getMatricula();
+		    int calificacion = alumno.getCalificacion();
+			int numCursos = alumno.getNumCursos();
+			float notaMedia = calificacion / (float) numCursos;
+		    if(mejorNota == matricula.getValoracion()) {
+		    	mejoresAlumnos.add(new AlumnoMatriculado(alumnoModel, matricula, calificacion, numCursos, notaMedia));
+		    }
+		    else if(mejorNota < matricula.getValoracion()){
+		    	mejoresAlumnos.clear();
+		    	mejoresAlumnos.add(new AlumnoMatriculado(alumnoModel, matricula, calificacion, numCursos, notaMedia));
+		    	mejorNota = matricula.getValoracion();
+		    }
+		}
+		return mejoresAlumnos;
+	}
+
+	@Override
+	public List<AlumnoMatriculado> listNotasMediasAlumnos(List<UsuarioModel> alumnos, List<MatriculaModel> matriculas) {
+		//Conseguir la nota total de todos los cursos matriculados por el alumno y el número de cursos en los que está matriculado
+		List<AlumnoMatriculado> alumnosMatriculados = new ArrayList<>();
+		for(UsuarioModel alumno : alumnos) {
+			for(MatriculaModel matricula : matriculas) {
+				if(alumno.getId() == matricula.getId().getId()) {
+					int index = 0;
+					boolean existe = false;
+					for(int k = 0; k < alumnosMatriculados.size(); k++) {
+						if(alumnosMatriculados.get(k).getUsuarioModel().getId() == alumno.getId()) {
+							index = k;
+							existe = true;
+						}
+					}
+					if(existe == true) {
+						alumnosMatriculados.get(index).setCalificacion(alumnosMatriculados.get(index).getCalificacion() + matricula.getValoracion());
+						alumnosMatriculados.get(index).setNumCursos(alumnosMatriculados.get(index).getNumCursos() + 1);
+					}
+					else {
+						alumnosMatriculados.add(new AlumnoMatriculado(alumno, matriculaService.transform(matricula), matricula.getValoracion(), 1, 0));
+					}
+				}
+			}
+		}
+		
+		//Conseguir las notas medias de los alumnos
+		for(AlumnoMatriculado alumno : alumnosMatriculados) {
+			int calificacion = alumno.getCalificacion();
+			int numCursos = alumno.getNumCursos();
+			float notaMedia = calificacion / (float) numCursos;
+			alumno.setNotaMedia(notaMedia);
+			
+		}
+		
+		//Ordenar la lista de las notas medias
+		alumnosMatriculados.sort(Comparator.comparing(AlumnoMatriculado::getNotaMedia).reversed());
+		return alumnosMatriculados;
+	}
+
+	
 }

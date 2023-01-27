@@ -17,12 +17,12 @@
 			</tr>
 		</thead>
 		
-		<tbody th:each="m: ${map}">
+		<tbody th:each="alumno: ${alumnosMatriculados}">
 			<tr>
-				<td th:text="${m.key.nombre}"></td>
-				<td th:text="${m.key.apellidos}"></td>
-				<td th:text="${m.key.email}"></td>
-				<td th:text="${m.value.valoracion}"></td>
+				<td th:text="${alumno.usuarioModel.nombre}"></td>
+				<td th:text="${alumno.usuarioModel.apellidos}"></td>
+				<td th:text="${alumno.usuarioModel.email}"></td>
+				<td th:text="${alumno.matricula.valoracion}"></td>
 			</tr>
 		</tbody>
 	</table>
@@ -37,14 +37,14 @@
 			</tr>
 		</thead>
 		
-		<tbody th:each="m: ${map}">
+		<tbody th:each="alumno: ${alumnosMatriculados}">
 			<tr>
-				<td th:text="${m.key.nombre}"></td>
-				<td th:text="${m.key.apellidos}"></td>
-				<td th:text="${m.key.email}"></td>
-				<td th:text="${m.value.valoracion}"></td>
+				<td th:text="${alumno.usuarioModel.nombre}"></td>
+				<td th:text="${alumno.usuarioModel.apellidos}"></td>
+				<td th:text="${alumno.usuarioModel.email}"></td>
+				<td th:text="${alumno.matricula.valoracion}"></td>
 				<td>
-					<form action="#" th:action="@{/profesor/listAlumnos/} + ${curso.idcurso} + @{/} + ${m.key.id}" th:object="${matricula}" method="post" class="form align-items-center">
+					<form action="#" th:action="@{/profesor/listAlumnos/} + ${curso.idcurso} + @{/} + ${alumno.usuarioModel.id}" th:object="${matricula}" method="post" class="form align-items-center">
 						<div th:if="${cursoFecha < localDate}">
 							<label class="sr-only">Nota:</label>
 							<input id="nota" name="nota" type="number" class="form-control-nota"/>

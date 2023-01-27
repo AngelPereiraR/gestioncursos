@@ -23,8 +23,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.entity.Noticia;
 import com.example.demo.entity.Usuario;
 import com.example.demo.model.NoticiaModel;
-import com.example.demo.repository.UserRepository;
 import com.example.demo.services.NoticiaService;
+import com.example.demo.services.UsuarioService;
 import com.example.demo.uploadingfiles.FileUploadController;
 import com.example.demo.uploadingfiles.storage.StorageService;
 
@@ -38,8 +38,8 @@ public class NoticiaController {
 	private NoticiaService noticiaService;
 	
 	@Autowired
-	@Qualifier("userRepository")
-	private UserRepository userRepository;
+	@Qualifier("userService")
+	private UsuarioService userService;
 	
 	@Autowired
 	@Qualifier("storageService")
@@ -56,7 +56,7 @@ public class NoticiaController {
 	public String addNoticia(@ModelAttribute("noticia") NoticiaModel noticiaModel, RedirectAttributes flash, @RequestParam("file") MultipartFile file) {
 		if (noticiaModel.getIdnoticia() == 0) {
 			String email = SecurityContextHolder.getContext().getAuthentication().getName();
-			Usuario usuario = userRepository.findByEmail(email);
+			Usuario usuario = userService.findByEmail(email);
 			noticiaModel.setUsuario(usuario);
 			if(!file.isEmpty()) {
 				String imagen = storageService.store(file);
@@ -68,7 +68,7 @@ public class NoticiaController {
 		} else {
 			NoticiaModel noticia = noticiaService.findNoticia(noticiaModel.getIdnoticia());
 			String email = SecurityContextHolder.getContext().getAuthentication().getName();
-			Usuario usuario = userRepository.findByEmail(email);
+			Usuario usuario = userService.findByEmail(email);
 			String[] array = noticia.getImagen().split("/");
 			String ruta = "src/main/resources/static/imgs/" + array[array.length - 1];
 			Path path = Paths.get(ruta);
