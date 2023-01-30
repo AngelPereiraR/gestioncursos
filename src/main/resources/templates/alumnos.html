@@ -13,25 +13,31 @@
 				<th>Nombre</th>
 				<th>Apellidos</th>
 				<th>Email</th>
-				<th>Foto</th>
+				<th>Nota Media</th>
 				<th>Acciones</th>
 			</tr>
 		</thead>
 		
 		<tbody th:each="alumno: ${alumnos}">
 			<tr>
-				<td th:text=${alumno.nombre}></td>
-				<td th:text=${alumno.apellidos}></td>
-				<td th:text=${alumno.email}></td>
-				<td th:text=${alumno.foto}></td>
+				<td th:text=${alumno.usuarioModel.nombre}></td>
+				<td th:text=${alumno.usuarioModel.apellidos}></td>
+				<td th:text=${alumno.usuarioModel.email}></td>
 				<td>
-					<a th:if="${alumno.enabled == false}" th:href="@{/admin/activateAlumno/} + ${alumno.id}" method="post">
+					<table>
+						<tr th:each="nota: ${alumno.notaMedia}">
+							<td th:text="${nota}"></td>
+						</tr>
+					</table>
+				</td>
+				<td>
+					<a th:if="${alumno.usuarioModel.enabled == false}" th:href="@{/admin/activateAlumno/} + ${alumno.usuarioModel.id}" method="post">
 						<button class="btn tbn-lg btn-primary btn-block text-uppercase" type="button">Activar Alumno</button>
 					</a>
-					<a th:unless="${alumno.enabled == false}" th:href="@{/admin/deactivateAlumno/} + ${alumno.id}" method="post">
+					<a th:unless="${alumno.usuarioModel.enabled == false}" th:href="@{/admin/deactivateAlumno/} + ${alumno.usuarioModel.id}" method="post">
 						<button class="btn tbn-lg btn-danger btn-block text-uppercase" type="button">Desactivar Alumno</button>
 					</a>
-					<a th:href="@{/admin/removeAlumno/} + ${alumno.id}" method="post">
+					<a th:href="@{/admin/removeAlumno/} + ${alumno.usuarioModel.id}" method="post">
 						<button class="btn tbn-lg btn-danger btn-block text-uppercase" type="button" onclick="return confirm('¿Seguro que desea eliminar?')">Eliminar Alumno</button>
 					</a>
 				</td>

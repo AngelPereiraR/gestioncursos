@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.demo.entity.Curso;
 import com.example.demo.entity.Matricula;
+import com.example.demo.entity.Usuario;
 import com.example.demo.model.MatriculaModel;
 
 public interface MatriculaService {
@@ -21,5 +22,8 @@ public interface MatriculaService {
 
 	public abstract int numMatriculasByIdcurso(Curso idcurso);
 	
+	public abstract List<Matricula> findByIdcurso(int id);
+	
+	public abstract Matricula findByIdAndIdcurso(Usuario usuario, Curso curso);	
 	
 }

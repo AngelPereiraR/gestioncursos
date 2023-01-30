@@ -3,7 +3,9 @@ package com.example.demo.services;
 import java.text.ParseException;
 import java.util.List;
 
+import com.example.demo.entity.Matricula;
 import com.example.demo.entity.Usuario;
+import com.example.demo.model.AlumnoMatriculado;
 import com.example.demo.model.CursoModel;
 import com.example.demo.model.MatriculaModel;
 import com.example.demo.model.UsuarioModel;
@@ -15,6 +17,10 @@ public interface UsuarioService {
 	public abstract UsuarioModel transform(Usuario user);
 
 	public abstract UsuarioModel findUsuario(int id);
+	
+	public abstract Usuario findByEmail(String email);
+	
+	public abstract List<Usuario> findAllByRole(String role);
 
 	// Alumno
 
@@ -33,6 +39,10 @@ public interface UsuarioService {
 	public abstract List<CursoModel> listCursosAlumno(int nivel);
 	
 	public abstract List<MatriculaModel> listMatriculasAlumno(Usuario id);
+	
+	public abstract List<AlumnoMatriculado> listMejoresAlumnosAdmin(List<UsuarioModel> alumnos, List<Matricula> matriculas);
+	
+	public abstract List<AlumnoMatriculado> listNotasMediasAlumnos(List<UsuarioModel> alumnos, List<MatriculaModel> matriculas);
 
 	// Profesor
 

@@ -20,11 +20,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.Usuario;
+import com.example.demo.model.AlumnoMatriculado;
 import com.example.demo.model.Counter;
 import com.example.demo.model.MatriculaModel;
 import com.example.demo.model.Opcion;
 import com.example.demo.model.UsuarioModel;
-import com.example.demo.repository.UserRepository;
 import com.example.demo.services.CursoService;
 import com.example.demo.services.MatriculaService;
 import com.example.demo.services.NoticiaService;
@@ -46,9 +46,6 @@ public class AlumnoController {
 	@Autowired
 	@Qualifier("cursoService")
 	public CursoService cursoService;
-	@Autowired
-	@Qualifier("userRepository")
-	public UserRepository userRepository;
 	
 	@Autowired
 	@Qualifier("noticiaService")
@@ -56,14 +53,17 @@ public class AlumnoController {
 	
 	@Autowired
 	@Qualifier("matriculaService")
-	private MatriculaService matriculaService;
-	
-	
+	private MatriculaService matriculaService;	
 
 	@GetMapping("/admin/listaAlumnos")
 	public ModelAndView listaAlumnos() {
 		ModelAndView mav = new ModelAndView(ALUMNOS_VIEW);
-		mav.addObject("alumnos", userService.listAllAlumnos());
+		List<UsuarioModel> alumnos = userService.listAllAlumnos();
+		List<MatriculaModel> matriculas = matriculaService.listAllMatriculas();
+		List<AlumnoMatriculado> notasMediasOrdenadasAlumno = userService.listNotasMediasAlumnos(alumnos, matriculas);
+		
+		
+		mav.addObject("alumnos", notasMediasOrdenadasAlumno);
 		return mav;
 	}
 
@@ -106,7 +106,7 @@ public class AlumnoController {
 	@GetMapping("/alumno/formAlumno")
 	public String formAlumno(Model model) {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
-		Usuario usuario = userRepository.findByEmail(email);
+		Usuario usuario = userService.findByEmail(email);
 		
 		model.addAttribute("alumno", usuario);
 		return FORM_VIEW;
@@ -122,7 +122,7 @@ public class AlumnoController {
 	@GetMapping("/alumno/listCursos")
 	public String listCursos(@RequestParam(name = "name", required = false, defaultValue="") Opcion opcion, Model model) throws ParseException {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
-		Usuario user=userRepository.findByEmail(email);
+		Usuario user=userService.findByEmail(email);
 		List<MatriculaModel> matriculas= userService.listMatriculasAlumno(user);
 		ArrayList<Integer> idcursos = new ArrayList<>();
 		ArrayList<Integer> idalumnos = new ArrayList<>();
