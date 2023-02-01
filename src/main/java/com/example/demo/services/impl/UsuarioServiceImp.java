@@ -244,7 +244,7 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 	@Override
 	public List<CursoModel> listOrderCursosByImpartidos(UsuarioModel usuarioModel) throws ParseException {
 		Calendar c1 = Calendar.getInstance();
-		String fechaActual = ( Integer.toString(c1.get(Calendar.YEAR)) + "-" + Integer.toString(c1.get(Calendar.MONTH)+1) + "-" + Integer.toString(c1.get(Calendar.DATE))+" "+Integer.toString(c1.get(Calendar.HOUR_OF_DAY))+"OO:OO");
+		String fechaActual = ( Integer.toString(c1.get(Calendar.YEAR)) + "-" + Integer.toString(c1.get(Calendar.MONTH)+1) + "-" + Integer.toString(c1.get(Calendar.DATE))+" "+Integer.toString(c1.get(Calendar.HOUR_OF_DAY))+":OO");
 		
 		System.out.println(fechaActual);
 		ModelMapper modelMapper = new ModelMapper();
@@ -257,8 +257,8 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 	@Override
 	public List<CursoModel> listOrderCursosByImpartiendo(UsuarioModel usuarioModel) throws ParseException {
 		Calendar c1 = Calendar.getInstance();
-		String fechaActual = ( Integer.toString(c1.get(Calendar.YEAR)) + "-" + Integer.toString(c1.get(Calendar.MONTH)+1) + "-" + Integer.toString(c1.get(Calendar.DATE))+" "+Integer.toString(c1.get(Calendar.HOUR_OF_DAY))+"OO:OO");
-
+		String fechaActual = ( Integer.toString(c1.get(Calendar.YEAR)) + "-" + Integer.toString(c1.get(Calendar.MONTH)+1) + "-" + Integer.toString(c1.get(Calendar.DATE))+" "+Integer.toString(c1.get(Calendar.HOUR_OF_DAY))+":OO");
+		
 		ModelMapper modelMapper = new ModelMapper();
 		System.out.println(fechaActual);
 		return cursoRepository
@@ -272,7 +272,7 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 	
 		Calendar c1 = Calendar.getInstance();
 		
-		String fechaActual = ( Integer.toString(c1.get(Calendar.YEAR)) + "-" + Integer.toString(c1.get(Calendar.MONTH)+1) + "-" + Integer.toString(c1.get(Calendar.DATE))+" "+Integer.toString(c1.get(Calendar.HOUR_OF_DAY))+"OO:OO");
+		String fechaActual = ( Integer.toString(c1.get(Calendar.YEAR)) + "-" + Integer.toString(c1.get(Calendar.MONTH)+1) + "-" + Integer.toString(c1.get(Calendar.DATE))+" "+Integer.toString(c1.get(Calendar.HOUR_OF_DAY))+":OO");
 		ModelMapper modelMapper = new ModelMapper();
 		System.out.println(fechaActual);
 		return cursoRepository.findByFechaInicioAfterAndProfesor(fechaActual, transform(usuarioModel)).stream()
