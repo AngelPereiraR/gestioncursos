@@ -11,6 +11,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>GestionCursos</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>GestionCursos</name>
 	<description>Mi primer proyecto Spring</description>
 	<properties>
@@ -64,6 +65,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
 	</dependencies>
 
