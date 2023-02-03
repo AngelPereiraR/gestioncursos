@@ -17,7 +17,7 @@
 			</tr>
 		</thead>
 		
-		<tbody th:each="alumno: ${alumnosMatriculados}">
+		<tbody th:if="${not #lists.isEmpty(alumnosMatriculados)}" th:each="alumno: ${alumnosMatriculados}">
 			<tr>
 				<td th:text="${alumno.usuarioModel.nombre}"></td>
 				<td th:text="${alumno.usuarioModel.apellidos}"></td>

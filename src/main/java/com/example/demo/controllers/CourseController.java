@@ -77,7 +77,7 @@ public class CourseController {
 		List<UsuarioModel> alumnos = userService.listAlumnosByMatricula(id);
 		List<Matricula> matriculas = matriculaService.findByIdcurso(id);
 		List<AlumnoMatriculado> alumnosMatriculados = new ArrayList<>();
-		for (int i = 0; i < alumnos.size(); i++) {
+		for(int i = 0; i < alumnos.size(); i++) {
 			alumnosMatriculados.add(new AlumnoMatriculado(alumnos.get(i), matriculas.get(i), 0, 0, 0));
 		}
 		mav.addObject("alumnosMatriculados", alumnosMatriculados);
@@ -92,7 +92,7 @@ public class CourseController {
 		Matricula matricula = matriculaService.findByIdAndIdcurso(usuario, curso);
 		matricula.setValoracion(Integer.parseInt(nota));
 		matriculaService.updateMatricula(matriculaService.transform(matricula));
-		flash.addFlashAttribute("succes", "curso actualizado satisfactoriamente");
+		flash.addFlashAttribute("success", "alumno calificado correctamente");
 		return "redirect:/profesor/listCursos";
 
 	}
@@ -110,7 +110,7 @@ public class CourseController {
 			comentarioModel.setCurso(cursoService.transform(curso));
 			comentarioService.addComentario(comentarioModel);
 
-			flash.addFlashAttribute("succes", "comentario añadido satisfactoriamente");
+			flash.addFlashAttribute("success", "comentario añadido satisfactoriamente");
 			return "redirect:/alumno/listCursos";
 
 
@@ -126,7 +126,7 @@ public class CourseController {
 	
 
 	@GetMapping("/profesor/listAlumnos/{id}")
-	public ModelAndView listAlumnosProfesor(@PathVariable("id") int id) {
+	public ModelAndView listAlumnosProfesor(@PathVariable("id") int id, RedirectAttributes flash) {
 		ModelAndView mav = new ModelAndView(ALUMNOS_VIEW);
 		CursoModel curso = cursoService.findCurso(id);
 		List<UsuarioModel> alumnos = userService.listAlumnosByMatricula(id);
@@ -139,6 +139,7 @@ public class CourseController {
 		mav.addObject("curso", curso);
 		mav.addObject("localDate", Date.valueOf(LocalDate.now()));
 		mav.addObject("cursoFecha", Date.valueOf(curso.getFechaFin()));
+		flash.addFlashAttribute("success", "Alumnos mostrados correctamente");
 		return mav;
 	}
 
@@ -205,36 +206,43 @@ public class CourseController {
 	}
 	
 	@GetMapping("admin/listCursosSolicitados")
-	public ModelAndView listCursosSolicitados() {
+	public ModelAndView listCursosSolicitados(RedirectAttributes flash) {
 		List<CursoModel>cursos=cursoService.listAllCursos();
 		List<CursoModel>cursosOrdenados = new ArrayList<>();
 		boolean mayor=false;
 		ModelAndView mav = new ModelAndView(COURSES2_VIEW);
 		if(cursos.size()==1) {
 			mav.addObject("cursos",cursos);
-		}else {
-		for(int i =0; i<cursos.size(); i++) {
-			for(int j =0; j<cursos.size()-1; j++) {
-				if(matriculaService.numMatriculasByIdcurso(cursoService.transform(cursos.get(i)))>matriculaService.numMatriculasByIdcurso(cursoService.transform(cursos.get(j)))) {
-					mayor=true;
+		} else {
+			for(int i =0; i<cursos.size(); i++) {
+				for(int j =0; j<cursos.size()-1; j++) {
+					if(matriculaService.numMatriculasByIdcurso(cursoService.transform(cursos.get(i)))>matriculaService.numMatriculasByIdcurso(cursoService.transform(cursos.get(j)))) {
+						mayor=true;
+					}
+				}
+				if(mayor==true) {
+					cursosOrdenados.add(cursos.get(i));
+					mayor=false;
 				}
 			}
-			if(mayor==true) {
-				cursosOrdenados.add(cursos.get(i));
-				mayor=false;
-			}
-		}mav.addObject("cursos",cursosOrdenados);}
+		mav.addObject("cursos",cursosOrdenados);
+		}
+		
+		flash.addFlashAttribute("success", "Alumnos mostrados correctamente");
 		
 		return mav;
 	}
 	
 	@GetMapping("/admin/listMejoresAlumnos/{id}")
-	public ModelAndView listMejoresAlumnosAdmin(@PathVariable("id") int id) {
+	public ModelAndView listMejoresAlumnosAdmin(@PathVariable("id") int id, RedirectAttributes flash) {
 		ModelAndView mav = new ModelAndView(ALUMNOS_VIEW);
 		List<UsuarioModel> alumnos = userService.listAlumnosByMatricula(id);
 		List<Matricula> matriculas = matriculaService.findByIdcurso(id);
 		List<AlumnoMatriculado> mejoresAlumnos = userService.listMejoresAlumnosAdmin(alumnos, matriculas);
 		mav.addObject("alumnosMatriculados", mejoresAlumnos);
+		
+		flash.addFlashAttribute("success", "Alumnos mostrados correctamente");
+		
 		return mav;
 	}
 

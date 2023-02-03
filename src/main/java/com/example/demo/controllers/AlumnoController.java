@@ -56,7 +56,7 @@ public class AlumnoController {
 	private MatriculaService matriculaService;	
 
 	@GetMapping("/admin/listaAlumnos")
-	public ModelAndView listaAlumnos() {
+	public ModelAndView listaAlumnos(RedirectAttributes flash) {
 		ModelAndView mav = new ModelAndView(ALUMNOS_VIEW);
 		List<UsuarioModel> alumnos = userService.listAllAlumnos();
 		List<MatriculaModel> matriculas = matriculaService.listAllMatriculas();
@@ -64,6 +64,9 @@ public class AlumnoController {
 		
 		
 		mav.addObject("alumnos", notasMediasOrdenadasAlumno);
+		
+		flash.addFlashAttribute("success", "Alumnos mostrados correctamente");
+		
 		return mav;
 	}
 

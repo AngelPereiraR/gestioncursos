@@ -354,22 +354,19 @@ public class UsuarioServiceImp implements UserDetailsService, UsuarioService {
 			}
 		}
 		List<AlumnoMatriculado> mejoresAlumnos = new ArrayList<>();
-		int mejorNota = 0;
-		for (AlumnoMatriculado alumno : alumnosMatriculados) {
-			UsuarioModel alumnoModel = alumno.getUsuarioModel();
-		    Matricula matricula = alumno.getMatricula();
-		    int calificacion = alumno.getCalificacion();
-			int numCursos = alumno.getNumCursos();
-			float notaMedia = calificacion / (float) numCursos;
-		    if(mejorNota == matricula.getValoracion()) {
-		    	mejoresAlumnos.add(new AlumnoMatriculado(alumnoModel, matricula, calificacion, numCursos, notaMedia));
-		    }
-		    else if(mejorNota < matricula.getValoracion()){
-		    	mejoresAlumnos.clear();
-		    	mejoresAlumnos.add(new AlumnoMatriculado(alumnoModel, matricula, calificacion, numCursos, notaMedia));
-		    	mejorNota = matricula.getValoracion();
-		    }
+		alumnosMatriculados.sort(Comparator.comparing(AlumnoMatriculado::getCalificacion).reversed());
+		if(alumnosMatriculados.size() >= 3) {
+			for(int i = 0; i < 3; i++) {
+				mejoresAlumnos.add(alumnosMatriculados.get(i));
+			}
+		} else {
+			if(alumnosMatriculados.size() == 1 || alumnosMatriculados.size() == 2) {
+				for(int i = 0; i < alumnosMatriculados.size(); i++) {
+					mejoresAlumnos.add(alumnosMatriculados.get(i));
+				}
+			}
 		}
+		
 		return mejoresAlumnos;
 	}
 

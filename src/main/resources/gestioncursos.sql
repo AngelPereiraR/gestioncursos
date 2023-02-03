@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 16-01-2023 a las 13:00:42
+-- Tiempo de generación: 03-02-2023 a las 08:42:53
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -66,7 +66,8 @@ INSERT INTO `curso` (`idcurso`, `descripcion`, `fecha_fin`, `fecha_inicio`, `niv
 (4, 'Curso para aprender Java', '2023-01-31', '2023-01-01', 8, 'Java', 2),
 (5, 'Curso para aprender Python', '2023-01-15', '2023-01-05', 7, 'Python', 3),
 (8, 'Curso para aprender Laravel', '2023-01-15', '2023-01-01', 3, 'Laravel', 2),
-(9, 'Curso para aprender Flutter', '2023-02-08', '2023-01-31', 8, 'Flutter', 3);
+(9, 'Curso para aprender Flutter', '2023-02-08', '2023-01-31', 8, 'Flutter', 3),
+(18, 'Curso para aprender Odoo', '2023-01-22', '2023-01-01', 3, 'Odoo', 2);
 
 -- --------------------------------------------------------
 
@@ -83,7 +84,7 @@ CREATE TABLE `hibernate_sequence` (
 --
 
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(18);
+(20);
 
 -- --------------------------------------------------------
 
@@ -103,8 +104,11 @@ CREATE TABLE `matricula` (
 --
 
 INSERT INTO `matricula` (`idmatricula`, `valoracion`, `id`, `idcurso`) VALUES
-(14, 7, 11, 5),
-(17, 0, 11, 9);
+(14, 5, 11, 5),
+(17, 7, 11, 9),
+(19, 8, 10, 9),
+(20, 4, 12, 9),
+(21, 2, 13, 9);
 
 -- --------------------------------------------------------
 
